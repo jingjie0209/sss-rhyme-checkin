@@ -122,12 +122,10 @@ function songDisplayName(title: string) {
     .replace(/^Bye Bye Goodbye\b/i, "Bye Bye Goodbye");
 }
 
-function resourceState(song: ResourceSong) {
+function resourceState() {
   return [
-    { key: "video", label: "视频", icon: "▶", available: Boolean(song.videoPath) },
-    { key: "audio", label: "音频", icon: "♫", available: Boolean(song.audioPath) },
-    { key: "lyrics", label: "歌词", icon: "文", available: song.hasLyrics },
-    { key: "flash", label: "闪卡", icon: "▦", available: song.hasFlashcards },
+    { key: "video", label: "视频", icon: "▶", available: true },
+    { key: "audio", label: "音频", icon: "♫", available: true },
   ];
 }
 
@@ -136,7 +134,6 @@ function AppHeader() {
   return (
     <header className="resource-header">
       <div>
-        <span>SUPER SIMPLE SONGS</span>
         <h1>儿歌主题打卡</h1>
       </div>
       <div className="header-count"><b>{totalDays}</b><small>累计打卡天</small></div>
@@ -205,7 +202,7 @@ function ThemeSongRow({ song, theme, onOpen }: { song: ResourceSong; theme: Them
         <span className="song-number">{String(song.no).padStart(3, "0")}</span>
         <span className="song-row-copy">
           <b>{songDisplayName(song.title)}</b>
-          <small>{resourceState(song).filter((item) => item.available).map((item) => item.label).join(" · ")}</small>
+          <small>{resourceState().filter((item) => item.available).map((item) => item.label).join(" · ")}</small>
         </span>
         <span className="song-open-arrow">›</span>
       </button>
@@ -268,7 +265,6 @@ function ThemeLibraryView({ flow }: { flow: FlowControls }) {
           );
         })}
       </section>
-      <WeChatFooter />
     </>
   );
 }
@@ -285,7 +281,6 @@ function ResourceShell({ flow, mobile = false }: { flow: FlowControls; mobile?: 
   );
 }
 
-// 方案 B：媒体不托管到网站，改为按单首歌跳转网盘。
 const WECHAT_ID = "GL11280308";
 
 function MediaContactCard() {
@@ -310,20 +305,6 @@ function MediaContactCard() {
   );
 }
 
-function WeChatFooter() {
-  return (
-    <footer className="wechat-footer">
-      <a
-        href="weixin://"
-        onClick={() => navigator.clipboard?.writeText(WECHAT_ID).catch(() => {})}
-      >
-        添加VX获取更多资源：{WECHAT_ID}
-      </a>
-      <small>点击已复制微信号，可打开微信添加</small>
-    </footer>
-  );
-}
-
 function SongDetail({ song, onBack }: { song: SongWithTheme; onBack: () => void }) {
   const { checked } = useCheckins();
   const done = checked.has(song.id);
@@ -340,7 +321,7 @@ function SongDetail({ song, onBack }: { song: SongWithTheme; onBack: () => void 
           <h1>{songDisplayName(song.title)}</h1>
           <div className="detail-actions">
             <div className="detail-status-row">
-              {resourceState(song).map((item) => <span key={item.key} className={item.available ? "on" : "off"}><i>{item.icon}</i>{item.label}</span>)}
+              {resourceState().map((item) => <span key={item.key} className={item.available ? "on" : "off"}><i>{item.icon}</i>{item.label}</span>)}
             </div>
             <CheckinButton songId={song.id} />
           </div>
@@ -349,8 +330,7 @@ function SongDetail({ song, onBack }: { song: SongWithTheme; onBack: () => void 
         </div>
         <div className="detail-section-title"><h2>对应内容</h2><span>视频音频可微信获取</span></div>
         <MediaContactCard />
-        <WeChatFooter />
-      </main>
+        </main>
     </MobileScroll>
   );
 }
