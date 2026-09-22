@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState, type CSSProperties, type ReactNode } from "react";
 import { FlowStack, MobileScroll, type FlowControls, type FlowScreen } from "./mobile";
 import { RESOURCE_DATA, type ResourceSong, type ThemeGroup } from "./data/appData";
-import { SONG_PREVIEWS } from "./data/previewData";
 
 type SongWithTheme = ResourceSong & { themeId: string; themeName: string; themeLabel: string };
 
@@ -325,78 +324,9 @@ function WeChatFooter() {
   );
 }
 
-type ImageViewerState = {
-  images: string[];
-  index: number;
-  title: string;
-};
-
-function ImageLightbox({ viewer, onClose, onChange }: { viewer: ImageViewerState; onClose: () => void; onChange: (index: number) => void }) {
-  const hasMultiple = viewer.images.length > 1;
-
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
-      if (event.key === "ArrowLeft" && hasMultiple) onChange((viewer.index - 1 + viewer.images.length) % viewer.images.length);
-      if (event.key === "ArrowRight" && hasMultiple) onChange((viewer.index + 1) % viewer.images.length);
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [hasMultiple, onChange, onClose, viewer.images.length, viewer.index]);
-
-  return (
-    <div className="image-lightbox" role="dialog" aria-modal="true" aria-label={`${viewer.title}大图`} onClick={onClose}>
-      <header className="lightbox-header" onClick={(event) => event.stopPropagation()}>
-        <div><b>{viewer.title}</b>{hasMultiple ? <span>{viewer.index + 1} / {viewer.images.length}</span> : <span>点击空白处关闭</span>}</div>
-        <button type="button" onClick={onClose} aria-label="关闭大图">×</button>
-      </header>
-      <div className="lightbox-stage" onClick={(event) => event.stopPropagation()}>
-        {hasMultiple ? <button className="lightbox-arrow previous" type="button" onClick={() => onChange((viewer.index - 1 + viewer.images.length) % viewer.images.length)} aria-label="上一张">‹</button> : null}
-        <img src={viewer.images[viewer.index]} alt={`${viewer.title} ${viewer.index + 1}`} onClick={onClose} />
-        {hasMultiple ? <button className="lightbox-arrow next" type="button" onClick={() => onChange((viewer.index + 1) % viewer.images.length)} aria-label="下一张">›</button> : null}
-      </div>
-      {hasMultiple ? <div className="lightbox-dots" onClick={(event) => event.stopPropagation()}>{viewer.images.map((image, index) => <button key={image} className={index === viewer.index ? "active" : ""} onClick={() => onChange(index)} type="button" aria-label={`查看第 ${index + 1} 张`} />)}</div> : null}
-    </div>
-  );
-}
-
-function LyricsPreview({ song, onView }: { song: SongWithTheme; onView: (viewer: ImageViewerState) => void }) {
-  const preview = SONG_PREVIEWS[song.id];
-  return (
-    <section className={`content-card lyrics-content-card ${song.hasLyrics ? "" : "unavailable"}`}>
-      <header><div><span className="content-icon">文</span><div><b>歌词</b><small>{song.hasLyrics ? song.lyricStatus : "未找到对应歌词"}</small></div></div><em>{song.hasLyrics ? "点击查看大图" : "暂无"}</em></header>
-      {song.hasLyrics && preview?.lyric ? (
-        <button className="image-preview-button lyric-preview-button" type="button" onClick={() => onView({ images: [preview.lyric!], index: 0, title: `${song.title} · 歌词` })} aria-label={`查看 ${song.title} 歌词大图`}>
-          <img className="lyric-preview" src={preview.lyric} alt={`${song.title} 歌词`} />
-          <span className="image-zoom-hint">⌕ 点击查看大图</span>
-        </button>
-      ) : <div className="missing-content">这首歌暂时没有歌词图片</div>}
-    </section>
-  );
-}
-
-function FlashcardPreview({ song, onView }: { song: SongWithTheme; onView: (viewer: ImageViewerState) => void }) {
-  const preview = SONG_PREVIEWS[song.id];
-  const cards = preview?.flashcards || [];
-  if (!cards.length) return null;
-  return (
-    <section className="content-card flash-content-card">
-      <header><div><span className="content-icon">▦</span><div><b>闪卡</b><small>{`${song.flashJpgCount || cards.length} 张图片${song.flashPdfPath ? " · 含 PDF" : ""}`}</small></div></div><em>点击查看大图</em></header>
-      <div className="flashcard-grid">{cards.map((card, index) => (
-        <button className="image-preview-button flashcard-preview-button" type="button" onClick={() => onView({ images: cards, index, title: `${songDisplayName(song.title)} · 闪卡` })} aria-label={`查看 ${songDisplayName(song.title)} 第 ${index + 1} 张闪卡大图`} key={card}>
-          <img src={card} alt={`${songDisplayName(song.title)} 闪卡 ${index + 1}`} />
-          <span className="flashcard-number">{index + 1}</span>
-        </button>
-      ))}</div>
-    </section>
-  );
-}
-
 function SongDetail({ song, onBack }: { song: SongWithTheme; onBack: () => void }) {
   const { checked } = useCheckins();
   const done = checked.has(song.id);
-  const [viewer, setViewer] = useState<ImageViewerState | null>(null);
-  const updateViewerIndex = (index: number) => setViewer((current) => current ? { ...current, index } : current);
   return (
     <MobileScroll className="detail-scroll resource-detail-scroll">
       <main className="resource-detail">
@@ -417,19 +347,17 @@ function SongDetail({ song, onBack }: { song: SongWithTheme; onBack: () => void 
             {done ? <p className="checked-message">已完成本首儿歌打卡，进度已计入主题统计。</p> : null}
           </section>
         </div>
-        <div className="detail-section-title"><h2>对应内容</h2><span>歌词直接查看大图</span></div>
+        <div className="detail-section-title"><h2>对应内容</h2><span>视频音频可微信获取</span></div>
         <MediaContactCard />
-        <LyricsPreview song={song} onView={setViewer} />
-        <FlashcardPreview song={song} onView={setViewer} />
         <WeChatFooter />
       </main>
-      {viewer ? <ImageLightbox viewer={viewer} onClose={() => setViewer(null)} onChange={updateViewerIndex} /> : null}
     </MobileScroll>
   );
 }
 
-export default function Prototype({ mobile = false }: { mobile?: boolean } = {}) {
-  const initial: FlowScreen = { id: "resource-home", headerHeight: 0, render: (flow) => <ResourceShell flow={flow} mobile={mobile} /> };
+export default function Prototype({ safePublic = false }: { safePublic?: boolean } = {}) {
+  void safePublic;
+  const initial: FlowScreen = { id: "resource-home", headerHeight: 0, render: (flow) => <ResourceShell flow={flow} mobile={false} /> };
   return (
     <CheckinProvider>
       <CelebrationModal />

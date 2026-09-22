@@ -1,7 +1,8 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
+  base: mode === "github" ? "/sss-rhyme-checkin/" : "/",
   build: {
     outDir: "dist/client",
   },
@@ -10,4 +11,4 @@ export default defineConfig({
     allowedHosts: ["terminal.local"],
   },
   plugins: [react()],
-});
+}));
