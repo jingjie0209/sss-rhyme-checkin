@@ -1,0 +1,460 @@
+{
+  "config": {
+    "argv": [
+      "/Users/jingjie/.local/lib/nodejs/node-v22.23.2/bin/node",
+      "/Users/jingjie/Documents/ChatGPT/下载/sss-rhyme-checkin-ui/node_modules/.bin/playwright",
+      "test",
+      "--reporter=json",
+      "--workers=1",
+      "--retries=2"
+    ],
+    "configFile": "/Users/jingjie/Documents/ChatGPT/下载/sss-rhyme-checkin-ui/playwright.config.ts",
+    "rootDir": "/Users/jingjie/Documents/ChatGPT/下载/sss-rhyme-checkin-ui/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/jingjie/Documents/ChatGPT/下载/sss-rhyme-checkin-ui/test-results",
+        "repeatEach": 1,
+        "retries": 2,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/Users/jingjie/Documents/ChatGPT/下载/sss-rhyme-checkin-ui/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 20000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": {
+      "command": "npm run dev -- --port 4199",
+      "url": "http://127.0.0.1:4199/tests/runtime-fixture.html",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "mobile-runtime.spec.ts",
+      "file": "mobile-runtime.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "horizontal intent stays in Carousel and cannot create parent momentum",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 20000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 952,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-19T12:11:21.844Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4e393dcab4be1850d094-3ab3ce00e2fdfc2031af",
+          "file": "mobile-runtime.spec.ts",
+          "line": 25,
+          "column": 1
+        },
+        {
+          "title": "vertical intent over a carousel is handed to MobileScroll in both directions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 20000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1209,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-19T12:11:23.112Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4e393dcab4be1850d094-018e7c8ad230da524005",
+          "file": "mobile-runtime.spec.ts",
+          "line": 42,
+          "column": 1
+        },
+        {
+          "title": "tap activates a card but a completed drag does not",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 20000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1248,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-19T12:11:24.333Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4e393dcab4be1850d094-7883b6c84363541681bd",
+          "file": "mobile-runtime.spec.ts",
+          "line": 58,
+          "column": 1
+        },
+        {
+          "title": "Carousel preserves momentum and edge rubber-banding",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 20000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2130,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-19T12:11:25.596Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4e393dcab4be1850d094-e42fb090452d6ee74148",
+          "file": "mobile-runtime.spec.ts",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "BottomSheet remains mounted while its default exit animation plays",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 20000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 20035,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 20000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 20000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 20000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "/Users/jingjie/Documents/ChatGPT/下载/sss-rhyme-checkin-ui/tests/mobile-runtime.spec.ts",
+                        "column": 43,
+                        "line": 94
+                      },
+                      "message": "Error: locator.click: Test timeout of 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByTestId('sheet-overlay')\u001b[22m\n\u001b[2m    - locator resolved to <div data-state=\"open\" aria-hidden=\"true\" class=\"sheet-overlay\" data-aria-hidden=\"true\" data-testid=\"sheet-overlay\"></div>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <html lang=\"en\">…</html> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <html lang=\"en\">…</html> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    37 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <html lang=\"en\">…</html> intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n  92 |   await expect(page.getByTestId(\"bottom-sheet\")).toBeVisible();\n  93 |\n> 94 |   await page.getByTestId(\"sheet-overlay\").click({ position: { x: 8, y: 8 } });\n     |                                           ^\n  95 |   await expect(page.getByTestId(\"bottom-sheet\")).toHaveCount(1);\n  96 |   await page.waitForTimeout(500);\n  97 |   await expect(page.getByTestId(\"bottom-sheet\")).toHaveCount(0);\n    at /Users/jingjie/Documents/ChatGPT/下载/sss-rhyme-checkin-ui/tests/mobile-runtime.spec.ts:94:43"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-19T12:11:27.739Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/jingjie/Documents/ChatGPT/下载/sss-rhyme-checkin-ui/test-results/mobile-runtime-BottomSheet-3e949-efault-exit-animation-plays/error-context.md"
+                    }
+                  ]
+                },
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 20040,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 20000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 20000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 20000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "/Users/jingjie/Documents/ChatGPT/下载/sss-rhyme-checkin-ui/tests/mobile-runtime.spec.ts",
+                        "column": 43,
+                        "line": 94
+                      },
+                      "message": "Error: locator.click: Test timeout of 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByTestId('sheet-overlay')\u001b[22m\n\u001b[2m    - locator resolved to <div data-state=\"open\" aria-hidden=\"true\" class=\"sheet-overlay\" data-aria-hidden=\"true\" data-testid=\"sheet-overlay\"></div>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <html lang=\"en\">…</html> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <html lang=\"en\">…</html> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    37 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <html lang=\"en\">…</html> intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n  92 |   await expect(page.getByTestId(\"bottom-sheet\")).toBeVisible();\n  93 |\n> 94 |   await page.getByTestId(\"sheet-overlay\").click({ position: { x: 8, y: 8 } });\n     |                                           ^\n  95 |   await expect(page.getByTestId(\"bottom-sheet\")).toHaveCount(1);\n  96 |   await page.waitForTimeout(500);\n  97 |   await expect(page.getByTestId(\"bottom-sheet\")).toHaveCount(0);\n    at /Users/jingjie/Documents/ChatGPT/下载/sss-rhyme-checkin-ui/tests/mobile-runtime.spec.ts:94:43"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 1,
+                  "startTime": "2026-09-19T12:12:07.438Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/jingjie/Documents/ChatGPT/下载/sss-rhyme-checkin-ui/test-results/mobile-runtime-BottomSheet-3e949-efault-exit-animation-plays-retry1/error-context.md"
+                    }
+                  ]
+                },
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 20004,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 20000ms exceeded while running \"beforeEach\" hook.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 20000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n    at /Users/jingjie/Documents/ChatGPT/下载/sss-rhyme-checkin-ui/tests/mobile-runtime.spec.ts:21:6",
+                    "location": {
+                      "file": "/Users/jingjie/Documents/ChatGPT/下载/sss-rhyme-checkin-ui/tests/mobile-runtime.spec.ts",
+                      "column": 6,
+                      "line": 21
+                    },
+                    "snippet": "  19 | }\n  20 |\n> 21 | test.beforeEach(async ({ page }) => {\n     |      ^\n  22 |   await page.goto(\"/tests/runtime-fixture.html\");\n  23 | });\n  24 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/jingjie/Documents/ChatGPT/下载/sss-rhyme-checkin-ui/tests/mobile-runtime.spec.ts",
+                        "column": 6,
+                        "line": 21
+                      },
+                      "message": "\u001b[31mTest timeout of 20000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n\n  19 | }\n  20 |\n> 21 | test.beforeEach(async ({ page }) => {\n     |      ^\n  22 |   await page.goto(\"/tests/runtime-fixture.html\");\n  23 | });\n  24 |\n    at /Users/jingjie/Documents/ChatGPT/下载/sss-rhyme-checkin-ui/tests/mobile-runtime.spec.ts:21:6"
+                    },
+                    {
+                      "message": "Error: browser.newContext: Test ended.\nBrowser logs:\n\n<launching> /Applications/Google Chrome.app/Contents/MacOS/Google Chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/var/folders/sp/ydmmx8150z370xhqd87xs9fw0000gn/T/playwright_chromiumdev_profile-nc6cEU --remote-debugging-pipe --no-startup-window\n<launched> pid=27759\n[pid=27759] <gracefully close start>\n[pid=27759] <kill>\n[pid=27759] <will force kill>"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 2,
+                  "startTime": "2026-09-19T12:12:55.019Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/jingjie/Documents/ChatGPT/下载/sss-rhyme-checkin-ui/test-results/mobile-runtime-BottomSheet-3e949-efault-exit-animation-plays-retry2/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/jingjie/Documents/ChatGPT/下载/sss-rhyme-checkin-ui/tests/mobile-runtime.spec.ts",
+                    "column": 6,
+                    "line": 21
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4e393dcab4be1850d094-0a90af7e4d5ed3d822ca",
+          "file": "mobile-runtime.spec.ts",
+          "line": 90,
+          "column": 1
+        },
+        {
+          "title": "keyboard and its attached footer dismiss on the same transition",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 20000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1340,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-19T12:13:45.858Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4e393dcab4be1850d094-8dbf74ab40262affee47",
+          "file": "mobile-runtime.spec.ts",
+          "line": 100,
+          "column": 1
+        },
+        {
+          "title": "switching to Pixel keeps the composer above Android navigation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 20000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1929,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-19T12:13:47.538Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4e393dcab4be1850d094-f4d54f7657f57a4fc41f",
+          "file": "mobile-runtime.spec.ts",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "FlowStack pushes and pops screens while dismissing the keyboard",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 20000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2930,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-19T12:13:49.482Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4e393dcab4be1850d094-974abe9ebff09c793ddc",
+          "file": "mobile-runtime.spec.ts",
+          "line": 216,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-19T12:11:21.276Z",
+    "duration": 151336.894,
+    "expected": 7,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

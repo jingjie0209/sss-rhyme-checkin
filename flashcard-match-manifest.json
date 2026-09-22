@@ -1,0 +1,329 @@
+{
+  "song-003": {
+    "source_cards": [
+      "p5_c52"
+    ],
+    "web_cards": [
+      "/previews/pdf-flashcards/song-003_card01.png"
+    ],
+    "confidence": "exact"
+  },
+  "song-010": {
+    "source_cards": [
+      "p2_c01",
+      "p2_c02"
+    ],
+    "web_cards": [
+      "/previews/pdf-flashcards/song-010_card01.png",
+      "/previews/pdf-flashcards/song-010_card02.png"
+    ],
+    "confidence": "exact"
+  },
+  "song-025": {
+    "source_cards": [
+      "p2_c22",
+      "p2_c23",
+      "p2_c24",
+      "p2_c25",
+      "p2_c26",
+      "p2_c27",
+      "p2_c28",
+      "p2_c29",
+      "p2_c30"
+    ],
+    "web_cards": [
+      "/previews/pdf-flashcards/song-025_card01.png",
+      "/previews/pdf-flashcards/song-025_card02.png",
+      "/previews/pdf-flashcards/song-025_card03.png",
+      "/previews/pdf-flashcards/song-025_card04.png",
+      "/previews/pdf-flashcards/song-025_card05.png",
+      "/previews/pdf-flashcards/song-025_card06.png",
+      "/previews/pdf-flashcards/song-025_card07.png",
+      "/previews/pdf-flashcards/song-025_card08.png",
+      "/previews/pdf-flashcards/song-025_card09.png"
+    ],
+    "confidence": "exact"
+  },
+  "song-029": {
+    "source_cards": [
+      "p3_c16",
+      "p3_c17",
+      "p3_c18",
+      "p3_c19",
+      "p3_c20",
+      "p3_c21",
+      "p3_c22",
+      "p3_c23"
+    ],
+    "web_cards": [
+      "/previews/pdf-flashcards/song-029_card01.png",
+      "/previews/pdf-flashcards/song-029_card02.png",
+      "/previews/pdf-flashcards/song-029_card03.png",
+      "/previews/pdf-flashcards/song-029_card04.png",
+      "/previews/pdf-flashcards/song-029_card05.png",
+      "/previews/pdf-flashcards/song-029_card06.png",
+      "/previews/pdf-flashcards/song-029_card07.png",
+      "/previews/pdf-flashcards/song-029_card08.png"
+    ],
+    "confidence": "exact"
+  },
+  "song-055": {
+    "source_cards": [
+      "p4_c69",
+      "p4_c70",
+      "p4_c71",
+      "p4_c72",
+      "p4_c73",
+      "p4_c74",
+      "p4_c75"
+    ],
+    "web_cards": [
+      "/previews/pdf-flashcards/song-055_card01.png",
+      "/previews/pdf-flashcards/song-055_card02.png",
+      "/previews/pdf-flashcards/song-055_card03.png",
+      "/previews/pdf-flashcards/song-055_card04.png",
+      "/previews/pdf-flashcards/song-055_card05.png",
+      "/previews/pdf-flashcards/song-055_card06.png",
+      "/previews/pdf-flashcards/song-055_card07.png"
+    ],
+    "confidence": "exact"
+  },
+  "song-069": {
+    "source_cards": [
+      "p1_c29",
+      "p1_c30",
+      "p1_c31"
+    ],
+    "web_cards": [
+      "/previews/pdf-flashcards/song-069_card01.png",
+      "/previews/pdf-flashcards/song-069_card02.png",
+      "/previews/pdf-flashcards/song-069_card03.png"
+    ],
+    "confidence": "exact"
+  },
+  "song-070": {
+    "source_cards": [
+      "p1_c27",
+      "p1_c28"
+    ],
+    "web_cards": [
+      "/previews/pdf-flashcards/song-070_card01.png",
+      "/previews/pdf-flashcards/song-070_card02.png"
+    ],
+    "confidence": "exact"
+  },
+  "song-076": {
+    "source_cards": [
+      "p3_c56",
+      "p3_c57",
+      "p3_c58",
+      "p3_c59",
+      "p3_c60",
+      "p3_c61",
+      "p3_c62",
+      "p3_c63",
+      "p3_c64",
+      "p3_c65",
+      "p3_c66",
+      "p3_c67"
+    ],
+    "web_cards": [
+      "/previews/pdf-flashcards/song-076_card01.png",
+      "/previews/pdf-flashcards/song-076_card02.png",
+      "/previews/pdf-flashcards/song-076_card03.png",
+      "/previews/pdf-flashcards/song-076_card04.png",
+      "/previews/pdf-flashcards/song-076_card05.png",
+      "/previews/pdf-flashcards/song-076_card06.png",
+      "/previews/pdf-flashcards/song-076_card07.png",
+      "/previews/pdf-flashcards/song-076_card08.png",
+      "/previews/pdf-flashcards/song-076_card09.png",
+      "/previews/pdf-flashcards/song-076_card10.png",
+      "/previews/pdf-flashcards/song-076_card11.png",
+      "/previews/pdf-flashcards/song-076_card12.png"
+    ],
+    "confidence": "exact"
+  },
+  "song-090": {
+    "source_cards": [
+      "p3_c08",
+      "p3_c09",
+      "p3_c10",
+      "p3_c11",
+      "p3_c12",
+      "p3_c13",
+      "p3_c14",
+      "p3_c15"
+    ],
+    "web_cards": [
+      "/previews/pdf-flashcards/song-090_card01.png",
+      "/previews/pdf-flashcards/song-090_card02.png",
+      "/previews/pdf-flashcards/song-090_card03.png",
+      "/previews/pdf-flashcards/song-090_card04.png",
+      "/previews/pdf-flashcards/song-090_card05.png",
+      "/previews/pdf-flashcards/song-090_card06.png",
+      "/previews/pdf-flashcards/song-090_card07.png",
+      "/previews/pdf-flashcards/song-090_card08.png"
+    ],
+    "confidence": "exact"
+  },
+  "song-109": {
+    "source_cards": [
+      "p5_c41",
+      "p5_c42",
+      "p5_c43",
+      "p5_c44"
+    ],
+    "web_cards": [
+      "/previews/pdf-flashcards/song-109_card01.png",
+      "/previews/pdf-flashcards/song-109_card02.png",
+      "/previews/pdf-flashcards/song-109_card03.png",
+      "/previews/pdf-flashcards/song-109_card04.png"
+    ],
+    "confidence": "exact"
+  },
+  "song-138": {
+    "source_cards": [
+      "p4_c58",
+      "p4_c59",
+      "p4_c60",
+      "p4_c61",
+      "p4_c62"
+    ],
+    "web_cards": [
+      "/previews/pdf-flashcards/song-138_card01.png",
+      "/previews/pdf-flashcards/song-138_card02.png",
+      "/previews/pdf-flashcards/song-138_card03.png",
+      "/previews/pdf-flashcards/song-138_card04.png",
+      "/previews/pdf-flashcards/song-138_card05.png"
+    ],
+    "confidence": "exact"
+  },
+  "song-146": {
+    "source_cards": [
+      "p4_c64",
+      "p4_c65",
+      "p4_c66",
+      "p4_c67",
+      "p4_c68"
+    ],
+    "web_cards": [
+      "/previews/pdf-flashcards/song-146_card01.png",
+      "/previews/pdf-flashcards/song-146_card02.png",
+      "/previews/pdf-flashcards/song-146_card03.png",
+      "/previews/pdf-flashcards/song-146_card04.png",
+      "/previews/pdf-flashcards/song-146_card05.png"
+    ],
+    "confidence": "exact"
+  },
+  "song-153": {
+    "source_cards": [
+      "p2_c59",
+      "p2_c60",
+      "p2_c61",
+      "p2_c62",
+      "p2_c63",
+      "p2_c64",
+      "p2_c65",
+      "p2_c66",
+      "p2_c67",
+      "p2_c68",
+      "p2_c69",
+      "p2_c70",
+      "p2_c71",
+      "p2_c72",
+      "p2_c73",
+      "p2_c74",
+      "p2_c75",
+      "p2_c76"
+    ],
+    "web_cards": [
+      "/previews/pdf-flashcards/song-153_card01.png",
+      "/previews/pdf-flashcards/song-153_card02.png",
+      "/previews/pdf-flashcards/song-153_card03.png",
+      "/previews/pdf-flashcards/song-153_card04.png",
+      "/previews/pdf-flashcards/song-153_card05.png",
+      "/previews/pdf-flashcards/song-153_card06.png",
+      "/previews/pdf-flashcards/song-153_card07.png",
+      "/previews/pdf-flashcards/song-153_card08.png",
+      "/previews/pdf-flashcards/song-153_card09.png",
+      "/previews/pdf-flashcards/song-153_card10.png",
+      "/previews/pdf-flashcards/song-153_card11.png",
+      "/previews/pdf-flashcards/song-153_card12.png",
+      "/previews/pdf-flashcards/song-153_card13.png",
+      "/previews/pdf-flashcards/song-153_card14.png",
+      "/previews/pdf-flashcards/song-153_card15.png",
+      "/previews/pdf-flashcards/song-153_card16.png",
+      "/previews/pdf-flashcards/song-153_card17.png",
+      "/previews/pdf-flashcards/song-153_card18.png"
+    ],
+    "confidence": "exact"
+  },
+  "song-156": {
+    "source_cards": [
+      "p2_c04",
+      "p2_c05",
+      "p2_c06",
+      "p2_c07"
+    ],
+    "web_cards": [
+      "/previews/pdf-flashcards/song-156_card01.png",
+      "/previews/pdf-flashcards/song-156_card02.png",
+      "/previews/pdf-flashcards/song-156_card03.png",
+      "/previews/pdf-flashcards/song-156_card04.png"
+    ],
+    "confidence": "exact"
+  },
+  "song-160": {
+    "source_cards": [
+      "p4_c57"
+    ],
+    "web_cards": [
+      "/previews/pdf-flashcards/song-160_card01.png"
+    ],
+    "confidence": "exact"
+  },
+  "song-169": {
+    "source_cards": [
+      "p5_c46"
+    ],
+    "web_cards": [
+      "/previews/pdf-flashcards/song-169_card01.png"
+    ],
+    "confidence": "exact"
+  },
+  "song-176": {
+    "source_cards": [
+      "p4_c46"
+    ],
+    "web_cards": [
+      "/previews/pdf-flashcards/song-176_card01.png"
+    ],
+    "confidence": "exact"
+  },
+  "song-182": {
+    "source_cards": [
+      "p5_c48"
+    ],
+    "web_cards": [
+      "/previews/pdf-flashcards/song-182_card01.png"
+    ],
+    "confidence": "exact"
+  },
+  "song-192": {
+    "source_cards": [
+      "p4_c19",
+      "p4_c20",
+      "p4_c21",
+      "p4_c22",
+      "p4_c23"
+    ],
+    "web_cards": [
+      "/previews/pdf-flashcards/song-192_card01.png",
+      "/previews/pdf-flashcards/song-192_card02.png",
+      "/previews/pdf-flashcards/song-192_card03.png",
+      "/previews/pdf-flashcards/song-192_card04.png",
+      "/previews/pdf-flashcards/song-192_card05.png"
+    ],
+    "confidence": "theme"
+  }
+}

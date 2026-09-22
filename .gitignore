@@ -1,0 +1,10 @@
+node_modules/
+dist/
+test-results/
+playwright-report/
+
+# Do not publish hosted media to GitHub Pages.
+public/media/
+
+# Local/runtime files
+.mobile-runtime-lock.tmp
