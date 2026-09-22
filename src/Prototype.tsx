@@ -287,136 +287,26 @@ function ResourceShell({ flow, mobile = false }: { flow: FlowControls; mobile?: 
 }
 
 // 方案 B：媒体不托管到网站，改为按单首歌跳转网盘。
-type PanDriveLinks = { video: string; audio: string };
-const THEME_PAN_LINK = "https://pan.baidu.com/s/1lE0ag-xeoAc5uyi8x_98LQ?pwd=hnqd";
-const PAN_DRIVE_LINKS: Record<string, PanDriveLinks> = {
-  // 主题 1 · 摇篮曲：单曲 MP4 分享，音频暂复用同一 MP4 播放页。
-  "song-001": {
-    video: "https://pan.baidu.com/s/15PRD8omfiLM7x0C99ucs2A?pwd=34q1",
-    audio: "https://pan.baidu.com/s/15PRD8omfiLM7x0C99ucs2A?pwd=34q1",
-  },
-  "song-002": {
-    video: "https://pan.baidu.com/s/1nTSwz3VWl1wlyHBrKaRoLg?pwd=34q1",
-    audio: "https://pan.baidu.com/s/1nTSwz3VWl1wlyHBrKaRoLg?pwd=34q1",
-  },
-  "song-003": {
-    video: "https://pan.baidu.com/s/1czLm2gvtOeMn1MM1ZPNADQ?pwd=34q1",
-    audio: "https://pan.baidu.com/s/1czLm2gvtOeMn1MM1ZPNADQ?pwd=34q1",
-  },
-  "song-004": {
-    video: "https://pan.baidu.com/s/1u_KYoOWKCJw31S_LxhmSWw?pwd=34q1",
-    audio: "https://pan.baidu.com/s/1u_KYoOWKCJw31S_LxhmSWw?pwd=34q1",
-  },
-  "song-005": {
-    video: "https://pan.baidu.com/s/1lTchNvoDPLj5dYGnWXno6A?pwd=34q1",
-    audio: "https://pan.baidu.com/s/1lTchNvoDPLj5dYGnWXno6A?pwd=34q1",
-  },
-  "song-006": {
-    video: "https://pan.baidu.com/s/173U3qz1W3X7O0y5sEhBQJA?pwd=34q1",
-    audio: "https://pan.baidu.com/s/173U3qz1W3X7O0y5sEhBQJA?pwd=34q1",
-  },
-  "song-007": {
-    video: "https://pan.baidu.com/s/1UgR5Jo6en6-alFs5wmSn7Q?pwd=34q1",
-    audio: "https://pan.baidu.com/s/1UgR5Jo6en6-alFs5wmSn7Q?pwd=34q1",
-  },
-  "song-008": {
-    video: "https://pan.baidu.com/s/1368MMn0L3__lLz9fK_R2DQ?pwd=34q1",
-    audio: "https://pan.baidu.com/s/1368MMn0L3__lLz9fK_R2DQ?pwd=34q1",
-  },
-
-  // 主题 2 · 字母拼读：单曲 MP4 分享，音频暂复用同一 MP4 播放页。
-  "song-009": {
-    video: "https://pan.baidu.com/s/1WBCOnLuFhCG7JUKME1BenQ?pwd=dh15",
-    audio: "https://pan.baidu.com/s/1WBCOnLuFhCG7JUKME1BenQ?pwd=dh15",
-  },
-  "song-010": {
-    video: "https://pan.baidu.com/s/165loH4kAvNzh8LuTy3oksw?pwd=dh15",
-    audio: "https://pan.baidu.com/s/165loH4kAvNzh8LuTy3oksw?pwd=dh15",
-  },
-  "song-011": {
-    video: "https://pan.baidu.com/s/17bZI7t1Hdlg6BJWrDkR2AQ?pwd=dh15",
-    audio: "https://pan.baidu.com/s/17bZI7t1Hdlg6BJWrDkR2AQ?pwd=dh15",
-  },
-  "song-012": {
-    video: "https://pan.baidu.com/s/1wbuRKJXVFcg7ysswsy2b_Q?pwd=dh15",
-    audio: "https://pan.baidu.com/s/1wbuRKJXVFcg7ysswsy2b_Q?pwd=dh15",
-  },
-  "song-013": {
-    video: "https://pan.baidu.com/s/1wVcvN9OS7StkE-A6EJw9Gg?pwd=dh15",
-    audio: "https://pan.baidu.com/s/1wVcvN9OS7StkE-A6EJw9Gg?pwd=dh15",
-  },
-
-  // 主题 3 · 交通工具：单曲 MP4 分享，音频暂复用同一 MP4 播放页。
-  "song-014": {
-    video: "https://pan.baidu.com/s/1JYEiyTjBeiKvjjTyTXNYYg?pwd=yira",
-    audio: "https://pan.baidu.com/s/1JYEiyTjBeiKvjjTyTXNYYg?pwd=yira",
-  },
-  "song-015": {
-    video: "https://pan.baidu.com/s/1EN_v_ytHY5kY_CbuD3dFfw?pwd=yira",
-    audio: "https://pan.baidu.com/s/1EN_v_ytHY5kY_CbuD3dFfw?pwd=yira",
-  },
-  "song-016": {
-    video: "https://pan.baidu.com/s/13-Uvfm7kUe1zFnnsnQH3CA?pwd=yira",
-    audio: "https://pan.baidu.com/s/13-Uvfm7kUe1zFnnsnQH3CA?pwd=yira",
-  },
-  "song-017": {
-    video: "https://pan.baidu.com/s/1pi8dcwi3dFho3QiwFsDkcA?pwd=yira",
-    audio: "https://pan.baidu.com/s/1pi8dcwi3dFho3QiwFsDkcA?pwd=yira",
-  },
-  "song-018": {
-    video: "https://pan.baidu.com/s/1Q6FlvAkm1D6D8fuiXiR0CA?pwd=yira",
-    audio: "https://pan.baidu.com/s/1Q6FlvAkm1D6D8fuiXiR0CA?pwd=yira",
-  },
-  "song-019": {
-    video: "https://pan.baidu.com/s/10FToMTldnnmfYCvSe84NIQ?pwd=yira",
-    audio: "https://pan.baidu.com/s/10FToMTldnnmfYCvSe84NIQ?pwd=yira",
-  },
-  "song-020": {
-    video: "https://pan.baidu.com/s/1mf-TrA9dF8oJvL8QZUG5Yw?pwd=yira",
-    audio: "https://pan.baidu.com/s/1mf-TrA9dF8oJvL8QZUG5Yw?pwd=yira",
-  },
-  "song-021": {
-    video: "https://pan.baidu.com/s/1Ef9X_N5W0mj8s0Pv23lSTw?pwd=yira",
-    audio: "https://pan.baidu.com/s/1Ef9X_N5W0mj8s0Pv23lSTw?pwd=yira",
-  },
-  "song-022": {
-    video: "https://pan.baidu.com/s/1bbbKySqdvRpRjiN92gknAQ?pwd=yira",
-    audio: "https://pan.baidu.com/s/1bbbKySqdvRpRjiN92gknAQ?pwd=yira",
-  },
-  "song-023": {
-    video: "https://pan.baidu.com/s/13nKVVJYBN-SxM_8czwDiUw?pwd=yira",
-    audio: "https://pan.baidu.com/s/13nKVVJYBN-SxM_8czwDiUw?pwd=yira",
-  },
-  "song-024": {
-    video: "https://pan.baidu.com/s/1KoOpSc9UPzycPzbe1IjukQ?pwd=yira",
-    audio: "https://pan.baidu.com/s/1KoOpSc9UPzycPzbe1IjukQ?pwd=yira",
-  },
-};
 const WECHAT_ID = "GL11280308";
 
-function getPanDriveLinks(songId: string): PanDriveLinks {
-  return PAN_DRIVE_LINKS[songId] || { video: THEME_PAN_LINK, audio: THEME_PAN_LINK };
-}
-
-function CloudMediaCard({ song, kind }: { song: SongWithTheme; kind: "video" | "audio" }) {
-  const links = getPanDriveLinks(song.id);
-  const isVideo = kind === "video";
+function MediaContactCard() {
   return (
-    <section className="content-card cloud-media-card">
+    <section className="content-card media-contact-card">
       <header>
         <div>
-          <span className="content-icon">{isVideo ? "▶" : "♫"}</span>
+          <span className="content-icon">▶</span>
           <div>
-            <b>{isVideo ? "MP4 视频" : "MP3 音频"}</b>
-            <small>百度网盘 · 单首歌分享</small>
+            <b>视频和音频</b>
+            <small>添加微信获取完整 MP4 / MP3</small>
           </div>
         </div>
-        <em>网盘播放</em>
+        <em>微信获取</em>
       </header>
-      <a className={`cloud-media-button ${isVideo ? "" : "audio"}`} href={isVideo ? links.video : links.audio} target="_blank" rel="noreferrer">
-        {isVideo ? "播放视频" : "播放音频"}
-      </a>
-      <p className="cloud-media-tip">链接已定位到当前分享内容，但百度网盘可能会显示分享页或提取码页。建议保存到自己网盘后，在 App 里播放。</p>
+      <p className="media-contact-copy">添加客服微信号，获取这首歌的完整视频和音频。</p>
+      <div className="media-contact-row">
+        <span className="wechat-id">{WECHAT_ID}</span>
+        <button className="copy-contact" type="button" onClick={() => navigator.clipboard?.writeText(WECHAT_ID).catch(() => {})}>复制微信号</button>
+      </div>
     </section>
   );
 }
@@ -528,8 +418,7 @@ function SongDetail({ song, onBack }: { song: SongWithTheme; onBack: () => void 
           </section>
         </div>
         <div className="detail-section-title"><h2>对应内容</h2><span>歌词直接查看大图</span></div>
-        <CloudMediaCard song={song} kind="video" />
-        <CloudMediaCard song={song} kind="audio" />
+        <MediaContactCard />
         <LyricsPreview song={song} onView={setViewer} />
         <FlashcardPreview song={song} onView={setViewer} />
         <WeChatFooter />
