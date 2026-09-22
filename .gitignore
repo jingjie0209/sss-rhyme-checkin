@@ -5,7 +5,7 @@ playwright-report/
 
 # Do not publish hosted media to GitHub Pages.
 public/media/
-public/previews/
+
 
 # Local/runtime files
 .mobile-runtime-lock.tmp

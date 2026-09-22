@@ -1,5 +1,5 @@
 export type ResourceSong = {
-  id: string; no: number; title: string;
+  id: string; no: number; title: string; hasLyrics: boolean; hasFlashcards: boolean; flashJpgCount: number;
 };
 
 export type ThemeGroup = {
@@ -28,42 +28,66 @@ export const RESOURCE_DATA: {
         {
           "id": "song-001",
           "no": 1,
-          "title": "Twinkle Twinkle Little Star"
+          "title": "Twinkle Twinkle Little Star",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-002",
           "no": 2,
-          "title": "Row Row Row Your Boat "
+          "title": "Row Row Row Your Boat ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-003",
           "no": 3,
-          "title": "Little Snowflake Kids Songs "
+          "title": "Little Snowflake Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 1
         },
         {
           "id": "song-004",
           "no": 4,
-          "title": "Sweet Dreams (Goodnight Song) "
+          "title": "Sweet Dreams (Goodnight Song) ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-005",
           "no": 5,
-          "title": "Are You Sleeping - Kids Songs - "
+          "title": "Are You Sleeping - Kids Songs - ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-006",
           "no": 6,
-          "title": "纯音乐 01.Hush Little Baby"
+          "title": "纯音乐 01.Hush Little Baby",
+          "hasLyrics": false,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-007",
           "no": 7,
-          "title": "纯音乐 02.Brahms’Lullaby"
+          "title": "纯音乐 02.Brahms’Lullaby",
+          "hasLyrics": false,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-008",
           "no": 8,
-          "title": "纯音乐 03.Twinkle Twinkle Little Star"
+          "title": "纯音乐 03.Twinkle Twinkle Little Star",
+          "hasLyrics": false,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         }
       ]
     },
@@ -78,27 +102,42 @@ export const RESOURCE_DATA: {
         {
           "id": "song-009",
           "no": 9,
-          "title": "The Alphabet Chant featuring Noodle & Pals "
+          "title": "The Alphabet Chant featuring Noodle & Pals ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-010",
           "no": 10,
-          "title": "Apples & Bananas "
+          "title": "Apples & Bananas ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 2
         },
         {
           "id": "song-011",
           "no": 11,
-          "title": "The Alphabet Song Kids Songs "
+          "title": "The Alphabet Song Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-012",
           "no": 12,
-          "title": "The Alphabet Is So Much Fun Kids Songs "
+          "title": "The Alphabet Is So Much Fun Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-013",
           "no": 13,
-          "title": "Halloween ABC Song  "
+          "title": "Halloween ABC Song  ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         }
       ]
     },
@@ -113,57 +152,90 @@ export const RESOURCE_DATA: {
         {
           "id": "song-014",
           "no": 14,
-          "title": "The Wheels On The Bus "
+          "title": "The Wheels On The Bus ",
+          "hasLyrics": false,
+          "hasFlashcards": false,
+          "flashJpgCount": 4
         },
         {
           "id": "song-015",
           "no": 15,
-          "title": "10 Little Airplanes Kids Songs Count To Ten "
+          "title": "10 Little Airplanes Kids Songs Count To Ten ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-016",
           "no": 16,
-          "title": "10 Little Sailboats Kids Songs "
+          "title": "10 Little Sailboats Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-017",
           "no": 17,
-          "title": "10 Little Tractors Kids Songs "
+          "title": "10 Little Tractors Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-018",
           "no": 18,
-          "title": "10 Little Buses Kids Songs "
+          "title": "10 Little Buses Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-019",
           "no": 19,
-          "title": "Let's Take The Subway Sing Along With Tobee "
+          "title": "Let's Take The Subway Sing Along With Tobee ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-020",
           "no": 20,
-          "title": "10 Little Bicycles Kids Songs "
+          "title": "10 Little Bicycles Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-021",
           "no": 21,
-          "title": "The Wheels On The Bus (2019) Nursery Rhymes "
+          "title": "The Wheels On The Bus (2019) Nursery Rhymes ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 4
         },
         {
           "id": "song-022",
           "no": 22,
-          "title": "Driving In My Car Kids Songs "
+          "title": "Driving In My Car Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-023",
           "no": 23,
-          "title": "Here Comes The Fire Truck "
+          "title": "Here Comes The Fire Truck ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-024",
           "no": 24,
-          "title": "The Wheels On The Bus (Carl's Car Wash Version)"
+          "title": "The Wheels On The Bus (Carl's Car Wash Version)",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         }
       ]
     },
@@ -178,47 +250,74 @@ export const RESOURCE_DATA: {
         {
           "id": "song-025",
           "no": 25,
-          "title": "The Bath Song Original Kids Song "
+          "title": "The Bath Song Original Kids Song ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 9
         },
         {
           "id": "song-026",
           "no": 26,
-          "title": "Clean Up Song Kids Song for Tidying Up "
+          "title": "Clean Up Song Kids Song for Tidying Up ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-027",
           "no": 27,
-          "title": "This Is The Way Kids Songs "
+          "title": "This Is The Way Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-028",
           "no": 28,
-          "title": "Brush Your Teeth Kids Songs "
+          "title": "Brush Your Teeth Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-029",
           "no": 29,
-          "title": "This Is The Way We Get Dressed Kids Songs "
+          "title": "This Is The Way We Get Dressed Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 8
         },
         {
           "id": "song-030",
           "no": 30,
-          "title": "This Is The Way We Go To Bed Kids Songs "
+          "title": "This Is The Way We Go To Bed Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-031",
           "no": 31,
-          "title": "Red Light, Green Light "
+          "title": "Red Light, Green Light ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-032",
           "no": 32,
-          "title": "Sitting On The Potty Kids Songs "
+          "title": "Sitting On The Potty Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-033",
           "no": 33,
-          "title": "Line Up!  featuring Noodle & Pals  "
+          "title": "Line Up!  featuring Noodle & Pals  ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         }
       ]
     },
@@ -233,67 +332,106 @@ export const RESOURCE_DATA: {
         {
           "id": "song-034",
           "no": 34,
-          "title": "Good Morning, Mr. Rooster "
+          "title": "Good Morning, Mr. Rooster ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-035",
           "no": 35,
-          "title": "Hello, Reindeer Children's Christmas Song"
+          "title": "Hello, Reindeer Children's Christmas Song",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-036",
           "no": 36,
-          "title": "Hello! "
+          "title": "Hello! ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 4
         },
         {
           "id": "song-037",
           "no": 37,
-          "title": "After A While, Crocodile "
+          "title": "After A While, Crocodile ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-038",
           "no": 38,
-          "title": "Hello, My Friends"
+          "title": "Hello, My Friends",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-039",
           "no": 39,
-          "title": "Goodbye, My Friends Halloween Party Song "
+          "title": "Goodbye, My Friends Halloween Party Song ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-040",
           "no": 40,
-          "title": "Bye Bye Goodbye Goodbye Song for Kids "
+          "title": "Bye Bye Goodbye Goodbye Song for Kids ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-041",
           "no": 41,
-          "title": "Goodbye, Snowman Christmas Song for Kids "
+          "title": "Goodbye, Snowman Christmas Song for Kids ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-042",
           "no": 42,
-          "title": "See You Later, Alligator Goodbye Song "
+          "title": "See You Later, Alligator Goodbye Song ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-043",
           "no": 43,
-          "title": "The More We Get Together Kids Songs "
+          "title": "The More We Get Together Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-044",
           "no": 44,
-          "title": "Hello! featuring The Super Simple Puppets "
+          "title": "Hello! featuring The Super Simple Puppets ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 4
         },
         {
           "id": "song-045",
           "no": 45,
-          "title": "Hello Hello!  featuring The Super Simple Puppets"
+          "title": "Hello Hello!  featuring The Super Simple Puppets",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-046",
           "no": 46,
-          "title": "What's Your Name (Super Simple Puppets version)  "
+          "title": "What's Your Name (Super Simple Puppets version)  ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         }
       ]
     },
@@ -308,82 +446,130 @@ export const RESOURCE_DATA: {
         {
           "id": "song-047",
           "no": 47,
-          "title": "Head Shoulders Knees & Toes (Sing It)"
+          "title": "Head Shoulders Knees & Toes (Sing It)",
+          "hasLyrics": false,
+          "hasFlashcards": false,
+          "flashJpgCount": 4
         },
         {
           "id": "song-048",
           "no": 48,
-          "title": "Head Shoulders Knees & Toes (Learn It)"
+          "title": "Head Shoulders Knees & Toes (Learn It)",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 4
         },
         {
           "id": "song-049",
           "no": 49,
-          "title": "One Little Finger featuring Noodle & Pals "
+          "title": "One Little Finger featuring Noodle & Pals ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 4
         },
         {
           "id": "song-050",
           "no": 50,
-          "title": "This Is The Way We Carve A Pumpkin "
+          "title": "This Is The Way We Carve A Pumpkin ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-051",
           "no": 51,
-          "title": "I'm A Little Snowman "
+          "title": "I'm A Little Snowman ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-052",
           "no": 52,
-          "title": "My Teddy Bear "
+          "title": "My Teddy Bear ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-053",
           "no": 53,
-          "title": "Head Shoulders Knees & Toes (Speeding Up) Nursery Rhyme "
+          "title": "Head Shoulders Knees & Toes (Speeding Up) Nursery Rhyme ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 4
         },
         {
           "id": "song-054",
           "no": 54,
-          "title": "Hello Hello! Can You Clap Your Hands Original Kids Song "
+          "title": "Hello Hello! Can You Clap Your Hands Original Kids Song ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-055",
           "no": 55,
-          "title": "The Pinocchio Nursery Rhymes "
+          "title": "The Pinocchio Nursery Rhymes ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 7
         },
         {
           "id": "song-056",
           "no": 56,
-          "title": "The Skeleton Dance Halloween Song for Kids "
+          "title": "The Skeleton Dance Halloween Song for Kids ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-057",
           "no": 57,
-          "title": "How Many Fingers Kids Songs "
+          "title": "How Many Fingers Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-058",
           "no": 58,
-          "title": "Here We Go Looby Loo Nursery Rhymes "
+          "title": "Here We Go Looby Loo Nursery Rhymes ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-059",
           "no": 59,
-          "title": "Where Is Thumbkin featuring Noodle & Pals "
+          "title": "Where Is Thumbkin featuring Noodle & Pals ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-060",
           "no": 60,
-          "title": "Head Shoulders Knees And Toes (2019) Noodle & Pals "
+          "title": "Head Shoulders Knees And Toes (2019) Noodle & Pals ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 4
         },
         {
           "id": "song-061",
           "no": 61,
-          "title": "With My Heart Kids Songs "
+          "title": "With My Heart Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-062",
           "no": 62,
-          "title": "Head Shoulders Knees And Toes  Kids Songs  "
+          "title": "Head Shoulders Knees And Toes  Kids Songs  ",
+          "hasLyrics": false,
+          "hasFlashcards": false,
+          "flashJpgCount": 4
         }
       ]
     },
@@ -398,67 +584,106 @@ export const RESOURCE_DATA: {
         {
           "id": "song-063",
           "no": 63,
-          "title": "Do You Like Broccoli Ice Cream "
+          "title": "Do You Like Broccoli Ice Cream ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 4
         },
         {
           "id": "song-064",
           "no": 64,
-          "title": "Do You Like Spaghetti Yogurt "
+          "title": "Do You Like Spaghetti Yogurt ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 4
         },
         {
           "id": "song-065",
           "no": 65,
-          "title": "Trick Or Treat Give Me Something Good To Eat Halloween Song"
+          "title": "Trick Or Treat Give Me Something Good To Eat Halloween Song",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-066",
           "no": 66,
-          "title": "Do You Like Pickle Pudding "
+          "title": "Do You Like Pickle Pudding ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 2
         },
         {
           "id": "song-067",
           "no": 67,
-          "title": "Do You Like Lasagna Milkshakes Ice Cream and Lasagna! "
+          "title": "Do You Like Lasagna Milkshakes Ice Cream and Lasagna! ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 2
         },
         {
           "id": "song-068",
           "no": 68,
-          "title": "The Muffin Man Kids Songs "
+          "title": "The Muffin Man Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-069",
           "no": 69,
-          "title": "Peanut Butter & Jelly Kids Songs "
+          "title": "Peanut Butter & Jelly Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 3
         },
         {
           "id": "song-070",
           "no": 70,
-          "title": "Pat-A-Cake Kids Songs "
+          "title": "Pat-A-Cake Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 2
         },
         {
           "id": "song-071",
           "no": 71,
-          "title": "Are You Hungry Kids Songs "
+          "title": "Are You Hungry Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 1
         },
         {
           "id": "song-072",
           "no": 72,
-          "title": "Hot Cross Buns Nursery Rhymes "
+          "title": "Hot Cross Buns Nursery Rhymes ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-073",
           "no": 73,
-          "title": "The Ants Go Marching #2 featuring The Bumble Nums "
+          "title": "The Ants Go Marching #2 featuring The Bumble Nums ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-074",
           "no": 74,
-          "title": "Do You Like Broccoli Ice Cream featuring The Super Simple Puppets "
+          "title": "Do You Like Broccoli Ice Cream featuring The Super Simple Puppets ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 4
         },
         {
           "id": "song-075",
           "no": 75,
-          "title": "What’s Your Favorite Flavor Of Ice Cream Kids Songs "
+          "title": "What’s Your Favorite Flavor Of Ice Cream Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         }
       ]
     },
@@ -473,92 +698,146 @@ export const RESOURCE_DATA: {
         {
           "id": "song-076",
           "no": 76,
-          "title": "Hickory Dickory Dock "
+          "title": "Hickory Dickory Dock ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 12
         },
         {
           "id": "song-077",
           "no": 77,
-          "title": "The Months Chant "
+          "title": "The Months Chant ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 4
         },
         {
           "id": "song-078",
           "no": 78,
-          "title": "How's The Weather "
+          "title": "How's The Weather ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 3
         },
         {
           "id": "song-079",
           "no": 79,
-          "title": "I See Something Blue Colors Song for Children"
+          "title": "I See Something Blue Colors Song for Children",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 3
         },
         {
           "id": "song-080",
           "no": 80,
-          "title": "I See Something Pink Colors Song "
+          "title": "I See Something Pink Colors Song ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 1
         },
         {
           "id": "song-081",
           "no": 81,
-          "title": "Rain Rain Go Away Super Simple Songs Sesame Street Nursery Rhyme Week"
+          "title": "Rain Rain Go Away Super Simple Songs Sesame Street Nursery Rhyme Week",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 3
         },
         {
           "id": "song-082",
           "no": 82,
-          "title": "The Shape Song #1 "
+          "title": "The Shape Song #1 ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 2
         },
         {
           "id": "song-083",
           "no": 83,
-          "title": "The Shape Song #2 "
+          "title": "The Shape Song #2 ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 2
         },
         {
           "id": "song-084",
           "no": 84,
-          "title": "Mystery Box #1 Preschool Song "
+          "title": "Mystery Box #1 Preschool Song ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-085",
           "no": 85,
-          "title": "Mystery Box #2 Kids Song "
+          "title": "Mystery Box #2 Kids Song ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-086",
           "no": 86,
-          "title": "Days Of The Week Song Kids Songs "
+          "title": "Days Of The Week Song Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 4
         },
         {
           "id": "song-087",
           "no": 87,
-          "title": "Mystery Box #3 Original Nursery Rhyme "
+          "title": "Mystery Box #3 Original Nursery Rhyme ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-088",
           "no": 88,
-          "title": "Baby Shark Kids Songs "
+          "title": "Baby Shark Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 2
         },
         {
           "id": "song-089",
           "no": 89,
-          "title": "Mr. Sun, Sun, Mr. Golden Sun Kids Songs "
+          "title": "Mr. Sun, Sun, Mr. Golden Sun Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-090",
           "no": 90,
-          "title": "What's Your Favorite Color Kids Songs "
+          "title": "What's Your Favorite Color Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 8
         },
         {
           "id": "song-091",
           "no": 91,
-          "title": "Red Yellow Green Blue featuring The Bumble Nums "
+          "title": "Red Yellow Green Blue featuring The Bumble Nums ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-092",
           "no": 92,
-          "title": "When The Band Comes Marching In Kids Songs "
+          "title": "When The Band Comes Marching In Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-093",
           "no": 93,
-          "title": "What’s This What’s That Kids Songs "
+          "title": "What’s This What’s That Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         }
       ]
     },
@@ -573,67 +852,106 @@ export const RESOURCE_DATA: {
         {
           "id": "song-094",
           "no": 94,
-          "title": "If You're Happy "
+          "title": "If You're Happy ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 2
         },
         {
           "id": "song-095",
           "no": 95,
-          "title": "Can You Make A Happy Face featuring Noodle & Pals "
+          "title": "Can You Make A Happy Face featuring Noodle & Pals ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-096",
           "no": 96,
-          "title": "What Do You Want For Christmas Santa's On His Way"
+          "title": "What Do You Want For Christmas Santa's On His Way",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 3
         },
         {
           "id": "song-097",
           "no": 97,
-          "title": "Skidamarink (Animated Version) "
+          "title": "Skidamarink (Animated Version) ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 1
         },
         {
           "id": "song-098",
           "no": 98,
-          "title": "Say Cheese! (Let's Take A Picture) Nursery Rhymes "
+          "title": "Say Cheese! (Let's Take A Picture) Nursery Rhymes ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-099",
           "no": 99,
-          "title": "Uh-huh! Original Nursery Rhyme "
+          "title": "Uh-huh! Original Nursery Rhyme ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-100",
           "no": 100,
-          "title": "I Like You Kids Songs "
+          "title": "I Like You Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-101",
           "no": 101,
-          "title": "What Do You Like To Do Kids Songs "
+          "title": "What Do You Like To Do Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-102",
           "no": 102,
-          "title": "I Can't Remember The Words To This Song Kids Songs "
+          "title": "I Can't Remember The Words To This Song Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-103",
           "no": 103,
-          "title": "If You’re Happy And You Know It Kids Songs Super Simple Songs (2)"
+          "title": "If You’re Happy And You Know It Kids Songs Super Simple Songs (2)",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 2
         },
         {
           "id": "song-104",
           "no": 104,
-          "title": "If You’re Happy And You Know It Kids Songs "
+          "title": "If You’re Happy And You Know It Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 2
         },
         {
           "id": "song-105",
           "no": 105,
-          "title": "Skidamarink A Dink A Dink Nursery Rhyme "
+          "title": "Skidamarink A Dink A Dink Nursery Rhyme ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 1
         },
         {
           "id": "song-106",
           "no": 106,
-          "title": "My Happy Song  featuring Noodle & Pals  "
+          "title": "My Happy Song  featuring Noodle & Pals  ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         }
       ]
     },
@@ -648,87 +966,138 @@ export const RESOURCE_DATA: {
         {
           "id": "song-107",
           "no": 107,
-          "title": "Old MacDonald Had A Farm "
+          "title": "Old MacDonald Had A Farm ",
+          "hasLyrics": false,
+          "hasFlashcards": false,
+          "flashJpgCount": 3
         },
         {
           "id": "song-108",
           "no": 108,
-          "title": "One Potato, Two Potatoes "
+          "title": "One Potato, Two Potatoes ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-109",
           "no": 109,
-          "title": "The Itsy Bitsy Spider Nursery Rhymes from Caitie's Classroom"
+          "title": "The Itsy Bitsy Spider Nursery Rhymes from Caitie's Classroom",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 4
         },
         {
           "id": "song-110",
           "no": 110,
-          "title": "Five Little Ducks Kids Songs "
+          "title": "Five Little Ducks Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-111",
           "no": 111,
-          "title": "Little Robin Redbreast Kids Songs "
+          "title": "Little Robin Redbreast Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-112",
           "no": 112,
-          "title": "Down By The Bay Kids Songs "
+          "title": "Down By The Bay Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-113",
           "no": 113,
-          "title": "Jack & Jill Kids Songs "
+          "title": "Jack & Jill Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-114",
           "no": 114,
-          "title": "Humpty Dumpty Kids Songs "
+          "title": "Humpty Dumpty Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-115",
           "no": 115,
-          "title": "Wind The Bobbin Up Kids Songs "
+          "title": "Wind The Bobbin Up Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-116",
           "no": 116,
-          "title": "Down By The Bay #2 Kids Songs "
+          "title": "Down By The Bay #2 Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-117",
           "no": 117,
-          "title": "The Farmer In The Dell Kids Songs "
+          "title": "The Farmer In The Dell Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-118",
           "no": 118,
-          "title": "Down By The Bay #3 Kids Songs "
+          "title": "Down By The Bay #3 Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-119",
           "no": 119,
-          "title": "Here Is The Beehive "
+          "title": "Here Is The Beehive ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-120",
           "no": 120,
-          "title": "Down By The Spooky Bay Halloween Song for Kids "
+          "title": "Down By The Spooky Bay Halloween Song for Kids ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-121",
           "no": 121,
-          "title": "Over The Deep Blue Sea Kids Songs "
+          "title": "Over The Deep Blue Sea Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-122",
           "no": 122,
-          "title": "The Bear Went Over The Mountain Nursery Rhyme "
+          "title": "The Bear Went Over The Mountain Nursery Rhyme ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-123",
           "no": 123,
-          "title": "I Love The Mountains  "
+          "title": "I Love The Mountains  ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         }
       ]
     },
@@ -743,137 +1112,218 @@ export const RESOURCE_DATA: {
         {
           "id": "song-124",
           "no": 124,
-          "title": "Open Shut Them "
+          "title": "Open Shut Them ",
+          "hasLyrics": false,
+          "hasFlashcards": false,
+          "flashJpgCount": 4
         },
         {
           "id": "song-125",
           "no": 125,
-          "title": "Who Took The Candy Halloween Song "
+          "title": "Who Took The Candy Halloween Song ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-126",
           "no": 126,
-          "title": "Wag Your Tail Animal Action Verb Song "
+          "title": "Wag Your Tail Animal Action Verb Song ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-127",
           "no": 127,
-          "title": "Rock Scissors Paper #1 Finger Play Song "
+          "title": "Rock Scissors Paper #1 Finger Play Song ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-128",
           "no": 128,
-          "title": "Rock Scissors Paper #2 Finger Play Song "
+          "title": "Rock Scissors Paper #2 Finger Play Song ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-129",
           "no": 129,
-          "title": "Who Took The Cookie Nursery Rhyme "
+          "title": "Who Took The Cookie Nursery Rhyme ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-130",
           "no": 130,
-          "title": "We All Fall Down Walk Around The Circle Song "
+          "title": "We All Fall Down Walk Around The Circle Song ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-131",
           "no": 131,
-          "title": "Make A Circle Preschool Song "
+          "title": "Make A Circle Preschool Song ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-132",
           "no": 132,
-          "title": "Walking Walking featuring Noodle & Pals "
+          "title": "Walking Walking featuring Noodle & Pals ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-133",
           "no": 133,
-          "title": "Hide And Seek featuring Noodle & Pals "
+          "title": "Hide And Seek featuring Noodle & Pals ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-134",
           "no": 134,
-          "title": "Peekaboo Original Children's Song Peek-a-boo Song for Kids Let's play Peek A Boo!"
+          "title": "Peekaboo Original Children's Song Peek-a-boo Song for Kids Let's play Peek A Boo!",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-135",
           "no": 135,
-          "title": "Rock Scissors Paper #3 Kids Songs "
+          "title": "Rock Scissors Paper #3 Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-136",
           "no": 136,
-          "title": "Take Me Out To The Ball Game Kids Songs "
+          "title": "Take Me Out To The Ball Game Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-137",
           "no": 137,
-          "title": "Rock Scissors Paper #4 Kids Songs "
+          "title": "Rock Scissors Paper #4 Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-138",
           "no": 138,
-          "title": "Follow Me Kids Songs "
+          "title": "Follow Me Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 5
         },
         {
           "id": "song-139",
           "no": 139,
-          "title": "Open Shut Them #2 Kids Songs "
+          "title": "Open Shut Them #2 Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 4
         },
         {
           "id": "song-140",
           "no": 140,
-          "title": "Who Took The Cookie (Farm Animals Version) Kids Songs "
+          "title": "Who Took The Cookie (Farm Animals Version) Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-141",
           "no": 141,
-          "title": "Peekaboo Playground Kids Songs "
+          "title": "Peekaboo Playground Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-142",
           "no": 142,
-          "title": "Peekaboo Halloween Kids Songs "
+          "title": "Peekaboo Halloween Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-143",
           "no": 143,
-          "title": "Pass The Beanbag featuring Noodle & Pals "
+          "title": "Pass The Beanbag featuring Noodle & Pals ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-144",
           "no": 144,
-          "title": "Peekaboo Christmas Kids Songs "
+          "title": "Peekaboo Christmas Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-145",
           "no": 145,
-          "title": "Open Shut Them featuring Noodle & Pals "
+          "title": "Open Shut Them featuring Noodle & Pals ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 4
         },
         {
           "id": "song-146",
           "no": 146,
-          "title": "The Jellyfish Kids Songs "
+          "title": "The Jellyfish Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 5
         },
         {
           "id": "song-147",
           "no": 147,
-          "title": "Peekaboo, I Love You Kids Songs "
+          "title": "Peekaboo, I Love You Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-148",
           "no": 148,
-          "title": "Where Is Baby Kids Songs "
+          "title": "Where Is Baby Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-149",
           "no": 149,
-          "title": "Open Shut Them #3 featuring Baby Shark "
+          "title": "Open Shut Them #3 featuring Baby Shark ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 4
         },
         {
           "id": "song-150",
           "no": 150,
-          "title": "Open Shut Them #4 "
+          "title": "Open Shut Them #4 ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 4
         }
       ]
     },
@@ -888,87 +1338,138 @@ export const RESOURCE_DATA: {
         {
           "id": "song-151",
           "no": 151,
-          "title": "Ten In The Bed "
+          "title": "Ten In The Bed ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-152",
           "no": 152,
-          "title": "Count & Move from "
+          "title": "Count & Move from ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-153",
           "no": 153,
-          "title": "The Bananas Song Counting Bananas "
+          "title": "The Bananas Song Counting Bananas ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 18
         },
         {
           "id": "song-154",
           "no": 154,
-          "title": "Count Down From 20 to 1 "
+          "title": "Count Down From 20 to 1 ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-155",
           "no": 155,
-          "title": "Five Little Pumpkins Pumpkin Song "
+          "title": "Five Little Pumpkins Pumpkin Song ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 4
         },
         {
           "id": "song-156",
           "no": 156,
-          "title": "10 Little Elves Christmas Song For Kids "
+          "title": "10 Little Elves Christmas Song For Kids ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 4
         },
         {
           "id": "song-157",
           "no": 157,
-          "title": "Seven Steps featuring Noodle & Pals "
+          "title": "Seven Steps featuring Noodle & Pals ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-158",
           "no": 158,
-          "title": "The Ice Cream Song Kids Songs "
+          "title": "The Ice Cream Song Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-159",
           "no": 159,
-          "title": "10 Little Dinosaurs Kids Songs "
+          "title": "10 Little Dinosaurs Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 1
         },
         {
           "id": "song-160",
           "no": 160,
-          "title": "Alice The Camel Kids Songs "
+          "title": "Alice The Camel Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 1
         },
         {
           "id": "song-161",
           "no": 161,
-          "title": "Five Little Monsters Jumping On The Bed Kids Halloween Song "
+          "title": "Five Little Monsters Jumping On The Bed Kids Halloween Song ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-162",
           "no": 162,
-          "title": "12 Days Of Christmas Kids Songs "
+          "title": "12 Days Of Christmas Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-163",
           "no": 163,
-          "title": "10 Little Fishies - Featuring Baby Shark! Kids Songs "
+          "title": "10 Little Fishies - Featuring Baby Shark! Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-164",
           "no": 164,
-          "title": "10 Little Dinosaurs #2 Kids Songs "
+          "title": "10 Little Dinosaurs #2 Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 1
         },
         {
           "id": "song-165",
           "no": 165,
-          "title": "Six In The Bed Kids Songs "
+          "title": "Six In The Bed Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-166",
           "no": 166,
-          "title": "10 Monsters In The Bed  Kids Halloween Song  "
+          "title": "10 Monsters In The Bed  Kids Halloween Song  ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-167",
           "no": 167,
-          "title": "Pop The Bubbles  Kids Songs  "
+          "title": "Pop The Bubbles  Kids Songs  ",
+          "hasLyrics": false,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         }
       ]
     },
@@ -983,107 +1484,170 @@ export const RESOURCE_DATA: {
         {
           "id": "song-168",
           "no": 168,
-          "title": "S-A-N-T-A "
+          "title": "S-A-N-T-A ",
+          "hasLyrics": false,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-169",
           "no": 169,
-          "title": "Jingle Bells "
+          "title": "Jingle Bells ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 1
         },
         {
           "id": "song-170",
           "no": 170,
-          "title": "Go Away! "
+          "title": "Go Away! ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 4
         },
         {
           "id": "song-171",
           "no": 171,
-          "title": "Five Creepy Spiders Halloween Song "
+          "title": "Five Creepy Spiders Halloween Song ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-172",
           "no": 172,
-          "title": "Knock Knock, Trick Or Treat Halloween Song "
+          "title": "Knock Knock, Trick Or Treat Halloween Song ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-173",
           "no": 173,
-          "title": "One For You, One For Me Halloween Song "
+          "title": "One For You, One For Me Halloween Song ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-174",
           "no": 174,
-          "title": "Go Away, Spooky Goblin! Spooky Simple Song"
+          "title": "Go Away, Spooky Goblin! Spooky Simple Song",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-175",
           "no": 175,
-          "title": "We Wish You A Merry Christmas "
+          "title": "We Wish You A Merry Christmas ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-176",
           "no": 176,
-          "title": "Decorate The Christmas Tree (to the tune of Deck The Halls ) "
+          "title": "Decorate The Christmas Tree (to the tune of Deck The Halls ) ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 1
         },
         {
           "id": "song-177",
           "no": 177,
-          "title": "Santa's On His Way Christmas Song for Kids "
+          "title": "Santa's On His Way Christmas Song for Kids ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-178",
           "no": 178,
-          "title": "Hello, My Friends Trick-Or-Treating Song "
+          "title": "Hello, My Friends Trick-Or-Treating Song ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-179",
           "no": 179,
-          "title": "Knock Knock, Trick Or Treat - Part 2 "
+          "title": "Knock Knock, Trick Or Treat - Part 2 ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-180",
           "no": 180,
-          "title": "Jingle Jingle Little Bell (to the tune of Twinkle Twinkle Little Star) "
+          "title": "Jingle Jingle Little Bell (to the tune of Twinkle Twinkle Little Star) ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-181",
           "no": 181,
-          "title": "Santa, Where Are You Kids Christmas Song "
+          "title": "Santa, Where Are You Kids Christmas Song ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 4
         },
         {
           "id": "song-182",
           "no": 182,
-          "title": "Up On The Housetop Kids Songs "
+          "title": "Up On The Housetop Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 1
         },
         {
           "id": "song-183",
           "no": 183,
-          "title": "Santa Shark Baby Shark Christmas Song "
+          "title": "Santa Shark Baby Shark Christmas Song ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-184",
           "no": 184,
-          "title": "Knock Knock, Trick Or Treat  featuring The Super Simple Puppets  "
+          "title": "Knock Knock, Trick Or Treat  featuring The Super Simple Puppets  ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-185",
           "no": 185,
-          "title": "This Is The Way We Trick Or Treat  featuring The Super Simple Puppets"
+          "title": "This Is The Way We Trick Or Treat  featuring The Super Simple Puppets",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-186",
           "no": 186,
-          "title": "At The North Pole  Super Simple Songs  Christmas Song For Kids"
+          "title": "At The North Pole  Super Simple Songs  Christmas Song For Kids",
+          "hasLyrics": false,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-187",
           "no": 187,
-          "title": "Jingle Bells  Christmas Song For Kids  "
+          "title": "Jingle Bells  Christmas Song For Kids  ",
+          "hasLyrics": false,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-188",
           "no": 188,
-          "title": "Silent Night  Christmas Song For Kids  "
+          "title": "Silent Night  Christmas Song For Kids  ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         }
       ]
     },
@@ -1098,87 +1662,138 @@ export const RESOURCE_DATA: {
         {
           "id": "song-189",
           "no": 189,
-          "title": "Five Little Monkeys "
+          "title": "Five Little Monkeys ",
+          "hasLyrics": false,
+          "hasFlashcards": false,
+          "flashJpgCount": 4
         },
         {
           "id": "song-190",
           "no": 190,
-          "title": "BINGO "
+          "title": "BINGO ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 3
         },
         {
           "id": "song-191",
           "no": 191,
-          "title": "Walking In The Jungle "
+          "title": "Walking In The Jungle ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-192",
           "no": 192,
-          "title": "Let's Go To The Zoo Animal Song for Kids"
+          "title": "Let's Go To The Zoo Animal Song for Kids",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 5
         },
         {
           "id": "song-193",
           "no": 193,
-          "title": "Mary Had A Little Lamb Animal Song "
+          "title": "Mary Had A Little Lamb Animal Song ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 0
         },
         {
           "id": "song-194",
           "no": 194,
-          "title": "I Have A Pet Animal Song "
+          "title": "I Have A Pet Animal Song ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-195",
           "no": 195,
-          "title": "Yes, I Can! Animal Song For Children "
+          "title": "Yes, I Can! Animal Song For Children ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-196",
           "no": 196,
-          "title": "What Do You Hear Animal Song "
+          "title": "What Do You Hear Animal Song ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-197",
           "no": 197,
-          "title": "Eeney Meeney Miney Moe Nursery Rhyme "
+          "title": "Eeney Meeney Miney Moe Nursery Rhyme ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-198",
           "no": 198,
-          "title": "Five Little Speckled Frogs Kids Songs "
+          "title": "Five Little Speckled Frogs Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-199",
           "no": 199,
-          "title": "The Ants Go Marching Kids Songs "
+          "title": "The Ants Go Marching Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-200",
           "no": 200,
-          "title": "A Sailor Went To Sea Kids Songs "
+          "title": "A Sailor Went To Sea Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 3
         },
         {
           "id": "song-201",
           "no": 201,
-          "title": "Baby Shark Halloween Kids Songs "
+          "title": "Baby Shark Halloween Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 2
         },
         {
           "id": "song-202",
           "no": 202,
-          "title": "Old MacDonald Had A Farm (2018) Nursery Rhymes "
+          "title": "Old MacDonald Had A Farm (2018) Nursery Rhymes ",
+          "hasLyrics": true,
+          "hasFlashcards": true,
+          "flashJpgCount": 3
         },
         {
           "id": "song-203",
           "no": 203,
-          "title": "There's A Hole In The Bottom Of The Sea Kids Songs "
+          "title": "There's A Hole In The Bottom Of The Sea Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-204",
           "no": 204,
-          "title": "The Bees Go Buzzing Kids Songs "
+          "title": "The Bees Go Buzzing Kids Songs ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         },
         {
           "id": "song-205",
           "no": 205,
-          "title": "Walking In The Forest "
+          "title": "Walking In The Forest ",
+          "hasLyrics": true,
+          "hasFlashcards": false,
+          "flashJpgCount": 0
         }
       ]
     }
