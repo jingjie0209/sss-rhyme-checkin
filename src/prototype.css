@@ -9,6 +9,7 @@ button { -webkit-tap-highlight-color: transparent; }
 .resource-shell, .flow-screen:has(.resource-shell), .flow-screen:has(.resource-detail) { position: absolute; inset: 0; overflow: hidden; background: #f7f8fc; }
 .resource-scroll { position: absolute; inset: 0; }
 .resource-main { min-height: 100%; padding: 54px 16px 48px; }
+.resource-detail { min-height: 100%; padding: 0 16px 40px; }
 
 .resource-header { display: flex; align-items: center; justify-content: space-between; padding: 6px 2px 18px; }
 .resource-header span { display: block; color: #7c82a1; font-size: 9px; font-weight: 900; letter-spacing: .16em; }
