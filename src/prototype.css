@@ -257,3 +257,6 @@ button { -webkit-tap-highlight-color: transparent; }
 .tpr-item i { display: grid; width: 30px; height: 30px; flex: 0 0 auto; place-items: center; border-radius: 10px; background: #edeaff; font-size: 15px; font-style: normal; }
 .tpr-item span { color: #32364f; font-size: 12px; font-weight: 750; }
 .tpr-content-card header em { background: #edeaff; color: #5f56cd; }
+
+/* Ensure inline audio never overflows on mobile. */
+.media-contact-card .local-audio { display: block; width: 100%; max-width: 100%; height: 42px; }
