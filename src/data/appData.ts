@@ -30,7 +30,7 @@ export const RESOURCE_DATA: {
           "no": 1,
           "title": "Twinkle Twinkle Little Star",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -46,7 +46,7 @@ export const RESOURCE_DATA: {
           "no": 3,
           "title": "Little Snowflake Kids Songs ",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 1
         },
         {
@@ -54,14 +54,14 @@ export const RESOURCE_DATA: {
           "no": 4,
           "title": "Sweet Dreams (Goodnight Song) ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
           "id": "song-005",
           "no": 5,
           "title": "Are You Sleeping - Kids Songs - ",
-          "hasLyrics": true,
+          "hasLyrics": false,
           "hasFlashcards": false,
           "flashJpgCount": 0
         },
@@ -85,7 +85,7 @@ export const RESOURCE_DATA: {
           "id": "song-008",
           "no": 8,
           "title": "纯音乐 03.Twinkle Twinkle Little Star",
-          "hasLyrics": false,
+          "hasLyrics": true,
           "hasFlashcards": false,
           "flashJpgCount": 0
         }
@@ -112,7 +112,7 @@ export const RESOURCE_DATA: {
           "no": 10,
           "title": "Apples & Bananas ",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 2
         },
         {
@@ -120,7 +120,7 @@ export const RESOURCE_DATA: {
           "no": 11,
           "title": "The Alphabet Song Kids Songs ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -135,7 +135,7 @@ export const RESOURCE_DATA: {
           "id": "song-013",
           "no": 13,
           "title": "Halloween ABC Song  ",
-          "hasLyrics": true,
+          "hasLyrics": false,
           "hasFlashcards": false,
           "flashJpgCount": 0
         }
@@ -153,8 +153,8 @@ export const RESOURCE_DATA: {
           "id": "song-014",
           "no": 14,
           "title": "The Wheels On The Bus ",
-          "hasLyrics": false,
-          "hasFlashcards": false,
+          "hasLyrics": true,
+          "hasFlashcards": true,
           "flashJpgCount": 4
         },
         {
@@ -162,7 +162,7 @@ export const RESOURCE_DATA: {
           "no": 15,
           "title": "10 Little Airplanes Kids Songs Count To Ten ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -210,7 +210,7 @@ export const RESOURCE_DATA: {
           "no": 21,
           "title": "The Wheels On The Bus (2019) Nursery Rhymes ",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 4
         },
         {
@@ -218,7 +218,7 @@ export const RESOURCE_DATA: {
           "no": 22,
           "title": "Driving In My Car Kids Songs ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -252,7 +252,7 @@ export const RESOURCE_DATA: {
           "no": 25,
           "title": "The Bath Song Original Kids Song ",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 9
         },
         {
@@ -260,7 +260,7 @@ export const RESOURCE_DATA: {
           "no": 26,
           "title": "Clean Up Song Kids Song for Tidying Up ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -284,7 +284,7 @@ export const RESOURCE_DATA: {
           "no": 29,
           "title": "This Is The Way We Get Dressed Kids Songs ",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 8
         },
         {
@@ -292,7 +292,7 @@ export const RESOURCE_DATA: {
           "no": 30,
           "title": "This Is The Way We Go To Bed Kids Songs ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -350,7 +350,7 @@ export const RESOURCE_DATA: {
           "no": 36,
           "title": "Hello! ",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 4
         },
         {
@@ -358,7 +358,7 @@ export const RESOURCE_DATA: {
           "no": 37,
           "title": "After A While, Crocodile ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -414,7 +414,7 @@ export const RESOURCE_DATA: {
           "no": 44,
           "title": "Hello! featuring The Super Simple Puppets ",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 4
         },
         {
@@ -422,14 +422,14 @@ export const RESOURCE_DATA: {
           "no": 45,
           "title": "Hello Hello!  featuring The Super Simple Puppets",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
           "id": "song-046",
           "no": 46,
           "title": "What's Your Name (Super Simple Puppets version)  ",
-          "hasLyrics": true,
+          "hasLyrics": false,
           "hasFlashcards": false,
           "flashJpgCount": 0
         }
@@ -447,8 +447,8 @@ export const RESOURCE_DATA: {
           "id": "song-047",
           "no": 47,
           "title": "Head Shoulders Knees & Toes (Sing It)",
-          "hasLyrics": false,
-          "hasFlashcards": false,
+          "hasLyrics": true,
+          "hasFlashcards": true,
           "flashJpgCount": 4
         },
         {
@@ -472,7 +472,7 @@ export const RESOURCE_DATA: {
           "no": 50,
           "title": "This Is The Way We Carve A Pumpkin ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -496,7 +496,7 @@ export const RESOURCE_DATA: {
           "no": 53,
           "title": "Head Shoulders Knees & Toes (Speeding Up) Nursery Rhyme ",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 4
         },
         {
@@ -504,7 +504,7 @@ export const RESOURCE_DATA: {
           "no": 54,
           "title": "Hello Hello! Can You Clap Your Hands Original Kids Song ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -512,7 +512,7 @@ export const RESOURCE_DATA: {
           "no": 55,
           "title": "The Pinocchio Nursery Rhymes ",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 7
         },
         {
@@ -520,7 +520,7 @@ export const RESOURCE_DATA: {
           "no": 56,
           "title": "The Skeleton Dance Halloween Song for Kids ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -552,23 +552,23 @@ export const RESOURCE_DATA: {
           "no": 60,
           "title": "Head Shoulders Knees And Toes (2019) Noodle & Pals ",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 4
         },
         {
           "id": "song-061",
           "no": 61,
           "title": "With My Heart Kids Songs ",
-          "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasLyrics": false,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
           "id": "song-062",
           "no": 62,
           "title": "Head Shoulders Knees And Toes  Kids Songs  ",
-          "hasLyrics": false,
-          "hasFlashcards": false,
+          "hasLyrics": true,
+          "hasFlashcards": true,
           "flashJpgCount": 4
         }
       ]
@@ -602,7 +602,7 @@ export const RESOURCE_DATA: {
           "no": 65,
           "title": "Trick Or Treat Give Me Something Good To Eat Halloween Song",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -610,7 +610,7 @@ export const RESOURCE_DATA: {
           "no": 66,
           "title": "Do You Like Pickle Pudding ",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 2
         },
         {
@@ -626,7 +626,7 @@ export const RESOURCE_DATA: {
           "no": 68,
           "title": "The Muffin Man Kids Songs ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -634,7 +634,7 @@ export const RESOURCE_DATA: {
           "no": 69,
           "title": "Peanut Butter & Jelly Kids Songs ",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 3
         },
         {
@@ -658,7 +658,7 @@ export const RESOURCE_DATA: {
           "no": 72,
           "title": "Hot Cross Buns Nursery Rhymes ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -674,7 +674,7 @@ export const RESOURCE_DATA: {
           "no": 74,
           "title": "Do You Like Broccoli Ice Cream featuring The Super Simple Puppets ",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 4
         },
         {
@@ -682,7 +682,7 @@ export const RESOURCE_DATA: {
           "no": 75,
           "title": "What’s Your Favorite Flavor Of Ice Cream Kids Songs ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         }
       ]
@@ -700,7 +700,7 @@ export const RESOURCE_DATA: {
           "no": 76,
           "title": "Hickory Dickory Dock ",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 12
         },
         {
@@ -764,7 +764,7 @@ export const RESOURCE_DATA: {
           "no": 84,
           "title": "Mystery Box #1 Preschool Song ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -780,7 +780,7 @@ export const RESOURCE_DATA: {
           "no": 86,
           "title": "Days Of The Week Song Kids Songs ",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 4
         },
         {
@@ -788,7 +788,7 @@ export const RESOURCE_DATA: {
           "no": 87,
           "title": "Mystery Box #3 Original Nursery Rhyme ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -796,7 +796,7 @@ export const RESOURCE_DATA: {
           "no": 88,
           "title": "Baby Shark Kids Songs ",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 2
         },
         {
@@ -804,7 +804,7 @@ export const RESOURCE_DATA: {
           "no": 89,
           "title": "Mr. Sun, Sun, Mr. Golden Sun Kids Songs ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -812,7 +812,7 @@ export const RESOURCE_DATA: {
           "no": 90,
           "title": "What's Your Favorite Color Kids Songs ",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 8
         },
         {
@@ -820,7 +820,7 @@ export const RESOURCE_DATA: {
           "no": 91,
           "title": "Red Yellow Green Blue featuring The Bumble Nums ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -854,7 +854,7 @@ export const RESOURCE_DATA: {
           "no": 94,
           "title": "If You're Happy ",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 2
         },
         {
@@ -862,7 +862,7 @@ export const RESOURCE_DATA: {
           "no": 95,
           "title": "Can You Make A Happy Face featuring Noodle & Pals ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -870,7 +870,7 @@ export const RESOURCE_DATA: {
           "no": 96,
           "title": "What Do You Want For Christmas Santa's On His Way",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 3
         },
         {
@@ -886,7 +886,7 @@ export const RESOURCE_DATA: {
           "no": 98,
           "title": "Say Cheese! (Let's Take A Picture) Nursery Rhymes ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -926,7 +926,7 @@ export const RESOURCE_DATA: {
           "no": 103,
           "title": "If You’re Happy And You Know It Kids Songs Super Simple Songs (2)",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 2
         },
         {
@@ -949,8 +949,8 @@ export const RESOURCE_DATA: {
           "id": "song-106",
           "no": 106,
           "title": "My Happy Song  featuring Noodle & Pals  ",
-          "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasLyrics": false,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         }
       ]
@@ -967,8 +967,8 @@ export const RESOURCE_DATA: {
           "id": "song-107",
           "no": 107,
           "title": "Old MacDonald Had A Farm ",
-          "hasLyrics": false,
-          "hasFlashcards": false,
+          "hasLyrics": true,
+          "hasFlashcards": true,
           "flashJpgCount": 3
         },
         {
@@ -976,7 +976,7 @@ export const RESOURCE_DATA: {
           "no": 108,
           "title": "One Potato, Two Potatoes ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -984,7 +984,7 @@ export const RESOURCE_DATA: {
           "no": 109,
           "title": "The Itsy Bitsy Spider Nursery Rhymes from Caitie's Classroom",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 4
         },
         {
@@ -992,7 +992,7 @@ export const RESOURCE_DATA: {
           "no": 110,
           "title": "Five Little Ducks Kids Songs ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -1095,7 +1095,7 @@ export const RESOURCE_DATA: {
           "id": "song-123",
           "no": 123,
           "title": "I Love The Mountains  ",
-          "hasLyrics": true,
+          "hasLyrics": false,
           "hasFlashcards": false,
           "flashJpgCount": 0
         }
@@ -1113,8 +1113,8 @@ export const RESOURCE_DATA: {
           "id": "song-124",
           "no": 124,
           "title": "Open Shut Them ",
-          "hasLyrics": false,
-          "hasFlashcards": false,
+          "hasLyrics": true,
+          "hasFlashcards": true,
           "flashJpgCount": 4
         },
         {
@@ -1122,7 +1122,7 @@ export const RESOURCE_DATA: {
           "no": 125,
           "title": "Who Took The Candy Halloween Song ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -1226,7 +1226,7 @@ export const RESOURCE_DATA: {
           "no": 138,
           "title": "Follow Me Kids Songs ",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 5
         },
         {
@@ -1242,7 +1242,7 @@ export const RESOURCE_DATA: {
           "no": 140,
           "title": "Who Took The Cookie (Farm Animals Version) Kids Songs ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -1282,7 +1282,7 @@ export const RESOURCE_DATA: {
           "no": 145,
           "title": "Open Shut Them featuring Noodle & Pals ",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 4
         },
         {
@@ -1298,7 +1298,7 @@ export const RESOURCE_DATA: {
           "no": 147,
           "title": "Peekaboo, I Love You Kids Songs ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -1314,7 +1314,7 @@ export const RESOURCE_DATA: {
           "no": 149,
           "title": "Open Shut Them #3 featuring Baby Shark ",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 4
         },
         {
@@ -1340,7 +1340,7 @@ export const RESOURCE_DATA: {
           "no": 151,
           "title": "Ten In The Bed ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -1356,7 +1356,7 @@ export const RESOURCE_DATA: {
           "no": 153,
           "title": "The Bananas Song Counting Bananas ",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 18
         },
         {
@@ -1364,7 +1364,7 @@ export const RESOURCE_DATA: {
           "no": 154,
           "title": "Count Down From 20 to 1 ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -1372,7 +1372,7 @@ export const RESOURCE_DATA: {
           "no": 155,
           "title": "Five Little Pumpkins Pumpkin Song ",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 4
         },
         {
@@ -1388,7 +1388,7 @@ export const RESOURCE_DATA: {
           "no": 157,
           "title": "Seven Steps featuring Noodle & Pals ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -1404,7 +1404,7 @@ export const RESOURCE_DATA: {
           "no": 159,
           "title": "10 Little Dinosaurs Kids Songs ",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 1
         },
         {
@@ -1420,7 +1420,7 @@ export const RESOURCE_DATA: {
           "no": 161,
           "title": "Five Little Monsters Jumping On The Bed Kids Halloween Song ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -1444,7 +1444,7 @@ export const RESOURCE_DATA: {
           "no": 164,
           "title": "10 Little Dinosaurs #2 Kids Songs ",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 1
         },
         {
@@ -1452,14 +1452,14 @@ export const RESOURCE_DATA: {
           "no": 165,
           "title": "Six In The Bed Kids Songs ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
           "id": "song-166",
           "no": 166,
           "title": "10 Monsters In The Bed  Kids Halloween Song  ",
-          "hasLyrics": true,
+          "hasLyrics": false,
           "hasFlashcards": false,
           "flashJpgCount": 0
         },
@@ -1485,7 +1485,7 @@ export const RESOURCE_DATA: {
           "id": "song-168",
           "no": 168,
           "title": "S-A-N-T-A ",
-          "hasLyrics": false,
+          "hasLyrics": true,
           "hasFlashcards": false,
           "flashJpgCount": 0
         },
@@ -1494,7 +1494,7 @@ export const RESOURCE_DATA: {
           "no": 169,
           "title": "Jingle Bells ",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 1
         },
         {
@@ -1510,7 +1510,7 @@ export const RESOURCE_DATA: {
           "no": 171,
           "title": "Five Creepy Spiders Halloween Song ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -1550,7 +1550,7 @@ export const RESOURCE_DATA: {
           "no": 176,
           "title": "Decorate The Christmas Tree (to the tune of Deck The Halls ) ",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 1
         },
         {
@@ -1558,7 +1558,7 @@ export const RESOURCE_DATA: {
           "no": 177,
           "title": "Santa's On His Way Christmas Song for Kids ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -1590,7 +1590,7 @@ export const RESOURCE_DATA: {
           "no": 181,
           "title": "Santa, Where Are You Kids Christmas Song ",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 4
         },
         {
@@ -1606,7 +1606,7 @@ export const RESOURCE_DATA: {
           "no": 183,
           "title": "Santa Shark Baby Shark Christmas Song ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -1621,7 +1621,7 @@ export const RESOURCE_DATA: {
           "id": "song-185",
           "no": 185,
           "title": "This Is The Way We Trick Or Treat  featuring The Super Simple Puppets",
-          "hasLyrics": true,
+          "hasLyrics": false,
           "hasFlashcards": false,
           "flashJpgCount": 0
         },
@@ -1637,7 +1637,7 @@ export const RESOURCE_DATA: {
           "id": "song-187",
           "no": 187,
           "title": "Jingle Bells  Christmas Song For Kids  ",
-          "hasLyrics": false,
+          "hasLyrics": true,
           "hasFlashcards": false,
           "flashJpgCount": 0
         },
@@ -1645,7 +1645,7 @@ export const RESOURCE_DATA: {
           "id": "song-188",
           "no": 188,
           "title": "Silent Night  Christmas Song For Kids  ",
-          "hasLyrics": true,
+          "hasLyrics": false,
           "hasFlashcards": false,
           "flashJpgCount": 0
         }
@@ -1663,8 +1663,8 @@ export const RESOURCE_DATA: {
           "id": "song-189",
           "no": 189,
           "title": "Five Little Monkeys ",
-          "hasLyrics": false,
-          "hasFlashcards": false,
+          "hasLyrics": true,
+          "hasFlashcards": true,
           "flashJpgCount": 4
         },
         {
@@ -1680,7 +1680,7 @@ export const RESOURCE_DATA: {
           "no": 191,
           "title": "Walking In The Jungle ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -1688,7 +1688,7 @@ export const RESOURCE_DATA: {
           "no": 192,
           "title": "Let's Go To The Zoo Animal Song for Kids",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 5
         },
         {
@@ -1696,7 +1696,7 @@ export const RESOURCE_DATA: {
           "no": 193,
           "title": "Mary Had A Little Lamb Animal Song ",
           "hasLyrics": true,
-          "hasFlashcards": true,
+          "hasFlashcards": false,
           "flashJpgCount": 0
         },
         {
@@ -1752,7 +1752,7 @@ export const RESOURCE_DATA: {
           "no": 200,
           "title": "A Sailor Went To Sea Kids Songs ",
           "hasLyrics": true,
-          "hasFlashcards": false,
+          "hasFlashcards": true,
           "flashJpgCount": 3
         },
         {
