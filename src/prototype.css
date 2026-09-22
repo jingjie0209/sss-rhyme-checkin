@@ -248,3 +248,11 @@ button { -webkit-tap-highlight-color: transparent; }
 .wechat-footer { display: grid; gap: 5px; margin: 28px 0 8px; padding: 16px; border: 1px dashed #cfc9f7; border-radius: 18px; background: #f7f5ff; text-align: center; }
 .wechat-footer a { color: #4b43bd; font-size: 13px; font-weight: 900; text-decoration: underline; text-underline-offset: 3px; }
 .wechat-footer small { color: #8d89a8; font-size: 10px; }
+
+/* Public-safe activity cards replacing source lyric/flashcard images. */
+.activity-copy { margin: 10px 0 0; color: #71768d; font-size: 11px; line-height: 1.65; }
+.tpr-list { display: grid; gap: 8px; }
+.tpr-item { display: flex; align-items: center; gap: 10px; padding: 10px 11px; border: 1px solid #e6e4f8; border-radius: 13px; background: #f8f7ff; }
+.tpr-item i { display: grid; width: 30px; height: 30px; flex: 0 0 auto; place-items: center; border-radius: 10px; background: #edeaff; font-size: 15px; font-style: normal; }
+.tpr-item span { color: #32364f; font-size: 12px; font-weight: 750; }
+.tpr-content-card header em { background: #edeaff; color: #5f56cd; }

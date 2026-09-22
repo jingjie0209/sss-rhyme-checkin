@@ -305,6 +305,52 @@ function MediaContactCard() {
   );
 }
 
+function SongActivityCards({ song }: { song: SongWithTheme }) {
+  const tprActions = [
+    { icon: "👋", label: "挥手打招呼" },
+    { icon: "🤝", label: "一起拍手" },
+    { icon: "🕺", label: "跟着节奏摆动" },
+  ];
+  return (
+    <>
+      <section className="content-card lyrics-content-card">
+        <header>
+          <div>
+            <span className="content-icon">文</span>
+            <div>
+              <b>歌词</b>
+              <small>添加微信获取歌词文件</small>
+            </div>
+          </div>
+          <em>微信获取</em>
+        </header>
+        <p className="activity-copy">添加客服微信后，可以获取这首歌对应的歌词图片，方便亲子跟唱。</p>
+      </section>
+      <section className="content-card tpr-content-card">
+        <header>
+          <div>
+            <span className="content-icon">🕺</span>
+            <div>
+              <b>TPR 亲子互动</b>
+              <small>边听边做动作</small>
+            </div>
+          </div>
+          <em>3 个动作</em>
+        </header>
+        <div className="tpr-list">
+          {tprActions.map((item, index) => (
+            <div className="tpr-item" key={`${item.label}-${index}`}>
+              <i>{item.icon}</i>
+              <span>{item.label}</span>
+            </div>
+          ))}
+        </div>
+        <p className="activity-copy">家长可以先示范一次，再和孩子轮流做动作，不用追求一次听懂。</p>
+      </section>
+    </>
+  );
+}
+
 function SongDetail({ song, onBack }: { song: SongWithTheme; onBack: () => void }) {
   const { checked } = useCheckins();
   const done = checked.has(song.id);
@@ -328,8 +374,9 @@ function SongDetail({ song, onBack }: { song: SongWithTheme; onBack: () => void 
             {done ? <p className="checked-message">已完成本首儿歌打卡，进度已计入主题统计。</p> : null}
           </section>
         </div>
-        <div className="detail-section-title"><h2>对应内容</h2><span>视频音频可微信获取</span></div>
+        <div className="detail-section-title"><h2>对应内容</h2><span>视频 · 歌词 · TPR</span></div>
         <MediaContactCard />
+        <SongActivityCards song={song} />
         </main>
     </MobileScroll>
   );
