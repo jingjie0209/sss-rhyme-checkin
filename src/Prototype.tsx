@@ -123,10 +123,15 @@ function songDisplayName(title: string) {
     .replace(/^Bye Bye Goodbye\b/i, "Bye Bye Goodbye");
 }
 
-function resourceState() {
+function resourceState(song?: ResourceSong) {
+  const hasAudio = Boolean(song && LOCAL_AUDIO[song.id]);
+  const hasLyrics = Boolean(song?.hasLyrics);
+  const hasFlash = Boolean(song?.hasFlashcards && (SONG_PREVIEWS[song.id]?.flashcards.length || song.flashJpgCount));
   return [
-    { key: "video", label: "视频", icon: "▶", available: true },
+    { key: "video", label: "视频", icon: "▶", available: !hasAudio },
     { key: "audio", label: "音频", icon: "♫", available: true },
+    { key: "lyrics", label: "歌词", icon: "文", available: hasLyrics },
+    { key: "flash", label: "闪卡", icon: "▦", available: hasFlash },
   ];
 }
 
@@ -203,7 +208,7 @@ function ThemeSongRow({ song, theme, onOpen }: { song: ResourceSong; theme: Them
         <span className="song-number">{String(song.no).padStart(3, "0")}</span>
         <span className="song-row-copy">
           <b>{songDisplayName(song.title)}</b>
-          <small>{resourceState().filter((item) => item.available).map((item) => item.label).join(" · ")}</small>
+          <small>{resourceState(song).filter((item) => item.available).map((item) => item.label).join(" · ")}</small>
         </span>
         <span className="song-open-arrow">›</span>
       </button>
@@ -410,7 +415,7 @@ function SongDetail({ song, onBack }: { song: SongWithTheme; onBack: () => void 
           <h1>{songDisplayName(song.title)}</h1>
           <div className="detail-actions">
             <div className="detail-status-row">
-              {resourceState().map((item) => <span key={item.key} className={item.available ? "on" : "off"}><i>{item.icon}</i>{item.label}</span>)}
+              {resourceState(song).map((item) => <span key={item.key} className={item.available ? "on" : "off"}><i>{item.icon}</i>{item.label}</span>)}
             </div>
             <CheckinButton songId={song.id} />
           </div>

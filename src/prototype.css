@@ -91,7 +91,7 @@ button { -webkit-tap-highlight-color: transparent; }
 .detail-theme em { padding: 4px 7px; border-radius: 999px; background: rgba(255,255,255,.12); font-size: 8px; font-style: normal; }
 .detail-title-card h1 { margin: 15px 0 15px; font-size: 24px; line-height: 1.26; letter-spacing: -.02em; }
 .detail-actions { display: flex; align-items: center; gap: 9px; }
-.detail-status-row { display: grid; flex: 1; grid-template-columns: repeat(4,1fr); gap: 5px; }
+.detail-status-row { display: grid; flex: 1; grid-template-columns: repeat(auto-fit,minmax(0,1fr)); gap: 5px; }
 .detail-status-row span { display: grid; justify-items: center; gap: 2px; padding: 7px 1px; border-radius: 10px; background: rgba(255,255,255,.1); color: #cbc8eb; font-size: 7px; font-weight: 900; }
 .detail-status-row span.on { background: rgba(255,255,255,.94); color: #5e56d5; }
 .detail-status-row i { font-size: 11px; font-style: normal; }
