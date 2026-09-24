@@ -1,0 +1,31 @@
+export type TprSong = { id: string; no: number; title: string };
+
+// TPR 儿歌清单（27首/2音频 文件夹，共 26 首）
+export const TPR_SONGS: TprSong[] = [
+  { id: "tpr-001", no: 1, title: "One Little Finger" },
+  { id: "tpr-002", no: 2, title: "Walking Walking" },
+  { id: "tpr-003", no: 3, title: "If You're Happy" },
+  { id: "tpr-004", no: 4, title: "Make A Circle" },
+  { id: "tpr-005", no: 5, title: "Head Shoulders Knees And Toes" },
+  { id: "tpr-006", no: 6, title: "Open Shut Them" },
+  { id: "tpr-007", no: 7, title: "Five Little Pumpkins" },
+  { id: "tpr-008", no: 8, title: "Can You Make A Happy Face" },
+  { id: "tpr-009", no: 9, title: "Say Cheese! (Let's Take A Picture)" },
+  { id: "tpr-010", no: 10, title: "Bye Bye Goodbye" },
+  { id: "tpr-011", no: 11, title: "Hello Hello" },
+  { id: "tpr-012", no: 12, title: "Rock Scissors Paper #1" },
+  { id: "tpr-013", no: 13, title: "Rock Scissors Paper #2" },
+  { id: "tpr-014", no: 14, title: "Rock Scissors Paper #3" },
+  { id: "tpr-015", no: 15, title: "Rock Scissors Paper #4" },
+  { id: "tpr-016", no: 16, title: "The Wheels On The Bus" },
+  { id: "tpr-017", no: 17, title: "The Pinocchio" },
+  { id: "tpr-018", no: 18, title: "We All Fall Down" },
+  { id: "tpr-019", no: 19, title: "Wag Your Tail" },
+  { id: "tpr-020", no: 20, title: "The Bath Song" },
+  { id: "tpr-021", no: 21, title: "This Is The Way" },
+  { id: "tpr-022", no: 22, title: "The Hokey Pokey Shake" },
+  { id: "tpr-023", no: 23, title: "Let's Go To The Zoo" },
+  { id: "tpr-024", no: 24, title: "What Do You Like To Do" },
+  { id: "tpr-025", no: 25, title: "Clean Up Song" },
+  { id: "tpr-026", no: 26, title: "Wind The Bobbin Up" },
+];

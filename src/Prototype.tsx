@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useMemo, useRef, useState, type C
 import { FlowStack, MobileScroll, type FlowControls, type FlowScreen } from "./mobile";
 import { RESOURCE_DATA, type ResourceSong, type ThemeGroup } from "./data/appData";
 import { SONG_TPR } from "./data/tprData";
+import { TPR_SONGS, type TprSong } from "./data/tprSongs";
 import { SONG_PREVIEWS } from "./data/previewData";
 
 type SongWithTheme = ResourceSong & { themeId: string; themeName: string; themeLabel: string };
@@ -220,12 +221,20 @@ function ThemeSongRow({ song, theme, onOpen }: { song: ResourceSong; theme: Them
 
 function TprLibraryView({ flow }: { flow: FlowControls }) {
   const { checked } = useCheckins();
-  const themes = RESOURCE_DATA.themes.filter((t) => t.id === "theme-11");
-  const theme = themes[0];
-  const songs = theme?.songs || [];
+  const songs = TPR_SONGS;
 
-  const openSong = (song: ResourceSong) => {
-    const songWithTheme: SongWithTheme = { ...song, themeId: theme.id, themeName: theme.name, themeLabel: theme.label };
+  const openSong = (song: TprSong) => {
+    const songWithTheme: SongWithTheme = {
+      id: song.id,
+      no: song.no,
+      title: song.title,
+      hasLyrics: true,
+      hasFlashcards: false,
+      flashJpgCount: 0,
+      themeId: "theme-11",
+      themeName: "TPR儿歌",
+      themeLabel: "11. TPR儿歌 词汇量150+",
+    };
     flow.push({ id: song.id, headerHeight: 0, render: () => <SongDetail song={songWithTheme} onBack={flow.pop} /> });
   };
 
@@ -556,6 +565,32 @@ const LOCAL_AUDIO: Record<string, string> = {
   "song-203": "/sss-rhyme-checkin/audio/song-203.m4a",
   "song-204": "/sss-rhyme-checkin/audio/song-204.m4a",
   "song-205": "/sss-rhyme-checkin/audio/song-205.m4a",
+  "tpr-001": "/sss-rhyme-checkin/audio/tpr-001.m4a",
+  "tpr-002": "/sss-rhyme-checkin/audio/tpr-002.m4a",
+  "tpr-003": "/sss-rhyme-checkin/audio/tpr-003.m4a",
+  "tpr-004": "/sss-rhyme-checkin/audio/tpr-004.m4a",
+  "tpr-005": "/sss-rhyme-checkin/audio/tpr-005.m4a",
+  "tpr-006": "/sss-rhyme-checkin/audio/tpr-006.m4a",
+  "tpr-007": "/sss-rhyme-checkin/audio/tpr-007.m4a",
+  "tpr-008": "/sss-rhyme-checkin/audio/tpr-008.m4a",
+  "tpr-009": "/sss-rhyme-checkin/audio/tpr-009.m4a",
+  "tpr-010": "/sss-rhyme-checkin/audio/tpr-010.m4a",
+  "tpr-011": "/sss-rhyme-checkin/audio/tpr-011.m4a",
+  "tpr-012": "/sss-rhyme-checkin/audio/tpr-012.m4a",
+  "tpr-013": "/sss-rhyme-checkin/audio/tpr-013.m4a",
+  "tpr-014": "/sss-rhyme-checkin/audio/tpr-014.m4a",
+  "tpr-015": "/sss-rhyme-checkin/audio/tpr-015.m4a",
+  "tpr-016": "/sss-rhyme-checkin/audio/tpr-016.m4a",
+  "tpr-017": "/sss-rhyme-checkin/audio/tpr-017.m4a",
+  "tpr-018": "/sss-rhyme-checkin/audio/tpr-018.m4a",
+  "tpr-019": "/sss-rhyme-checkin/audio/tpr-019.m4a",
+  "tpr-020": "/sss-rhyme-checkin/audio/tpr-020.m4a",
+  "tpr-021": "/sss-rhyme-checkin/audio/tpr-021.m4a",
+  "tpr-022": "/sss-rhyme-checkin/audio/tpr-022.m4a",
+  "tpr-023": "/sss-rhyme-checkin/audio/tpr-023.m4a",
+  "tpr-024": "/sss-rhyme-checkin/audio/tpr-024.m4a",
+  "tpr-025": "/sss-rhyme-checkin/audio/tpr-025.m4a",
+  "tpr-026": "/sss-rhyme-checkin/audio/tpr-026.m4a",
 };
 
 
