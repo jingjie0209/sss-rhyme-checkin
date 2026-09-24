@@ -217,11 +217,67 @@ function ThemeSongRow({ song, theme, onOpen }: { song: ResourceSong; theme: Them
   );
 }
 
+function TprLibraryView({ flow }: { flow: FlowControls }) {
+  const { checked } = useCheckins();
+  const [expandedTheme, setExpandedTheme] = useState<string | null>(null);
+  const themes = RESOURCE_DATA.themes.filter((t) => t.id === "theme-11");
+  const openSong = (song: ResourceSong, theme: ThemeGroup) => {
+    const songWithTheme: SongWithTheme = { ...song, themeId: theme.id, themeName: theme.name, themeLabel: theme.label };
+    flow.push({ id: song.id, headerHeight: 0, render: () => <SongDetail song={songWithTheme} onBack={flow.pop} /> });
+  };
+  const total = themes.reduce((sum, t) => sum + t.songCount, 0);
+  const done = themes.reduce((sum, t) => sum + t.songs.filter((song) => checked.has(song.id)).length, 0);
+  const totalPercent = total ? Math.min(100, done / total * 100) : 0;
+  return (
+    <>
+      <div className="resource-sticky-top">
+        <AppHeader />
+        <section className="theme-hero tpr-hero">
+          <div>
+            <span>TPR 亲子互动</span>
+            <strong>{themes.length} 个主题 · {total} 首儿歌</strong>
+            <p>听儿歌 · 做动作 · 打卡，帮孩子在动起来中磨耳朵。</p>
+          </div>
+          <div className="hero-progress" style={{ "--progress": totalPercent } as CSSProperties}><b>{done}</b><span>/ {total}</span></div>
+        </section>
+      </div>
+      <div className="section-heading"><div><b>TPR 歌单</b><span>点击展开歌曲明细</span></div><small>{total} 首歌曲</small></div>
+      <section className="theme-accordion-list">
+        {themes.map((theme, index) => {
+          const isOpen = expandedTheme === theme.id;
+          const completed = theme.songs.filter((song) => checked.has(song.id)).length;
+          const percent = theme.songCount ? Math.round(completed / theme.songCount * 100) : 0;
+          return (
+            <article className={`theme-accordion ${isOpen ? "open" : ""}`} key={theme.id}>
+              <button className="theme-accordion-head" onClick={() => setExpandedTheme(isOpen ? null : theme.id)} type="button" aria-expanded={isOpen}>
+                <span className="theme-order">主题 {theme.number}</span>
+                <span className="theme-symbol">{themeEmoji[index % themeEmoji.length]}</span>
+                <span className="theme-title-block">
+                  <b>{theme.name}</b>
+                  <small>{theme.songCount} 首歌曲 · {theme.level}</small>
+                  <i><em style={{ width: `${percent}%` }} /></i>
+                </span>
+                <span className="theme-complete"><b>{completed}</b><small>已完成</small></span>
+                <span className="theme-chevron">⌄</span>
+              </button>
+              {isOpen ? (
+                <div className="theme-song-list">
+                  {theme.songs.map((song) => <ThemeSongRow key={song.id} song={song} theme={theme} onOpen={() => openSong(song, theme)} />)}
+                </div>
+              ) : null}
+            </article>
+          );
+        })}
+      </section>
+    </>
+  );
+}
+
 function ThemeLibraryView({ flow }: { flow: FlowControls }) {
   const { checked } = useCheckins();
   const [expandedTheme, setExpandedTheme] = useState<string | null>(null);
 
-  const themes = RESOURCE_DATA.themes;
+  const themes = RESOURCE_DATA.themes.filter((t) => t.id !== "theme-11");
 
   const openSong = (song: ResourceSong, theme: ThemeGroup) => {
     const songWithTheme: SongWithTheme = { ...song, themeId: theme.id, themeName: theme.name, themeLabel: theme.label };
@@ -236,7 +292,7 @@ function ThemeLibraryView({ flow }: { flow: FlowControls }) {
         <section className="theme-hero">
           <div>
             <span>按主题循序打卡</span>
-            <strong>14 个主题 · 205 首儿歌</strong>
+            <strong>13 个主题 · 178 首儿歌</strong>
             <p>点开一个主题查看歌曲，完成一首就打卡一首。</p>
           </div>
           <div className="hero-progress" style={{ "--progress": totalPercent } as CSSProperties}><b>{checked.size}</b><span>/ {RESOURCE_DATA.stats.songs}</span></div>
@@ -276,11 +332,20 @@ function ThemeLibraryView({ flow }: { flow: FlowControls }) {
 }
 
 function ResourceShell({ flow, mobile = false }: { flow: FlowControls; mobile?: boolean }) {
+  const [tab, setTab] = useState<"all" | "tpr">("all");
   return (
     <div className={`resource-shell ${mobile ? "native-mobile" : ""}`}>
       <MobileScroll className="resource-scroll">
         <main className="resource-main">
-          <ThemeLibraryView flow={flow} />
+          <div className="resource-tabs" role="tablist" aria-label="内容分类">
+            <button className={tab === "all" ? "active" : ""} onClick={() => setTab("all")} type="button" role="tab" aria-selected={tab === "all"}>
+              <i>🎵</i>全部儿歌
+            </button>
+            <button className={tab === "tpr" ? "active" : ""} onClick={() => setTab("tpr")} type="button" role="tab" aria-selected={tab === "tpr"}>
+              <i>🕺</i>TPR 儿歌
+            </button>
+          </div>
+          {tab === "all" ? <ThemeLibraryView flow={flow} /> : <TprLibraryView flow={flow} />}
         </main>
       </MobileScroll>
     </div>

@@ -260,3 +260,14 @@ button { -webkit-tap-highlight-color: transparent; }
 
 /* Ensure inline audio never overflows on mobile. */
 .media-contact-card .local-audio { display: block; width: 100%; max-width: 100%; height: 42px; }
+
+/* Top tabs: 全部儿歌 / TPR 儿歌 */
+.resource-tabs { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin-bottom: 14px; }
+.resource-tabs button { display: flex; align-items: center; justify-content: center; gap: 7px; padding: 11px 10px; border: 1px solid #e2e4ef; border-radius: 14px; background: #fff; color: #6b6f85; font-size: 13px; font-weight: 800; box-shadow: 0 4px 12px rgba(31,38,81,.04); transition: background .18s, color .18s, border-color .18s, transform .12s; }
+.resource-tabs button i { font-size: 15px; font-style: normal; }
+.resource-tabs button.active { border-color: #655ddd; background: #655ddd; color: #fff; box-shadow: 0 8px 18px rgba(85,74,190,.18); }
+.resource-tabs button:active { transform: scale(.97); }
+.tpr-hero { background: linear-gradient(140deg,#0f8a67,#21a578 60%,#3ec79a); box-shadow: 0 16px 34px rgba(15,138,103,.22); }
+.tpr-hero span { color: #c8ffe6; }
+.tpr-hero p { color: #d8fff0; }
+.tpr-hero .hero-progress::after { background: #12805d; }
