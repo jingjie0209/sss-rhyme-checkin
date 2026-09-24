@@ -264,7 +264,7 @@ button { -webkit-tap-highlight-color: transparent; }
 /* Bottom tab bar: icon on top, label below */
 
 /* TPR 亲子动作卡片 */
-/* TPR 亲子动作卡片 — 白色底，与歌词/闪卡模块一致 */
+/* TPR 亲子动作卡片 — 白色底，与歌词/闪卡模块一致 v2 */
 .tpr-card { margin-top: 10px; padding: 15px; border: 1px solid #e2e4ee; border-radius: 18px; background: #fff; color: #23264a; box-shadow: 0 7px 20px rgba(31,38,81,.045); }
 .tpr-card > header { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 11px; }
 .tpr-card > header > div { display: flex; align-items: center; gap: 9px; }

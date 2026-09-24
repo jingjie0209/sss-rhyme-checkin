@@ -130,7 +130,6 @@ function resourceState(song?: ResourceSong) {
   const hasLyrics = Boolean(song?.hasLyrics) && !song?.id.startsWith("tpr-");
   const hasFlash = Boolean(song?.hasFlashcards && (SONG_PREVIEWS[song.id]?.flashcards.length || song.flashJpgCount)) && !song?.id.startsWith("tpr-");
   return [
-    { key: "video", label: "视频", icon: "▶", available: !hasAudio },
     { key: "audio", label: "音频", icon: "♫", available: true },
     { key: "lyrics", label: "歌词", icon: "文", available: hasLyrics },
     { key: "flash", label: "闪卡", icon: "▦", available: hasFlash },
