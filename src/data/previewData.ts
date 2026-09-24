@@ -1332,5 +1332,130 @@ export const SONG_PREVIEWS: Record<string, SongPreview> = {
     "poster": "/sss-rhyme-checkin/previews/posters/song-205.jpg",
     "lyric": "/sss-rhyme-checkin/previews/lyrics/song-205.jpg",
     "flashcards": []
-  }
+  },
+  "tpr-001": {
+    "poster": "",
+    "lyric": "/sss-rhyme-checkin/previews/lyrics/tpr-001.jpg",
+    "flashcards": []
+  },
+  "tpr-002": {
+    "poster": "",
+    "lyric": "/sss-rhyme-checkin/previews/lyrics/tpr-002.jpg",
+    "flashcards": []
+  },
+  "tpr-003": {
+    "poster": "",
+    "lyric": "/sss-rhyme-checkin/previews/lyrics/tpr-003.jpg",
+    "flashcards": []
+  },
+  "tpr-004": {
+    "poster": "",
+    "lyric": "/sss-rhyme-checkin/previews/lyrics/tpr-004.jpg",
+    "flashcards": []
+  },
+  "tpr-005": {
+    "poster": "",
+    "lyric": "/sss-rhyme-checkin/previews/lyrics/tpr-005.jpg",
+    "flashcards": []
+  },
+  "tpr-006": {
+    "poster": "",
+    "lyric": "/sss-rhyme-checkin/previews/lyrics/tpr-006.jpg",
+    "flashcards": []
+  },
+  "tpr-007": {
+    "poster": "",
+    "lyric": "/sss-rhyme-checkin/previews/lyrics/tpr-007.jpg",
+    "flashcards": []
+  },
+  "tpr-008": {
+    "poster": "",
+    "lyric": "/sss-rhyme-checkin/previews/lyrics/tpr-008.jpg",
+    "flashcards": []
+  },
+  "tpr-009": {
+    "poster": "",
+    "lyric": "/sss-rhyme-checkin/previews/lyrics/tpr-009.jpg",
+    "flashcards": []
+  },
+  "tpr-010": {
+    "poster": "",
+    "lyric": "/sss-rhyme-checkin/previews/lyrics/tpr-010.jpg",
+    "flashcards": []
+  },
+  "tpr-011": {
+    "poster": "",
+    "lyric": "/sss-rhyme-checkin/previews/lyrics/tpr-011.jpg",
+    "flashcards": []
+  },
+  "tpr-012": {
+    "poster": "",
+    "lyric": "/sss-rhyme-checkin/previews/lyrics/tpr-012.jpg",
+    "flashcards": []
+  },
+  "tpr-013": {
+    "poster": "",
+    "lyric": "/sss-rhyme-checkin/previews/lyrics/tpr-013.jpg",
+    "flashcards": []
+  },
+  "tpr-014": {
+    "poster": "",
+    "lyric": "/sss-rhyme-checkin/previews/lyrics/tpr-014.jpg",
+    "flashcards": []
+  },
+  "tpr-015": {
+    "poster": "",
+    "lyric": "/sss-rhyme-checkin/previews/lyrics/tpr-015.jpg",
+    "flashcards": []
+  },
+  "tpr-016": {
+    "poster": "",
+    "lyric": "/sss-rhyme-checkin/previews/lyrics/tpr-016.jpg",
+    "flashcards": []
+  },
+  "tpr-017": {
+    "poster": "",
+    "lyric": "/sss-rhyme-checkin/previews/lyrics/tpr-017.jpg",
+    "flashcards": []
+  },
+  "tpr-018": {
+    "poster": "",
+    "lyric": "/sss-rhyme-checkin/previews/lyrics/tpr-018.jpg",
+    "flashcards": []
+  },
+  "tpr-019": {
+    "poster": "",
+    "lyric": "/sss-rhyme-checkin/previews/lyrics/tpr-019.jpg",
+    "flashcards": []
+  },
+  "tpr-020": {
+    "poster": "",
+    "lyric": "/sss-rhyme-checkin/previews/lyrics/tpr-020.jpg",
+    "flashcards": []
+  },
+  "tpr-021": {
+    "poster": "",
+    "lyric": "/sss-rhyme-checkin/previews/lyrics/tpr-021.jpg",
+    "flashcards": []
+  },
+  "tpr-023": {
+    "poster": "",
+    "lyric": "/sss-rhyme-checkin/previews/lyrics/tpr-023.jpg",
+    "flashcards": []
+  },
+  "tpr-024": {
+    "poster": "",
+    "lyric": "/sss-rhyme-checkin/previews/lyrics/tpr-024.jpg",
+    "flashcards": []
+  },
+  "tpr-025": {
+    "poster": "",
+    "lyric": "/sss-rhyme-checkin/previews/lyrics/tpr-025.jpg",
+    "flashcards": []
+  },
+  "tpr-026": {
+    "poster": "",
+    "lyric": "/sss-rhyme-checkin/previews/lyrics/tpr-026.jpg",
+    "flashcards": []
+  },
 };
