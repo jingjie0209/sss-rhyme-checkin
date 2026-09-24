@@ -220,15 +220,18 @@ function ThemeSongRow({ song, theme, onOpen }: { song: ResourceSong; theme: Them
 
 function TprLibraryView({ flow }: { flow: FlowControls }) {
   const { checked } = useCheckins();
-  const [expandedTheme, setExpandedTheme] = useState<string | null>(null);
   const themes = RESOURCE_DATA.themes.filter((t) => t.id === "theme-11");
-  const openSong = (song: ResourceSong, theme: ThemeGroup) => {
+  const theme = themes[0];
+  const songs = theme?.songs || [];
+
+  const openSong = (song: ResourceSong) => {
     const songWithTheme: SongWithTheme = { ...song, themeId: theme.id, themeName: theme.name, themeLabel: theme.label };
     flow.push({ id: song.id, headerHeight: 0, render: () => <SongDetail song={songWithTheme} onBack={flow.pop} /> });
   };
-  const total = themes.reduce((sum, t) => sum + t.songCount, 0);
-  const done = themes.reduce((sum, t) => sum + t.songs.filter((song) => checked.has(song.id)).length, 0);
-  const totalPercent = total ? Math.min(100, done / total * 100) : 0;
+
+  const done = songs.filter((song) => checked.has(song.id)).length;
+  const totalPercent = songs.length ? Math.min(100, done / songs.length * 100) : 0;
+
   return (
     <>
       <div className="resource-sticky-top">
@@ -236,36 +239,26 @@ function TprLibraryView({ flow }: { flow: FlowControls }) {
         <section className="theme-hero tpr-hero">
           <div>
             <span>TPR 亲子互动</span>
-            <strong>{themes.length} 个主题 · {total} 首儿歌</strong>
+            <strong>{songs.length} 首儿歌</strong>
             <p>听儿歌 · 做动作 · 打卡，帮孩子在动起来中磨耳朵。</p>
           </div>
-          <div className="hero-progress" style={{ "--progress": totalPercent } as CSSProperties}><b>{done}</b><span>/ {total}</span></div>
+          <div className="hero-progress" style={{ "--progress": totalPercent } as CSSProperties}><b>{done}</b><span>/ {songs.length}</span></div>
         </section>
       </div>
-      <div className="section-heading"><div><b>TPR 歌单</b><span>点击展开歌曲明细</span></div><small>{total} 首歌曲</small></div>
-      <section className="theme-accordion-list">
-        {themes.map((theme, index) => {
-          const isOpen = expandedTheme === theme.id;
-          const completed = theme.songs.filter((song) => checked.has(song.id)).length;
-          const percent = theme.songCount ? Math.round(completed / theme.songCount * 100) : 0;
+      <div className="section-heading"><div><b>TPR 歌单</b><span>点击歌曲进入详情</span></div><small>{songs.length} 首歌曲</small></div>
+      <section className="tpr-song-list">
+        {songs.map((song) => {
+          const doneSong = checked.has(song.id);
           return (
-            <article className={`theme-accordion ${isOpen ? "open" : ""}`} key={theme.id}>
-              <button className="theme-accordion-head" onClick={() => setExpandedTheme(isOpen ? null : theme.id)} type="button" aria-expanded={isOpen}>
-                <span className="theme-order">主题 {theme.number}</span>
-                <span className="theme-symbol">{themeEmoji[index % themeEmoji.length]}</span>
-                <span className="theme-title-block">
-                  <b>{theme.name}</b>
-                  <small>{theme.songCount} 首歌曲 · {theme.level}</small>
-                  <i><em style={{ width: `${percent}%` }} /></i>
+            <article className={`tpr-song-row ${doneSong ? "checked" : ""}`} key={song.id}>
+              <button className="tpr-song-open" onClick={() => openSong(song)} type="button">
+                <span className="song-number">{String(song.no).padStart(3, "0")}</span>
+                <span className="song-row-copy">
+                  <b>{songDisplayName(song.title)}</b>
                 </span>
-                <span className="theme-complete"><b>{completed}</b><small>已完成</small></span>
-                <span className="theme-chevron">⌄</span>
+                <span className="song-open-arrow">›</span>
               </button>
-              {isOpen ? (
-                <div className="theme-song-list">
-                  {theme.songs.map((song) => <ThemeSongRow key={song.id} song={song} theme={theme} onOpen={() => openSong(song, theme)} />)}
-                </div>
-              ) : null}
+              <CheckinButton songId={song.id} compact />
             </article>
           );
         })}

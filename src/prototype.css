@@ -291,3 +291,16 @@ button { -webkit-tap-highlight-color: transparent; }
 /* Make room so content isn't hidden behind tab bar */
 .resource-main { padding-bottom: 90px !important; }
 .native-mobile .mobile-scroll-content { padding-bottom: calc(80px + env(safe-area-inset-bottom)) !important; }
+
+/* TPR flat song list (no accordion) */
+.tpr-song-list { display: grid; gap: 8px; }
+.tpr-song-row { display: flex; align-items: center; gap: 9px; padding: 12px 13px; border: 1px solid #e2e4ef; border-radius: 16px; background: #fff; box-shadow: 0 6px 16px rgba(31,38,81,.045); transition: border-color .18s, background .18s; }
+.tpr-song-row.checked { border-color: #b8e6d4; background: #f6fffb; }
+.tpr-song-row .song-number { flex: 0 0 auto; color: #8f9aae; font-size: 10px; font-weight: 800; letter-spacing: .04em; }
+.tpr-song-open { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; padding: 0; border: 0; background: transparent; text-align: left; }
+.tpr-song-open .song-row-copy { flex: 1; min-width: 0; }
+.tpr-song-open .song-row-copy b { display: block; overflow: hidden; color: #222745; font-size: 15px; font-weight: 800; text-overflow: ellipsis; white-space: nowrap; }
+.tpr-song-open .song-open-arrow { flex: 0 0 auto; color: #b4b8c8; font-size: 16px; font-weight: 600; }
+.tpr-song-row.checked .tpr-song-open .song-row-copy b { color: #2c8f68; }
+.tpr-song-row.checked .song-number { color: #7bc4a5; }
+.tpr-song-row.checked .song-open-arrow { color: #7bc4a5; }
