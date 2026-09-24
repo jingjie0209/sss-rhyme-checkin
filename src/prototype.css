@@ -261,16 +261,7 @@ button { -webkit-tap-highlight-color: transparent; }
 /* Ensure inline audio never overflows on mobile. */
 .media-contact-card .local-audio { display: block; width: 100%; max-width: 100%; height: 42px; }
 
-/* Top tabs: 全部儿歌 / TPR 儿歌 */
-.resource-tabs { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin-bottom: 14px; }
-.resource-tabs button { display: flex; align-items: center; justify-content: center; gap: 7px; padding: 11px 10px; border: 1px solid #e2e4ef; border-radius: 14px; background: #fff; color: #6b6f85; font-size: 13px; font-weight: 800; box-shadow: 0 4px 12px rgba(31,38,81,.04); transition: background .18s, color .18s, border-color .18s, transform .12s; }
-.resource-tabs button i { font-size: 15px; font-style: normal; }
-.resource-tabs button.active { border-color: #655ddd; background: #655ddd; color: #fff; box-shadow: 0 8px 18px rgba(85,74,190,.18); }
-.resource-tabs button:active { transform: scale(.97); }
-.tpr-hero { background: linear-gradient(140deg,#0f8a67,#21a578 60%,#3ec79a); box-shadow: 0 16px 34px rgba(15,138,103,.22); }
-.tpr-hero span { color: #c8ffe6; }
-.tpr-hero p { color: #d8fff0; }
-.tpr-hero .hero-progress::after { background: #12805d; }
+/* Bottom tab bar: icon on top, label below */
 
 /* TPR 亲子动作卡片 */
 .tpr-card { margin-top: 10px; padding: 15px; border: 1px solid #d9f2e5; border-radius: 18px; background: linear-gradient(135deg,#f2fbf7,#ffffff); box-shadow: 0 8px 20px rgba(20,138,103,.08); }
@@ -286,3 +277,17 @@ button { -webkit-tap-highlight-color: transparent; }
 .tpr-item b { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #1d3d31; font-size: 13px; }
 .tpr-zh { flex: 0 0 auto; color: #4e7f68; font-size: 11px; }
 .tpr-card .activity-copy { margin: 12px 0 0; color: #5e8a77; font-size: 11px; line-height: 1.7; }
+
+
+/* Bottom fixed tab bar */
+.bottom-tab-bar { position: fixed; z-index: 40; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: repeat(2,1fr); gap: 0; padding: 6px 8px calc(6px + env(safe-area-inset-bottom)); background: #ffffff; border-top: 1px solid #eceef5; box-shadow: 0 -6px 20px rgba(31,38,81,.08); }
+.bottom-tab-bar button { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 4px; border: 0; background: transparent; color: #8e93a8; font-size: 10px; font-weight: 800; transition: color .18s, transform .12s; }
+.bottom-tab-bar button i { font-size: 20px; line-height: 1; font-style: normal; transition: transform .18s; }
+.bottom-tab-bar button span { letter-spacing: .02em; }
+.bottom-tab-bar button.active { color: #655ddd; }
+.bottom-tab-bar button.active i { transform: scale(1.12); }
+.bottom-tab-bar button:active { transform: scale(.96); }
+
+/* Make room so content isn't hidden behind tab bar */
+.resource-main { padding-bottom: 90px !important; }
+.native-mobile .mobile-scroll-content { padding-bottom: calc(80px + env(safe-area-inset-bottom)) !important; }
