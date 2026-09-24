@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useState, type CSSProperties, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { FlowStack, MobileScroll, type FlowControls, type FlowScreen } from "./mobile";
 import { RESOURCE_DATA, type ResourceSong, type ThemeGroup } from "./data/appData";
 import { SONG_PREVIEWS } from "./data/previewData";
@@ -506,6 +506,36 @@ function MediaContactCard({ song }: { song: SongWithTheme }) {
   const hosted = LOCAL_AUDIO[song.id];
   const panAudio = PAN_DRIVE_AUDIO[song.id];
   const audio = hosted || panAudio;
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  useEffect(() => {
+    const el = audioRef.current;
+    if (!el) return;
+    const onPlay = () => {
+      try {
+        if ("mediaSession" in navigator) {
+          navigator.mediaSession.metadata = new MediaMetadata({
+            title: songDisplayName(song.title),
+            artist: song.themeName,
+            album: "儿歌主题打卡",
+          });
+        }
+      } catch {}
+    };
+    const onPause = () => {
+      try { if ("mediaSession" in navigator) navigator.mediaSession.playbackState = "paused"; } catch {}
+    };
+    const onEnded = () => {
+      try { if ("mediaSession" in navigator) navigator.mediaSession.playbackState = "none"; } catch {}
+    };
+    el.addEventListener("play", onPlay);
+    el.addEventListener("pause", onPause);
+    el.addEventListener("ended", onEnded);
+    return () => {
+      el.removeEventListener("play", onPlay);
+      el.removeEventListener("pause", onPause);
+      el.removeEventListener("ended", onEnded);
+    };
+  }, [hosted, song.id, song.themeName, song.title]);
   return (
     <section className="content-card media-contact-card">
       <header>
@@ -519,7 +549,7 @@ function MediaContactCard({ song }: { song: SongWithTheme }) {
         <em>{hosted ? "可播放" : panAudio ? "网盘播放" : "微信获取"}</em>
       </header>
       {hosted ? (
-        <audio controls preload="metadata" className="local-audio">
+        <audio ref={audioRef} controls playsInline preload="metadata" className="local-audio">
           <source src={hosted} type="audio/mp4" />
           您的浏览器不支持音频播放。
         </audio>
