@@ -271,7 +271,7 @@ function ThemeLibraryView({ flow }: { flow: FlowControls }) {
   const { checked } = useCheckins();
   const [expandedTheme, setExpandedTheme] = useState<string | null>(null);
 
-  const themes = RESOURCE_DATA.themes.filter((t) => t.id !== "theme-11");
+  const themes = RESOURCE_DATA.themes;
 
   const openSong = (song: ResourceSong, theme: ThemeGroup) => {
     const songWithTheme: SongWithTheme = { ...song, themeId: theme.id, themeName: theme.name, themeLabel: theme.label };
@@ -286,7 +286,7 @@ function ThemeLibraryView({ flow }: { flow: FlowControls }) {
         <section className="theme-hero">
           <div>
             <span>按主题循序打卡</span>
-            <strong>13 个主题 · 178 首儿歌</strong>
+            <strong>14 个主题 · 205 首儿歌</strong>
             <p>点开一个主题查看歌曲，完成一首就打卡一首。</p>
           </div>
           <div className="hero-progress" style={{ "--progress": totalPercent } as CSSProperties}><b>{checked.size}</b><span>/ {RESOURCE_DATA.stats.songs}</span></div>
