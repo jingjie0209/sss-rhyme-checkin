@@ -1,0 +1,32 @@
+export type TprEntry = { en: string; zh: string };
+
+// TPR 动作指令汇总（源自《30首日常SSS儿歌TPR指令汇总》）
+export const SONG_TPR: Record<string, TprEntry[]> = {
+  "song-124": [{ en: "open", zh: "打开" }, { en: "shut", zh: "关上" }, { en: "clap", zh: "拍手" }, { en: "put them in your lap", zh: "把放在你的腿上" }],
+  "song-125": [{ en: "make a happy face", zh: "做个开心的表情" }, { en: "make an angry face", zh: "做个生气的表情" }, { en: "make a scared face", zh: "做个害怕的表情" }, { en: "make a sad face", zh: "做个难过的表情" }],
+  "song-126": [{ en: "wag your tail", zh: "摇尾巴" }, { en: "thump your chest", zh: "捶胸" }, { en: "bend your knees", zh: "弯曲膝盖" }, { en: "wiggle your ears", zh: "晃动耳朵" }],
+  "song-127": [{ en: "rock", zh: "石头" }, { en: "scissors", zh: "剪刀" }, { en: "paper", zh: "" }],
+  "song-128": [{ en: "rock", zh: "石头" }, { en: "scissors", zh: "剪刀" }, { en: "paper", zh: "" }],
+  "song-129": [],
+  "song-130": [{ en: "walk around the circle", zh: "绕着走一圈" }, { en: "gallop around the circle", zh: "绕奔跑一圈" }, { en: "tiptoe around the circle", zh: "绕着圈踮脚走" }, { en: "hop around the circle", zh: "绕着跳一圈" }, { en: "twirl around the circle", zh: "绕着转一圈" }, { en: "fall down", zh: "摔倒" }],
+  "song-131": [{ en: "make a circle", zh: "围成一个圈" }, { en: "big", zh: "" }, { en: "small", zh: "" }, { en: "round and round", zh: "转圈刷" }],
+  "song-132": [{ en: "walking", zh: "走路" }, { en: "hop", zh: "单脚跳" }, { en: "running", zh: "跑步" }, { en: "let's stop", zh: "停下来" }, { en: "tiptoe", zh: "踮脚走" }, { en: "jump", zh: "" }, { en: "swimming", zh: "游泳" }, { en: "let's sleep", zh: "睡觉吧" }, { en: "wake up", zh: "醒来" }],
+  "song-133": [],
+  "song-134": [{ en: "peekaboo", zh: "捉迷藏" }, { en: "I see you", zh: "我看见你了" }],
+  "song-135": [{ en: "rock", zh: "石头" }, { en: "scissors", zh: "剪刀" }, { en: "paper", zh: "" }],
+  "song-136": [],
+  "song-137": [{ en: "rock", zh: "石头" }, { en: "scissors", zh: "剪刀" }, { en: "paper", zh: "" }],
+  "song-138": [{ en: "walking", zh: "走路" }, { en: "hop", zh: "单脚跳" }, { en: "running", zh: "跑步" }, { en: "let's stop", zh: "停下来" }, { en: "tiptoe", zh: "踮脚走" }, { en: "jump", zh: "" }, { en: "swimming", zh: "游泳" }, { en: "let's sleep", zh: "睡觉吧" }, { en: "wake up", zh: "醒来" }],
+  "song-139": [{ en: "open", zh: "打开" }, { en: "shut", zh: "关上" }, { en: "clap", zh: "拍手" }, { en: "put them in your lap", zh: "把放在你的腿上" }],
+  "song-140": [],
+  "song-141": [{ en: "peekaboo", zh: "捉迷藏" }, { en: "I see you", zh: "我看见你了" }],
+  "song-142": [{ en: "peekaboo", zh: "捉迷藏" }, { en: "I see you", zh: "我看见你了" }],
+  "song-143": [],
+  "song-144": [{ en: "peekaboo", zh: "捉迷藏" }, { en: "I see you", zh: "我看见你了" }],
+  "song-145": [{ en: "open", zh: "打开" }, { en: "shut", zh: "关上" }, { en: "clap", zh: "拍手" }, { en: "put them in your lap", zh: "把放在你的腿上" }],
+  "song-146": [],
+  "song-147": [{ en: "peekaboo", zh: "捉迷藏" }, { en: "I see you", zh: "我看见你了" }],
+  "song-148": [],
+  "song-149": [{ en: "open", zh: "打开" }, { en: "shut", zh: "关上" }, { en: "clap", zh: "拍手" }, { en: "put them in your lap", zh: "把放在你的腿上" }],
+  "song-150": [{ en: "open", zh: "打开" }, { en: "shut", zh: "关上" }, { en: "clap", zh: "拍手" }, { en: "put them in your lap", zh: "把放在你的腿上" }],
+};

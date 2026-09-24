@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { FlowStack, MobileScroll, type FlowControls, type FlowScreen } from "./mobile";
 import { RESOURCE_DATA, type ResourceSong, type ThemeGroup } from "./data/appData";
+import { SONG_TPR } from "./data/tprData";
 import { SONG_PREVIEWS } from "./data/previewData";
 
 type SongWithTheme = ResourceSong & { themeId: string; themeName: string; themeLabel: string };
@@ -698,6 +699,37 @@ function FlashcardPreview({ song, onView }: { song: SongWithTheme; onView: (view
   );
 }
 
+
+function TprCard({ song }: { song: SongWithTheme }) {
+  const items: { en: string; zh: string }[] = SONG_TPR[song.id] || [];
+  const valid = items.filter((x) => x.zh);
+  if (!valid.length) return null;
+  return (
+    <section className="content-card tpr-card">
+      <header>
+        <div>
+          <span className="content-icon">🕺</span>
+          <div>
+            <b>TPR 亲子动作</b>
+            <small>{valid.length} 个指令 · 边听边做</small>
+          </div>
+        </div>
+        <em>亲子互动</em>
+      </header>
+      <div className="tpr-list">
+        {valid.map((item, index) => (
+          <div className="tpr-item" key={`${item.en}-${index}`}>
+            <span className="tpr-number">{index + 1}</span>
+            <b>{item.en}</b>
+            <span className="tpr-zh">{item.zh}</span>
+          </div>
+        ))}
+      </div>
+      <p className="activity-copy">家长先示范一次，再和孩子轮流做动作。听几遍后可以让孩子当“小老师”发指令。</p>
+    </section>
+  );
+}
+
 function SongDetail({ song, onBack }: { song: SongWithTheme; onBack: () => void }) {
   const { checked } = useCheckins();
   const done = checked.has(song.id);
@@ -723,10 +755,11 @@ function SongDetail({ song, onBack }: { song: SongWithTheme; onBack: () => void 
             {done ? <p className="checked-message">已完成本首儿歌打卡，进度已计入主题统计。</p> : null}
           </section>
         </div>
-        <div className="detail-section-title"><h2>对应内容</h2><span>视频 · 歌词 · TPR</span></div>
+        <div className="detail-section-title"><h2>对应内容</h2><span>音频 · 歌词 · 闪卡 · TPR</span></div>
         <MediaContactCard song={song} />
         <LyricsPreview song={song} onView={setViewer} />
         <FlashcardPreview song={song} onView={setViewer} />
+        <TprCard song={song} />
         </main>
       {viewer ? <ImageLightbox viewer={viewer} onClose={() => setViewer(null)} onChange={updateViewerIndex} /> : null}
     </MobileScroll>
