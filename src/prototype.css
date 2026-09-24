@@ -280,7 +280,7 @@ button { -webkit-tap-highlight-color: transparent; }
 
 
 /* Bottom fixed tab bar */
-.bottom-tab-bar { position: fixed; z-index: 40; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: repeat(2,1fr); gap: 0; padding: 6px 8px calc(6px + env(safe-area-inset-bottom)); background: #ffffff; border-top: 1px solid #eceef5; box-shadow: 0 -6px 20px rgba(31,38,81,.08); }
+.bottom-tab-bar { position: absolute; z-index: 60; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: repeat(2,1fr); gap: 0; padding: 6px 8px calc(6px + env(safe-area-inset-bottom)); background: #ffffff; border-top: 1px solid #eceef5; box-shadow: 0 -6px 20px rgba(31,38,81,.08); }
 .bottom-tab-bar button { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 4px; border: 0; background: transparent; color: #8e93a8; font-size: 10px; font-weight: 800; transition: color .18s, transform .12s; }
 .bottom-tab-bar button i { font-size: 20px; line-height: 1; font-style: normal; transition: transform .18s; }
 .bottom-tab-bar button span { letter-spacing: .02em; }
@@ -304,3 +304,7 @@ button { -webkit-tap-highlight-color: transparent; }
 .tpr-song-row.checked .tpr-song-open .song-row-copy b { color: #2c8f68; }
 .tpr-song-row.checked .song-number { color: #7bc4a5; }
 .tpr-song-row.checked .song-open-arrow { color: #7bc4a5; }
+
+
+/* Ensure tab bar always pinned to shell bottom, independent of scroll */
+.resource-shell .bottom-tab-bar { position: absolute; left: 0; right: 0; bottom: 0; }

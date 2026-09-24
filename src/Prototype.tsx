@@ -333,17 +333,17 @@ function ResourceShell({ flow, mobile = false }: { flow: FlowControls; mobile?: 
         <main className="resource-main">
           {tab === "all" ? <ThemeLibraryView flow={flow} /> : <TprLibraryView flow={flow} />}
         </main>
-        <nav className="bottom-tab-bar" role="tablist" aria-label="内容分类">
-          <button className={tab === "all" ? "active" : ""} onClick={() => setTab("all")} type="button" role="tab" aria-selected={tab === "all"}>
-            <i>🎵</i>
-            <span>全部儿歌</span>
-          </button>
-          <button className={tab === "tpr" ? "active" : ""} onClick={() => setTab("tpr")} type="button" role="tab" aria-selected={tab === "tpr"}>
-            <i>🕺</i>
-            <span>TPR 儿歌</span>
-          </button>
-        </nav>
       </MobileScroll>
+      <nav className="bottom-tab-bar" role="tablist" aria-label="内容分类">
+        <button className={tab === "all" ? "active" : ""} onClick={() => setTab("all")} type="button" role="tab" aria-selected={tab === "all"}>
+          <i>🎵</i>
+          <span>全部儿歌</span>
+        </button>
+        <button className={tab === "tpr" ? "active" : ""} onClick={() => setTab("tpr")} type="button" role="tab" aria-selected={tab === "tpr"}>
+          <i>🕺</i>
+          <span>TPR 儿歌</span>
+        </button>
+      </nav>
     </div>
   );
 }
