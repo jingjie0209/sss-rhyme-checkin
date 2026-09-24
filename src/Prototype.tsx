@@ -247,12 +247,12 @@ function TprLibraryView({ flow }: { flow: FlowControls }) {
       </div>
       <div className="section-heading"><div><b>TPR 歌单</b><span>点击歌曲进入详情</span></div><small>{songs.length} 首歌曲</small></div>
       <section className="tpr-song-list">
-        {songs.map((song) => {
+        {songs.map((song, index) => {
           const doneSong = checked.has(song.id);
           return (
             <article className={`tpr-song-row ${doneSong ? "checked" : ""}`} key={song.id}>
               <button className="tpr-song-open" onClick={() => openSong(song)} type="button">
-                <span className="song-number">{String(song.no).padStart(3, "0")}</span>
+                <span className="song-number">{String(index + 1).padStart(2, "0")}</span>
                 <span className="song-row-copy">
                   <b>{songDisplayName(song.title)}</b>
                 </span>

@@ -18,7 +18,7 @@ button { -webkit-tap-highlight-color: transparent; }
 .header-count b { display: block; color: #5b55d6; font-size: 17px; line-height: 1; }
 .header-count small { display: block; margin-top: 3px; color: #898eaa; font-size: 9px; }
 
-.resource-sticky-top { position: sticky; z-index: 15; top: 0; padding-bottom: 12px; background: #f7f8fc; }
+.resource-sticky-top { position: sticky; z-index: 15; top: 0; padding-top: 10px; padding-bottom: 12px; background: #f7f8fc; box-shadow: 0 10px 18px -12px rgba(31,38,81,.28); }
 .theme-hero { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 18px; border-radius: 23px; background: linear-gradient(140deg, #4f46cf, #7564e4 60%, #9780ef); color: #fff; box-shadow: 0 16px 34px rgba(79,70,229,.22); }
 .theme-hero > div:first-child { min-width: 0; }
 .theme-hero span { color: #dcd9ff; font-size: 9px; font-weight: 900; letter-spacing: .08em; }
@@ -308,3 +308,8 @@ button { -webkit-tap-highlight-color: transparent; }
 
 /* Ensure tab bar always pinned to shell bottom, independent of scroll */
 .resource-shell .bottom-tab-bar { position: absolute; left: 0; right: 0; bottom: 0; }
+
+
+/* Prevent list rows from peeking above sticky hero */
+.resource-main { padding-top: 6px; }
+.resource-scroll .mobile-scroll-content { background: #f7f8fc; }
