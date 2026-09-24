@@ -127,8 +127,8 @@ function songDisplayName(title: string) {
 
 function resourceState(song?: ResourceSong) {
   const hasAudio = Boolean(song && (LOCAL_AUDIO[song.id] || PAN_DRIVE_AUDIO[song.id]));
-  const hasLyrics = Boolean(song?.hasLyrics);
-  const hasFlash = Boolean(song?.hasFlashcards && (SONG_PREVIEWS[song.id]?.flashcards.length || song.flashJpgCount));
+  const hasLyrics = Boolean(song?.hasLyrics) && !song?.id.startsWith("tpr-");
+  const hasFlash = Boolean(song?.hasFlashcards && (SONG_PREVIEWS[song.id]?.flashcards.length || song.flashJpgCount)) && !song?.id.startsWith("tpr-");
   return [
     { key: "video", label: "视频", icon: "▶", available: !hasAudio },
     { key: "audio", label: "音频", icon: "♫", available: true },
@@ -787,8 +787,8 @@ function SongDetail({ song, onBack }: { song: SongWithTheme; onBack: () => void 
         </div>
         <div className="detail-section-title"><h2>对应内容</h2><span>音频 · 歌词 · 闪卡 · TPR</span></div>
         <MediaContactCard song={song} />
-        <LyricsPreview song={song} onView={setViewer} />
-        <FlashcardPreview song={song} onView={setViewer} />
+        {song.id.startsWith("tpr-") ? null : <LyricsPreview song={song} onView={setViewer} />}
+        {song.id.startsWith("tpr-") ? null : <FlashcardPreview song={song} onView={setViewer} />}
         <TprCard song={song} />
         </main>
       {viewer ? <ImageLightbox viewer={viewer} onClose={() => setViewer(null)} onChange={updateViewerIndex} /> : null}

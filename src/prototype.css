@@ -264,20 +264,20 @@ button { -webkit-tap-highlight-color: transparent; }
 /* Bottom tab bar: icon on top, label below */
 
 /* TPR 亲子动作卡片 */
-/* TPR 亲子动作卡片 — 与详情页 hero 同色系 */
-.tpr-card { margin-top: 10px; padding: 15px; border: 1px solid rgba(117,102,227,.28); border-radius: 18px; background: linear-gradient(140deg,#5a51d3,#7566e3 70%,#8b7bee); color: #fff; box-shadow: 0 14px 28px rgba(79,70,229,.25); }
-.tpr-card > header { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+/* TPR 亲子动作卡片 — 白色底，与歌词/闪卡模块一致 */
+.tpr-card { margin-top: 10px; padding: 15px; border: 1px solid #e2e4ee; border-radius: 18px; background: #fff; color: #23264a; box-shadow: 0 7px 20px rgba(31,38,81,.045); }
+.tpr-card > header { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 11px; }
 .tpr-card > header > div { display: flex; align-items: center; gap: 9px; }
-.tpr-card header b { display: block; font-size: 13px; color: #fff; }
-.tpr-card header small { display: block; margin-top: 3px; color: #d7d1ff; font-size: 10px; }
-.tpr-card header em { flex: 0 0 auto; padding: 4px 9px; border-radius: 999px; background: rgba(255,255,255,.18); color: #fff; font-size: 9px; font-weight: 800; font-style: normal; }
-.tpr-card .content-icon { background: rgba(255,255,255,.18); color: #fff; }
+.tpr-card header b { display: block; font-size: 11px; color: #23264a; }
+.tpr-card header small { display: block; margin-top: 3px; color: #969aac; font-size: 7px; }
+.tpr-card header em { flex: 0 0 auto; padding: 4px 7px; border-radius: 999px; background: #edeaff; color: #5f56cd; font-size: 7px; font-weight: 900; font-style: normal; }
+.tpr-card .content-icon { background: #eeedff; color: #5f57d7; }
 .tpr-list { display: grid; gap: 8px; }
-.tpr-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid rgba(255,255,255,.16); border-radius: 12px; background: rgba(255,255,255,.1); }
-.tpr-number { flex: 0 0 auto; width: 24px; height: 24px; display: grid; place-items: center; border-radius: 50%; background: rgba(255,255,255,.24); color: #fff; font-size: 10px; font-weight: 800; }
-.tpr-item b { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #fff; font-size: 13px; }
-.tpr-zh { flex: 0 0 auto; color: #e6e2ff; font-size: 11px; }
-.tpr-card .activity-copy { margin: 12px 0 0; color: #e0dbff; font-size: 11px; line-height: 1.7; }
+.tpr-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #e6e6f1; border-radius: 12px; background: #f7f7fa; }
+.tpr-number { flex: 0 0 auto; width: 24px; height: 24px; display: grid; place-items: center; border-radius: 50%; background: #655ddd; color: #fff; font-size: 10px; font-weight: 800; }
+.tpr-item b { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #23264a; font-size: 13px; }
+.tpr-zh { flex: 0 0 auto; color: #6b6f85; font-size: 11px; }
+.tpr-card .activity-copy { margin: 12px 0 0; color: #8d90a2; font-size: 11px; line-height: 1.7; }
 
 
 /* Bottom fixed tab bar */
