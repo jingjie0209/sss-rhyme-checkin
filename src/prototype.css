@@ -322,7 +322,8 @@ button { -webkit-tap-highlight-color: transparent; }
 
 /* Loop playback button + toast */
 .media-contact-card { position: relative; }
-.loop-button { position: absolute; right: 15px; bottom: 15px; display: inline-flex; align-items: center; gap: 6px; margin-top: 0; padding: 8px 14px; border: 1px solid #d6d3f5; border-radius: 999px; background: #f4f2ff; color: #5f56cd; font-size: 11px; font-weight: 800; transition: background .18s, color .18s, border-color .18s; }
+.media-contact-card .local-audio { margin-bottom: 4px; }
+.loop-button { display: inline-flex; align-items: center; justify-content: flex-end; width: 100%; gap: 6px; margin-top: 2px; padding: 8px 14px; border: 1px solid #d6d3f5; border-radius: 999px; background: #f4f2ff; color: #5f56cd; font-size: 11px; font-weight: 800; transition: background .18s, color .18s, border-color .18s; }
 .loop-button.on { background: #655ddd; border-color: #655ddd; color: #fff; box-shadow: 0 6px 14px rgba(85,74,190,.24); }
 .loop-button:active { transform: scale(.97); }
 .loop-toast { position: fixed; z-index: 90; left: 50%; bottom: calc(90px + env(safe-area-inset-bottom)); transform: translateX(-50%); padding: 9px 18px; border-radius: 999px; background: rgba(35,38,74,.92); color: #fff; font-size: 11px; font-weight: 800; animation: loopToastIn .2s ease-out; }
