@@ -281,8 +281,8 @@ button { -webkit-tap-highlight-color: transparent; }
 
 
 /* Bottom fixed tab bar */
-.bottom-tab-bar { position: absolute; z-index: 60; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: repeat(2,1fr); gap: 0; padding: 6px 8px calc(6px + env(safe-area-inset-bottom)); background: #ffffff; border-top: 1px solid #eceef5; box-shadow: 0 -6px 20px rgba(31,38,81,.08); }
-.bottom-tab-bar button { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 4px; border: 0; background: transparent; color: #8e93a8; font-size: 10px; font-weight: 800; transition: color .18s, transform .12s; }
+.bottom-tab-bar { position: absolute; z-index: 60; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: repeat(3,1fr); gap: 0; padding: 6px 6px calc(6px + env(safe-area-inset-bottom)); background: #ffffff; border-top: 1px solid #eceef5; box-shadow: 0 -6px 20px rgba(31,38,81,.08); }
+.bottom-tab-bar button { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 2px; border: 0; background: transparent; color: #8e93a8; font-size: 9px; font-weight: 800; transition: color .18s, transform .12s; }
 .bottom-tab-bar button i { font-size: 20px; line-height: 1; font-style: normal; transition: transform .18s; }
 .bottom-tab-bar button span { letter-spacing: .02em; }
 .bottom-tab-bar button.active { color: #655ddd; }
