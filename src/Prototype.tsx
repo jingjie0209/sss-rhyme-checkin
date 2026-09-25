@@ -257,7 +257,7 @@ function SceneLibraryView({ flow }: { flow: FlowControls }) {
           <div className="hero-progress" style={{ "--progress": totalPercent } as CSSProperties}><b>{done}</b><span>/ {total}</span></div>
         </section>
       </div>
-      <div className="section-heading"><div><b>场景清单</b><span>点击场景展开歌曲</span></div><small>{groups.length} 个场景</small></div>
+      <div className="section-heading"><div><b>场景清单</b></div><small>{groups.length} 个场景</small></div>
       <section className="theme-accordion-list">
         {groups.map((group, index) => {
           const isOpen = expanded === group.id;
@@ -430,7 +430,7 @@ function ResourceShell({ flow, mobile = false }: { flow: FlowControls; mobile?: 
       </MobileScroll>
       <nav className="bottom-tab-bar" role="tablist" aria-label="内容分类">
         <button className={tab === "scene" ? "active" : ""} onClick={() => setTab("scene")} type="button" role="tab" aria-selected={tab === "scene"}>
-          <i>🌅</i>
+          <i className="tab-icon-soft">🌤️</i>
           <span>场景儿歌</span>
         </button>
         <button className={tab === "tpr" ? "active" : ""} onClick={() => setTab("tpr")} type="button" role="tab" aria-selected={tab === "tpr"}>
