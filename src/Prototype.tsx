@@ -848,15 +848,14 @@ function ImageLightbox({ viewer, onClose, onChange }: { viewer: ImageViewerState
 
 function LyricsPreview({ song, onView }: { song: SongWithTheme; onView: (viewer: ImageViewerState) => void }) {
   const preview = SONG_PREVIEWS[song.id];
+  if (!song.hasLyrics || !preview?.lyric) return null;
   return (
-    <section className={`content-card lyrics-content-card ${song.hasLyrics ? "" : "unavailable"}`}>
+    <section className="content-card lyrics-content-card">
       <header><div><span className="content-icon">文</span><div><b>歌词</b><small>{song.hasLyrics ? "点击查看大图" : "暂无歌词图"}</small></div></div><em>{song.hasLyrics ? "可查看" : "暂无"}</em></header>
-      {song.hasLyrics && preview?.lyric ? (
-        <button className="image-preview-button lyric-preview-button" type="button" onClick={() => onView({ images: [preview.lyric!], index: 0, title: `${songDisplayName(song.title)} · 歌词` })} aria-label={`查看 ${songDisplayName(song.title)} 歌词大图`}>
-          <img className="lyric-preview" src={preview.lyric} alt={`${songDisplayName(song.title)} 歌词`} />
-          <span className="image-zoom-hint">⌕ 点击查看大图</span>
-        </button>
-      ) : <div className="missing-content">这首歌暂时没有歌词图片</div>}
+      <button className="image-preview-button lyric-preview-button" type="button" onClick={() => onView({ images: [preview.lyric!], index: 0, title: `${songDisplayName(song.title)} · 歌词` })} aria-label={`查看 ${songDisplayName(song.title)} 歌词大图`}>
+        <img className="lyric-preview" src={preview.lyric} alt={`${songDisplayName(song.title)} 歌词`} />
+        <span className="image-zoom-hint">⌕ 点击查看大图</span>
+      </button>
     </section>
   );
 }
