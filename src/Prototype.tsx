@@ -251,7 +251,7 @@ function SceneLibraryView({ flow }: { flow: FlowControls }) {
         <section className="theme-hero">
           <div>
             <span>场景儿歌 · 一整天</span>
-            <strong>25 个场景 · {total} 首儿歌</strong>
+            <strong>{groups.length} 个场景 · {total} 首儿歌</strong>
             <p>从起床到睡觉，用儿歌串起孩子的一整天。</p>
           </div>
           <div className="hero-progress" style={{ "--progress": totalPercent } as CSSProperties}><b>{done}</b><span>/ {total}</span></div>
