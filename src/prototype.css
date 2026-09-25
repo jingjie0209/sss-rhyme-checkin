@@ -316,11 +316,6 @@ button { -webkit-tap-highlight-color: transparent; }
 .resource-scroll .mobile-scroll-content { background: #f7f8fc; }
 
 /* Scene hero green-blue gradient */
-/* Scene hero matches TPR green */
-.scene-hero { background: linear-gradient(140deg,#0f8a67,#21a578 60%,#3ec79a); box-shadow: 0 16px 34px rgba(15,138,103,.22); }
-.scene-hero span { color: #c8ffe6; }
-.scene-hero p { color: #d8fff0; }
-.scene-hero .hero-progress::after { background: #12805d; }
 
 /* Softer icon tone for 场景儿歌 tab */
 .bottom-tab-bar .tab-icon-soft { opacity: .78; filter: saturate(.7); }

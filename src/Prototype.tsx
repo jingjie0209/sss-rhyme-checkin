@@ -248,7 +248,7 @@ function SceneLibraryView({ flow }: { flow: FlowControls }) {
     <>
       <div className="resource-sticky-top">
         <AppHeader />
-        <section className="theme-hero scene-hero">
+        <section className="theme-hero">
           <div>
             <span>场景儿歌 · 一整天</span>
             <strong>25 个场景 · {total} 首儿歌</strong>
