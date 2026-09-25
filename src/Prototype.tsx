@@ -129,7 +129,7 @@ function songDisplayName(title: string) {
 
 function resourceState(song?: ResourceSong) {
   const hasAudio = Boolean(song && (LOCAL_AUDIO[song.id] || PAN_DRIVE_AUDIO[song.id]));
-  const hasLyrics = Boolean(song?.hasLyrics || (song?.id.startsWith("tpr-") && SONG_PREVIEWS[song.id]?.lyric));
+  const hasLyrics = Boolean(song?.hasLyrics || ((song?.id.startsWith("tpr-") || song?.id.startsWith("sce-")) && SONG_PREVIEWS[song.id]?.lyric));
   const hasFlash = Boolean(song?.hasFlashcards && (SONG_PREVIEWS[song.id]?.flashcards.length || song.flashJpgCount)) && !song?.id.startsWith("tpr-");
   return [
     { key: "audio", label: "音频", icon: "♫", available: true },
