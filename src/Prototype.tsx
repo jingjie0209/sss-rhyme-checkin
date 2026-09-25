@@ -3,6 +3,7 @@ import { FlowStack, MobileScroll, type FlowControls, type FlowScreen } from "./m
 import { RESOURCE_DATA, type ResourceSong, type ThemeGroup } from "./data/appData";
 import { SONG_TPR } from "./data/tprData";
 import { TPR_SONGS, type TprSong } from "./data/tprSongs";
+import { SCENE_GROUPS, type SceneSong, type SceneGroup } from "./data/sceneData";
 import { SONG_PREVIEWS } from "./data/previewData";
 
 type SongWithTheme = ResourceSong & { themeId: string; themeName: string; themeLabel: string };
@@ -19,6 +20,7 @@ type CheckinContextValue = {
 const CheckinContext = createContext<CheckinContextValue | null>(null);
 const CHECKIN_KEY = "sss-song-checkins-v1";
 const STREAK_KEY = "sss-song-checkin-streak-v1";
+const sceneEmoji = ["🌅","🪥","🦷","🍚","🚽","👕","👟","☀️","🌧️","❄️","🚶","🚦","🎠","🙏","🧸","🎲","🧹","🎨","📅","🗓️","🔷","🙈","📄","🛁","🌙"];
 const themeEmoji = ["🌙", "🔤", "🚌", "🛁", "👋", "🖐️", "🍎", "🎨", "😊", "🎶", "🏃", "🔢", "🎄", "🐾"];
 
 function readLocalDate() {
@@ -218,6 +220,90 @@ function ThemeSongRow({ song, theme, onOpen }: { song: ResourceSong; theme: Them
   );
 }
 
+function SceneLibraryView({ flow }: { flow: FlowControls }) {
+  const { checked } = useCheckins();
+  const [expanded, setExpanded] = useState<string | null>(null);
+  const groups = SCENE_GROUPS;
+
+  const openSong = (song: SceneSong, group: SceneGroup) => {
+    const songWithTheme: SongWithTheme = {
+      id: song.id,
+      no: song.no,
+      title: song.title,
+      hasLyrics: false,
+      hasFlashcards: false,
+      flashJpgCount: 0,
+      themeId: group.id,
+      themeName: group.name,
+      themeLabel: group.name,
+    };
+    flow.push({ id: song.id, headerHeight: 0, render: () => <SongDetail song={songWithTheme} onBack={flow.pop} /> });
+  };
+
+  const total = groups.reduce((sum, g) => sum + g.songs.length, 0);
+  const done = groups.reduce((sum, g) => sum + g.songs.filter((song) => checked.has(song.id)).length, 0);
+  const totalPercent = total ? Math.min(100, done / total * 100) : 0;
+
+  return (
+    <>
+      <div className="resource-sticky-top">
+        <AppHeader />
+        <section className="theme-hero scene-hero">
+          <div>
+            <span>场景儿歌 · 一整天</span>
+            <strong>25 个场景 · {total} 首儿歌</strong>
+            <p>从起床到睡觉，用儿歌串起孩子的一整天。</p>
+          </div>
+          <div className="hero-progress" style={{ "--progress": totalPercent } as CSSProperties}><b>{done}</b><span>/ {total}</span></div>
+        </section>
+      </div>
+      <div className="section-heading"><div><b>场景清单</b><span>点击场景展开歌曲</span></div><small>{groups.length} 个场景</small></div>
+      <section className="theme-accordion-list">
+        {groups.map((group, index) => {
+          const isOpen = expanded === group.id;
+          const completed = group.songs.filter((song) => checked.has(song.id)).length;
+          const percent = group.songs.length ? Math.round(completed / group.songs.length * 100) : 0;
+          const isEmpty = group.songs.length === 0;
+          return (
+            <article className={`theme-accordion ${isOpen ? "open" : ""}`} key={group.id}>
+              <button className="theme-accordion-head" onClick={() => { if (!isEmpty) setExpanded(isOpen ? null : group.id); }} type="button" aria-expanded={isOpen} disabled={isEmpty}>
+                <span className="theme-order">场景 {group.num}</span>
+                <span className="theme-symbol">{sceneEmoji[index % sceneEmoji.length]}</span>
+                <span className="theme-title-block">
+                  <b>{group.name}</b>
+                  <small>{isEmpty ? "暂无歌曲" : `${group.songs.length} 首歌曲`}</small>
+                  {!isEmpty && <i><em style={{ width: `${percent}%` }} /></i>}
+                </span>
+                <span className="theme-complete"><b>{completed}</b><small>已完成</small></span>
+                {!isEmpty && <span className="theme-chevron">⌄</span>}
+              </button>
+              {isOpen && !isEmpty ? (
+                <div className="theme-song-list">
+                  {group.songs.map((song) => {
+                    const doneSong = checked.has(song.id);
+                    return (
+                      <article className={`theme-song-row ${doneSong ? "checked" : ""}`} key={song.id}>
+                        <button className="song-open-button" onClick={() => openSong(song, group)} type="button">
+                          <span className="song-number">{String(song.no).padStart(2, "0")}</span>
+                          <span className="song-row-copy">
+                            <b>{songDisplayName(song.title)}</b>
+                          </span>
+                          <span className="song-open-arrow">›</span>
+                        </button>
+                        <CheckinButton songId={song.id} compact />
+                      </article>
+                    );
+                  })}
+                </div>
+              ) : null}
+            </article>
+          );
+        })}
+      </section>
+    </>
+  );
+}
+
 function TprLibraryView({ flow }: { flow: FlowControls }) {
   const { checked } = useCheckins();
   const songs = TPR_SONGS;
@@ -334,22 +420,26 @@ function ThemeLibraryView({ flow }: { flow: FlowControls }) {
 }
 
 function ResourceShell({ flow, mobile = false }: { flow: FlowControls; mobile?: boolean }) {
-  const [tab, setTab] = useState<"all" | "tpr">("all");
+  const [tab, setTab] = useState<"scene" | "tpr" | "all">("scene");
   return (
     <div className={`resource-shell ${mobile ? "native-mobile" : ""}`}>
       <MobileScroll className="resource-scroll">
         <main className="resource-main">
-          {tab === "all" ? <ThemeLibraryView flow={flow} /> : <TprLibraryView flow={flow} />}
+          {tab === "scene" ? <SceneLibraryView flow={flow} /> : tab === "tpr" ? <TprLibraryView flow={flow} /> : <ThemeLibraryView flow={flow} />}
         </main>
       </MobileScroll>
       <nav className="bottom-tab-bar" role="tablist" aria-label="内容分类">
-        <button className={tab === "all" ? "active" : ""} onClick={() => setTab("all")} type="button" role="tab" aria-selected={tab === "all"}>
-          <i>🎵</i>
-          <span>全部儿歌</span>
+        <button className={tab === "scene" ? "active" : ""} onClick={() => setTab("scene")} type="button" role="tab" aria-selected={tab === "scene"}>
+          <i>🌅</i>
+          <span>场景儿歌</span>
         </button>
         <button className={tab === "tpr" ? "active" : ""} onClick={() => setTab("tpr")} type="button" role="tab" aria-selected={tab === "tpr"}>
           <i>🕺</i>
           <span>TPR 儿歌</span>
+        </button>
+        <button className={tab === "all" ? "active" : ""} onClick={() => setTab("all")} type="button" role="tab" aria-selected={tab === "all"}>
+          <i>🎵</i>
+          <span>全部</span>
         </button>
       </nav>
     </div>
@@ -590,6 +680,52 @@ const LOCAL_AUDIO: Record<string, string> = {
   "tpr-024": "/sss-rhyme-checkin/audio/tpr-024.m4a",
   "tpr-025": "/sss-rhyme-checkin/audio/tpr-025.m4a",
   "tpr-026": "/sss-rhyme-checkin/audio/tpr-026.m4a",
+  "sce-001": "/sss-rhyme-checkin/audio/sce-001.m4a",
+  "sce-002": "/sss-rhyme-checkin/audio/sce-002.m4a",
+  "sce-003": "/sss-rhyme-checkin/audio/sce-003.m4a",
+  "sce-004": "/sss-rhyme-checkin/audio/sce-004.m4a",
+  "sce-005": "/sss-rhyme-checkin/audio/sce-005.m4a",
+  "sce-006": "/sss-rhyme-checkin/audio/sce-006.m4a",
+  "sce-007": "/sss-rhyme-checkin/audio/sce-007.m4a",
+  "sce-008": "/sss-rhyme-checkin/audio/sce-008.m4a",
+  "sce-009": "/sss-rhyme-checkin/audio/sce-009.m4a",
+  "sce-010": "/sss-rhyme-checkin/audio/sce-010.m4a",
+  "sce-011": "/sss-rhyme-checkin/audio/sce-011.m4a",
+  "sce-012": "/sss-rhyme-checkin/audio/sce-012.m4a",
+  "sce-013": "/sss-rhyme-checkin/audio/sce-013.m4a",
+  "sce-014": "/sss-rhyme-checkin/audio/sce-014.m4a",
+  "sce-015": "/sss-rhyme-checkin/audio/sce-015.m4a",
+  "sce-016": "/sss-rhyme-checkin/audio/sce-016.m4a",
+  "sce-017": "/sss-rhyme-checkin/audio/sce-017.m4a",
+  "sce-018": "/sss-rhyme-checkin/audio/sce-018.m4a",
+  "sce-019": "/sss-rhyme-checkin/audio/sce-019.m4a",
+  "sce-020": "/sss-rhyme-checkin/audio/sce-020.m4a",
+  "sce-021": "/sss-rhyme-checkin/audio/sce-021.m4a",
+  "sce-022": "/sss-rhyme-checkin/audio/sce-022.m4a",
+  "sce-023": "/sss-rhyme-checkin/audio/sce-023.m4a",
+  "sce-024": "/sss-rhyme-checkin/audio/sce-024.m4a",
+  "sce-025": "/sss-rhyme-checkin/audio/sce-025.m4a",
+  "sce-026": "/sss-rhyme-checkin/audio/sce-026.m4a",
+  "sce-027": "/sss-rhyme-checkin/audio/sce-027.m4a",
+  "sce-028": "/sss-rhyme-checkin/audio/sce-028.m4a",
+  "sce-029": "/sss-rhyme-checkin/audio/sce-029.m4a",
+  "sce-030": "/sss-rhyme-checkin/audio/sce-030.m4a",
+  "sce-031": "/sss-rhyme-checkin/audio/sce-031.m4a",
+  "sce-032": "/sss-rhyme-checkin/audio/sce-032.m4a",
+  "sce-033": "/sss-rhyme-checkin/audio/sce-033.m4a",
+  "sce-034": "/sss-rhyme-checkin/audio/sce-034.m4a",
+  "sce-035": "/sss-rhyme-checkin/audio/sce-035.m4a",
+  "sce-036": "/sss-rhyme-checkin/audio/sce-036.m4a",
+  "sce-037": "/sss-rhyme-checkin/audio/sce-037.m4a",
+  "sce-038": "/sss-rhyme-checkin/audio/sce-038.m4a",
+  "sce-039": "/sss-rhyme-checkin/audio/sce-039.m4a",
+  "sce-040": "/sss-rhyme-checkin/audio/sce-040.m4a",
+  "sce-041": "/sss-rhyme-checkin/audio/sce-041.m4a",
+  "sce-042": "/sss-rhyme-checkin/audio/sce-042.m4a",
+  "sce-043": "/sss-rhyme-checkin/audio/sce-043.m4a",
+  "sce-044": "/sss-rhyme-checkin/audio/sce-044.m4a",
+  "sce-045": "/sss-rhyme-checkin/audio/sce-045.m4a",
+  "sce-046": "/sss-rhyme-checkin/audio/sce-046.m4a",
 };
 
 

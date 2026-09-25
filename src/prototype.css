@@ -314,3 +314,9 @@ button { -webkit-tap-highlight-color: transparent; }
 /* Prevent list rows from peeking above sticky hero */
 .resource-main { padding-top: 6px; }
 .resource-scroll .mobile-scroll-content { background: #f7f8fc; }
+
+/* Scene hero green-blue gradient */
+.scene-hero { background: linear-gradient(140deg,#1c7ed6,#3b9ddf 60%,#63c7f0); box-shadow: 0 16px 34px rgba(28,126,214,.22); }
+.scene-hero span { color: #c9ecff; }
+.scene-hero p { color: #dbf3ff; }
+.scene-hero .hero-progress::after { background: #1469b3; }
