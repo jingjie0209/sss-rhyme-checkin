@@ -332,8 +332,7 @@ function TprLibraryView({ flow }: { flow: FlowControls }) {
         <AppHeader />
         <section className="theme-hero tpr-hero">
           <div>
-            <span>TPR 亲子互动</span>
-            <strong>{songs.length} 首儿歌</strong>
+            <strong>TPR {songs.length} 首儿歌</strong>
             <p>听儿歌 · 做动作 · 打卡，帮孩子在动起来中磨耳朵。</p>
           </div>
           <div className="hero-progress" style={{ "--progress": totalPercent } as CSSProperties}><b>{done}</b><span>/ {songs.length}</span></div>
