@@ -737,6 +737,15 @@ function MediaContactCard({ song }: { song: SongWithTheme }) {
   const panAudio = PAN_DRIVE_AUDIO[song.id];
   const audio = hosted || panAudio;
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [loop, setLoop] = useState(false);
+  const toggleLoop = () => {
+    const next = !loop;
+    setLoop(next);
+    if (audioRef.current) audioRef.current.loop = next;
+    setLoopToast(next ? "已开启单曲循环" : "已关闭单曲循环");
+    window.setTimeout(() => setLoopToast(null), 1800);
+  };
+  const [loopToast, setLoopToast] = useState<string | null>(null);
   useEffect(() => {
     const el = audioRef.current;
     if (!el) return;
@@ -779,10 +788,16 @@ function MediaContactCard({ song }: { song: SongWithTheme }) {
         <em>{hosted ? "可播放" : panAudio ? "网盘播放" : "微信获取"}</em>
       </header>
       {hosted ? (
-        <audio ref={audioRef} controls playsInline preload="metadata" className="local-audio">
-          <source src={hosted} type="audio/mp4" />
-          您的浏览器不支持音频播放。
-        </audio>
+        <>
+          <audio ref={audioRef} controls playsInline preload="metadata" className="local-audio">
+            <source src={hosted} type="audio/mp4" />
+            您的浏览器不支持音频播放。
+          </audio>
+          <button className={`loop-button ${loop ? "on" : ""}`} onClick={toggleLoop} type="button" aria-pressed={loop}>
+            🔁 {loop ? "循环已开启" : "循环播放"}
+          </button>
+          {loopToast ? <div className="loop-toast">{loopToast}</div> : null}
+        </>
       ) : panAudio ? (
         <a className="cloud-media-button" href={panAudio} target="_blank" rel="noreferrer">播放音频</a>
       ) : (
