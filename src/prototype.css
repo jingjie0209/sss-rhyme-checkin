@@ -326,3 +326,11 @@ button { -webkit-tap-highlight-color: transparent; }
 .loop-button:active { transform: scale(.97); }
 .loop-toast { position: fixed; z-index: 90; left: 50%; bottom: calc(90px + env(safe-area-inset-bottom)); transform: translateX(-50%); padding: 9px 18px; border-radius: 999px; background: rgba(35,38,74,.92); color: #fff; font-size: 11px; font-weight: 800; animation: loopToastIn .2s ease-out; }
 @keyframes loopToastIn { from { opacity: 0; transform: translate(-50%, 8px); } to { opacity: 1; transform: translate(-50%, 0); } }
+
+
+/* Hide native 3-dot "more" menu button on audio player */
+.local-audio::-webkit-media-controls-enclosure { overflow: hidden; }
+.local-audio::-webkit-media-controls-overflow-button,
+.local-audio::-webkit-media-controls-toggle-closed-captions-button { display: none !important; }
+/* Safari-specific: hide overflow/more button */
+.local-audio::-webkit-media-controls { overflow: hidden; }
