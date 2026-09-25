@@ -793,9 +793,11 @@ function MediaContactCard({ song }: { song: SongWithTheme }) {
             <source src={hosted} type="audio/mp4" />
             您的浏览器不支持音频播放。
           </audio>
-          <button className={`loop-button ${loop ? "on" : ""}`} onClick={toggleLoop} type="button" aria-pressed={loop}>
-            🔁 {loop ? "循环已开启" : "循环播放"}
-          </button>
+          <div className="loop-row">
+            <button className={`loop-button ${loop ? "on" : ""}`} onClick={toggleLoop} type="button" aria-pressed={loop}>
+              🔁 {loop ? "循环已开启" : "循环播放"}
+            </button>
+          </div>
           {loopToast ? <div className="loop-toast">{loopToast}</div> : null}
         </>
       ) : panAudio ? (
