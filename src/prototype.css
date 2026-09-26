@@ -337,3 +337,12 @@ button { -webkit-tap-highlight-color: transparent; }
 .local-audio::-webkit-media-controls-toggle-closed-captions-button { display: none !important; }
 /* Safari-specific: hide overflow/more button */
 .local-audio::-webkit-media-controls { overflow: hidden; }
+
+/* Play-all button + now playing line */
+.play-all-wrap { margin-top: 12px; display: grid; gap: 6px; }
+.play-all-button { display: inline-flex; align-items: center; gap: 6px; padding: 10px 16px; border: 0; border-radius: 999px; background: #fff; color: #554dca; font-size: 12px; font-weight: 900; box-shadow: 0 6px 16px rgba(31,38,81,.16); transition: background .18s, color .18s, transform .12s; }
+.play-all-button.on { background: #23264a; color: #fff; box-shadow: 0 6px 16px rgba(35,38,74,.3); }
+.play-all-button:active { transform: scale(.97); }
+.play-all-now { color: rgba(255,255,255,.92); font-size: 10px; line-height: 1.4; }
+.tpr-hero .play-all-now { color: #d8fff0; }
+.scene-hero .play-all-now { color: #d8fff0; }

@@ -4,6 +4,7 @@ import { RESOURCE_DATA, type ResourceSong, type ThemeGroup } from "./data/appDat
 import { SONG_TPR } from "./data/tprData";
 import { TPR_SONGS, type TprSong } from "./data/tprSongs";
 import { SCENE_GROUPS, type SceneSong, type SceneGroup } from "./data/sceneData";
+import { usePlayAll, type PlayAllTrack } from "./playAll";
 import { SONG_PREVIEWS } from "./data/previewData";
 
 type SongWithTheme = ResourceSong & { themeId: string; themeName: string; themeLabel: string };
@@ -220,10 +221,26 @@ function ThemeSongRow({ song, theme, onOpen }: { song: ResourceSong; theme: Them
   );
 }
 
+function PlayAllButton({ player }: { player: ReturnType<typeof usePlayAll> }) {
+  const current = player.current;
+  return (
+    <div className="play-all-wrap">
+      <button className={`play-all-button ${player.playing ? "on" : ""}`} onClick={player.toggle} type="button">
+        {player.playing ? "⏸ 停止连播" : "▶ 连续播放全部"}
+      </button>
+      {player.playing && current ? (
+        <div className="play-all-now">正在播放：{current.title}（{(player.index ?? 0) + 1}/{player.available.length}）</div>
+      ) : null}
+    </div>
+  );
+}
+
 function SceneLibraryView({ flow }: { flow: FlowControls }) {
   const { checked } = useCheckins();
   const [expanded, setExpanded] = useState<string | null>(null);
   const groups = SCENE_GROUPS;
+  const flatTracks: PlayAllTrack[] = groups.flatMap(g => g.songs.map(s => ({ id: s.id, title: s.title })));
+  const player = usePlayAll(flatTracks, LOCAL_AUDIO);
 
   const openSong = (song: SceneSong, group: SceneGroup) => {
     const songWithTheme: SongWithTheme = {
@@ -253,6 +270,7 @@ function SceneLibraryView({ flow }: { flow: FlowControls }) {
             <span>场景儿歌 · 一整天</span>
             <strong>{groups.length} 个场景 · {total} 首儿歌</strong>
             <p>从起床到睡觉，用儿歌串起孩子的一整天。</p>
+            <PlayAllButton player={player} />
           </div>
           <div className="hero-progress" style={{ "--progress": totalPercent } as CSSProperties}><b>{done}</b><span>/ {total}</span></div>
         </section>
@@ -307,6 +325,8 @@ function SceneLibraryView({ flow }: { flow: FlowControls }) {
 function TprLibraryView({ flow }: { flow: FlowControls }) {
   const { checked } = useCheckins();
   const songs = TPR_SONGS;
+  const flatTracks: PlayAllTrack[] = songs.map(s => ({ id: s.id, title: s.title }));
+  const player = usePlayAll(flatTracks, LOCAL_AUDIO);
 
   const openSong = (song: TprSong) => {
     const songWithTheme: SongWithTheme = {
@@ -334,6 +354,7 @@ function TprLibraryView({ flow }: { flow: FlowControls }) {
           <div>
             <strong>TPR {songs.length} 首儿歌</strong>
             <p>听儿歌 · 做动作 · 打卡，帮孩子在动起来中磨耳朵。</p>
+            <PlayAllButton player={player} />
           </div>
           <div className="hero-progress" style={{ "--progress": totalPercent } as CSSProperties}><b>{done}</b><span>/ {songs.length}</span></div>
         </section>
@@ -365,6 +386,8 @@ function ThemeLibraryView({ flow }: { flow: FlowControls }) {
   const [expandedTheme, setExpandedTheme] = useState<string | null>(null);
 
   const themes = RESOURCE_DATA.themes;
+  const flatTracks: PlayAllTrack[] = themes.flatMap(t => t.songs.map(s => ({ id: s.id, title: s.title })));
+  const player = usePlayAll(flatTracks, LOCAL_AUDIO);
 
   const openSong = (song: ResourceSong, theme: ThemeGroup) => {
     const songWithTheme: SongWithTheme = { ...song, themeId: theme.id, themeName: theme.name, themeLabel: theme.label };
@@ -381,6 +404,7 @@ function ThemeLibraryView({ flow }: { flow: FlowControls }) {
             <span>按主题循序打卡</span>
             <strong>14 个主题 · 205 首儿歌</strong>
             <p>点开一个主题查看歌曲，完成一首就打卡一首。</p>
+            <PlayAllButton player={player} />
           </div>
           <div className="hero-progress" style={{ "--progress": totalPercent } as CSSProperties}><b>{checked.size}</b><span>/ {RESOURCE_DATA.stats.songs}</span></div>
         </section>
