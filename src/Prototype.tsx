@@ -21,6 +21,8 @@ type CheckinContextValue = {
 const CheckinContext = createContext<CheckinContextValue | null>(null);
 const CHECKIN_KEY = "sss-song-checkins-v1";
 const STREAK_KEY = "sss-song-checkin-streak-v1";
+// 累计打卡天数独立持久化，不受版本升级 / 清理逻辑影响。
+const TOTAL_DAYS_KEY = "sss-total-days-v1";
 const sceneEmoji = ["🌅","🪥","🦷","🍚","🚽","👕","👟","☀️","🌧️","❄️","🚶","🚦","🎠","🙏","🧸","🎲","🧹","🎨","📅","🗓️","🔷","🙈","📄","🛁","🌙"];
 const themeEmoji = ["🌙", "🔤", "🚌", "🛁", "👋", "🖐️", "🍎", "🎨", "😊", "🎶", "🏃", "🔢", "🎄", "🐾"];
 
@@ -30,6 +32,12 @@ function readLocalDate() {
 }
 
 function readCheckinDays() {
+  let totalDays = 0;
+  try {
+    const persisted = Number(localStorage.getItem(TOTAL_DAYS_KEY) || "0");
+    if (Number.isFinite(persisted)) totalDays = persisted;
+  } catch {}
+
   try {
     const saved = JSON.parse(localStorage.getItem(STREAK_KEY) || "null") as {
       lastDate?: string;
@@ -40,6 +48,8 @@ function readCheckinDays() {
     const days = new Set(Array.isArray(saved?.days) ? saved?.days.filter(Boolean) : []);
     if (saved?.lastDate) days.add(saved.lastDate);
     const today = readLocalDate();
+    // 累计天数取两者较大值，永不下降。
+    totalDays = Math.max(totalDays, days.size);
 
     let streak = 0;
     if (saved?.lastDate && Number.isFinite(saved.streak) && (saved.streak || 0) > 0) {
@@ -49,9 +59,9 @@ function readCheckinDays() {
       if (saved.lastDate === today || saved.lastDate === yesterdayText) streak = saved.streak as number;
     }
 
-    return { streak, totalDays: days.size };
+    return { streak, totalDays };
   } catch {
-    return { streak: 0, totalDays: 0 };
+    return { streak: 0, totalDays };
   }
 }
 
@@ -89,12 +99,14 @@ function CheckinProvider({ children }: { children: ReactNode }) {
 
     const isAlreadyToday = saved?.lastDate === today;
     const nextStreak = isAlreadyToday ? Math.max(1, days.streak) : days.streak + 1;
+    const nextTotalDays = Math.max(days.totalDays, daySet.size);
     localStorage.setItem(STREAK_KEY, JSON.stringify({
       lastDate: today,
       streak: nextStreak,
       days: [...daySet].sort(),
     }));
-    setDays({ streak: nextStreak, totalDays: daySet.size });
+    localStorage.setItem(TOTAL_DAYS_KEY, String(nextTotalDays));
+    setDays({ streak: nextStreak, totalDays: nextTotalDays });
     setCelebrate({ streak: nextStreak, total: next.size, songsToday: 1 });
   };
 
