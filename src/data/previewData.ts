@@ -1464,11 +1464,6 @@ export const SONG_PREVIEWS: Record<string, SongPreview> = {
     "lyric": "/sss-rhyme-checkin/previews/lyrics/sce-001.jpg",
     "flashcards": []
   },
-  "sce-004": {
-    "poster": "",
-    "lyric": "/sss-rhyme-checkin/previews/lyrics/sce-004.jpg",
-    "flashcards": []
-  },
   "sce-005": {
     "poster": "",
     "lyric": "/sss-rhyme-checkin/previews/lyrics/sce-005.jpg",
@@ -1499,6 +1494,11 @@ export const SONG_PREVIEWS: Record<string, SongPreview> = {
     "lyric": "/sss-rhyme-checkin/previews/lyrics/sce-010.jpg",
     "flashcards": []
   },
+  "sce-011": {
+    "poster": "",
+    "lyric": "/sss-rhyme-checkin/previews/lyrics/song-081.jpg",
+    "flashcards": []
+  },
   "sce-012": {
     "poster": "",
     "lyric": "/sss-rhyme-checkin/previews/lyrics/sce-012.jpg",
@@ -1521,7 +1521,7 @@ export const SONG_PREVIEWS: Record<string, SongPreview> = {
   },
   "sce-016": {
     "poster": "",
-    "lyric": "/sss-rhyme-checkin/previews/lyrics/sce-016.jpg",
+    "lyric": "/sss-rhyme-checkin/previews/lyrics/song-014.jpg",
     "flashcards": []
   },
   "sce-017": {
