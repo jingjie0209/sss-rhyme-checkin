@@ -4,8 +4,12 @@ import { MobileRuntime } from "./mobile/MobileRuntime";
 import Prototype from "./Prototype";
 
 export default function App() {
-  const isRealMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
-    || (navigator.maxTouchPoints > 1 && /Macintosh/.test(navigator.platform));
+  const ua = navigator.userAgent;
+  // Some Android WebViews / WeChat browsers don't include "Android" in UA,
+  // so we also check for common mobile identifiers and touch capability.
+  const isRealMobile = /Android|iPhone|iPad|iPod|Mobile|Silk|Kindle/i.test(ua)
+    || (/Macintosh/.test(navigator.platform) && navigator.maxTouchPoints > 1)
+    || (navigator.maxTouchPoints > 1 && window.innerWidth < 900);
 
   if (isRealMobile) {
     return (
