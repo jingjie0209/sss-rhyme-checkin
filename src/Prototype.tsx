@@ -4,6 +4,7 @@ import { RESOURCE_DATA, type ResourceSong, type ThemeGroup } from "./data/appDat
 import { SONG_TPR } from "./data/tprData";
 import { TPR_SONGS, type TprSong } from "./data/tprSongs";
 import { SCENE_GROUPS, type SceneSong, type SceneGroup } from "./data/sceneData";
+import { PLAN_WEEKS } from "./data/planData";
 import { usePlayAll, type PlayAllTrack } from "./playAll";
 import { SONG_PREVIEWS } from "./data/previewData";
 
@@ -247,6 +248,88 @@ function PlayAllButton({ player }: { player: ReturnType<typeof usePlayAll> }) {
   );
 }
 
+
+function PlanLibraryView({ flow }: { flow: FlowControls }) {
+  const { checked } = useCheckins();
+  const [expanded, setExpanded] = useState<number | null>(null);
+  const weeks = PLAN_WEEKS;
+
+  const openSong = (song: { id: string; no: number; title: string }, week: number) => {
+    const songWithTheme: SongWithTheme = {
+      id: song.id, no: song.no, title: song.title,
+      hasLyrics: false, hasFlashcards: false, flashJpgCount: 0,
+      themeId: `plan-week-${week}`, themeName: `第${week}周`, themeLabel: `第${week}周`,
+    };
+    flow.push({ id: song.id, headerHeight: 0, render: () => <SongDetail song={songWithTheme} onBack={flow.pop} /> });
+  };
+
+  const flatTracks: PlayAllTrack[] = weeks.flatMap(w => w.songs.map(s => ({ id: s.id, title: s.title })));
+  const player = usePlayAll(flatTracks, LOCAL_AUDIO);
+  const totalSongs = weeks.reduce((sum, w) => sum + w.songs.length, 0);
+  const done = weeks.reduce((sum, w) => sum + w.songs.filter(s => checked.has(s.id)).length, 0);
+  const totalPercent = totalSongs ? Math.min(100, done / totalSongs * 100) : 0;
+
+  return (
+    <>
+      <div className="resource-sticky-top">
+        <AppHeader />
+        <section className="theme-hero">
+          <div>
+            <span>50 周打卡计划</span>
+            <strong>50 周 · {totalSongs} 首儿歌</strong>
+            <p>按周循序打卡，每周 3 首，复习周巩固学习。</p>
+          </div>
+          <div className="hero-progress" style={{ "--progress": totalPercent } as CSSProperties}><b>{done}</b><span>/ {totalSongs}</span></div>
+        </section>
+        <PlayAllButton player={player} />
+      </div>
+      <div className="section-heading"><div><b>周计划</b><span>点击周展开歌曲</span></div><small>{weeks.length} 周</small></div>
+      <section className="theme-accordion-list">
+        {weeks.map((week) => {
+          const isOpen = expanded === week.week;
+          const completed = week.songs.filter(s => checked.has(s.id)).length;
+          const percent = week.songs.length ? Math.round(completed / week.songs.length * 100) : 0;
+          const isReview = week.songs.length === 0;
+          return (
+            <article className={`theme-accordion ${isOpen ? "open" : ""} ${isReview ? "review-week" : ""}`} key={week.week}>
+              <button className="theme-accordion-head" onClick={() => { if (!isReview) setExpanded(isOpen ? null : week.week); }} type="button" aria-expanded={isOpen} disabled={isReview}>
+                <span className="theme-order">第 {week.week} 周</span>
+                <span className="theme-symbol">{isReview ? "📖" : "🎵"}</span>
+                <span className="theme-title-block">
+                  <b>{week.theme}</b>
+                  <small>{isReview ? "复习周" : `${week.songs.length} 首歌曲`}</small>
+                  {!isReview && <i><em style={{ width: `${percent}%` }} /></i>}
+                </span>
+                <span className="theme-complete"><b>{completed}</b><small>已完成</small></span>
+                {!isReview && <span className="theme-chevron">⌄</span>}
+              </button>
+              {isOpen && !isReview ? (
+                <div className="theme-song-list">
+                  {week.songs.map((song) => {
+                    const doneSong = checked.has(song.id);
+                    return (
+                      <article className={`theme-song-row ${doneSong ? "checked" : ""}`} key={song.id}>
+                        <button className="song-open-button" onClick={() => openSong(song, week.week)} type="button">
+                          <span className="song-number">{String(song.no).padStart(2, "0")}</span>
+                          <span className="song-row-copy">
+                            <b>{songDisplayName(song.title)}</b>
+                          </span>
+                          <span className="song-open-arrow">›</span>
+                        </button>
+                        <CheckinButton songId={song.id} compact />
+                      </article>
+                    );
+                  })}
+                </div>
+              ) : null}
+            </article>
+          );
+        })}
+      </section>
+    </>
+  );
+}
+
 function SceneLibraryView({ flow }: { flow: FlowControls }) {
   const { checked } = useCheckins();
   const [expanded, setExpanded] = useState<string | null>(null);
@@ -455,15 +538,19 @@ function ThemeLibraryView({ flow }: { flow: FlowControls }) {
 }
 
 function ResourceShell({ flow, mobile = false }: { flow: FlowControls; mobile?: boolean }) {
-  const [tab, setTab] = useState<"scene" | "tpr" | "all">("scene");
+  const [tab, setTab] = useState<"plan" | "scene" | "tpr" | "all">("plan");
   return (
     <div className={`resource-shell ${mobile ? "native-mobile" : ""}`}>
       <MobileScroll className="resource-scroll">
         <main className="resource-main">
-          {tab === "scene" ? <SceneLibraryView flow={flow} /> : tab === "tpr" ? <TprLibraryView flow={flow} /> : <ThemeLibraryView flow={flow} />}
+          {tab === "plan" ? <PlanLibraryView flow={flow} /> : tab === "scene" ? <SceneLibraryView flow={flow} /> : tab === "tpr" ? <TprLibraryView flow={flow} /> : <ThemeLibraryView flow={flow} />}
         </main>
       </MobileScroll>
       <nav className="bottom-tab-bar" role="tablist" aria-label="内容分类">
+        <button className={tab === "plan" ? "active" : ""} onClick={() => setTab("plan")} type="button" role="tab" aria-selected={tab === "plan"}>
+          <i>📅</i>
+          <span>打卡计划</span>
+        </button>
         <button className={tab === "scene" ? "active" : ""} onClick={() => setTab("scene")} type="button" role="tab" aria-selected={tab === "scene"}>
           <i className="tab-icon-soft">🌤️</i>
           <span>场景儿歌</span>
@@ -761,6 +848,110 @@ const LOCAL_AUDIO: Record<string, string> = {
   "sce-044": "/sss-rhyme-checkin/audio/sce-044.m4a",
   "sce-045": "/sss-rhyme-checkin/audio/sce-045.m4a",
   "sce-046": "/sss-rhyme-checkin/audio/sce-046.m4a",
+  "plan-01-01": "/sss-rhyme-checkin/audio/plan-01-01.m4a",
+  "plan-01-02": "/sss-rhyme-checkin/audio/plan-01-02.m4a",
+  "plan-01-03": "/sss-rhyme-checkin/audio/plan-01-03.m4a",
+  "plan-02-01": "/sss-rhyme-checkin/audio/plan-02-01.m4a",
+  "plan-02-02": "/sss-rhyme-checkin/audio/plan-02-02.m4a",
+  "plan-02-03": "/sss-rhyme-checkin/audio/plan-02-03.m4a",
+  "plan-03-01a": "/sss-rhyme-checkin/audio/plan-03-01a.m4a",
+  "plan-03-01b": "/sss-rhyme-checkin/audio/plan-03-01b.m4a",
+  "plan-03-01c": "/sss-rhyme-checkin/audio/plan-03-01c.m4a",
+  "plan-03-02": "/sss-rhyme-checkin/audio/plan-03-02.m4a",
+  "plan-03-03": "/sss-rhyme-checkin/audio/plan-03-03.m4a",
+  "plan-04-01": "/sss-rhyme-checkin/audio/plan-04-01.m4a",
+  "plan-04-02": "/sss-rhyme-checkin/audio/plan-04-02.m4a",
+  "plan-04-03": "/sss-rhyme-checkin/audio/plan-04-03.m4a",
+  "plan-07-01": "/sss-rhyme-checkin/audio/plan-07-01.m4a",
+  "plan-07-02": "/sss-rhyme-checkin/audio/plan-07-02.m4a",
+  "plan-07-03": "/sss-rhyme-checkin/audio/plan-07-03.m4a",
+  "plan-08-01": "/sss-rhyme-checkin/audio/plan-08-01.m4a",
+  "plan-08-02": "/sss-rhyme-checkin/audio/plan-08-02.m4a",
+  "plan-08-03": "/sss-rhyme-checkin/audio/plan-08-03.m4a",
+  "plan-09-01": "/sss-rhyme-checkin/audio/plan-09-01.m4a",
+  "plan-09-02": "/sss-rhyme-checkin/audio/plan-09-02.m4a",
+  "plan-09-03": "/sss-rhyme-checkin/audio/plan-09-03.m4a",
+  "plan-10-01": "/sss-rhyme-checkin/audio/plan-10-01.m4a",
+  "plan-10-02": "/sss-rhyme-checkin/audio/plan-10-02.m4a",
+  "plan-10-03": "/sss-rhyme-checkin/audio/plan-10-03.m4a",
+  "plan-13-01": "/sss-rhyme-checkin/audio/plan-13-01.m4a",
+  "plan-13-02": "/sss-rhyme-checkin/audio/plan-13-02.m4a",
+  "plan-13-03": "/sss-rhyme-checkin/audio/plan-13-03.m4a",
+  "plan-14-01": "/sss-rhyme-checkin/audio/plan-14-01.m4a",
+  "plan-14-02": "/sss-rhyme-checkin/audio/plan-14-02.m4a",
+  "plan-14-03": "/sss-rhyme-checkin/audio/plan-14-03.m4a",
+  "plan-15-01": "/sss-rhyme-checkin/audio/plan-15-01.m4a",
+  "plan-15-02a": "/sss-rhyme-checkin/audio/plan-15-02a.m4a",
+  "plan-15-02b": "/sss-rhyme-checkin/audio/plan-15-02b.m4a",
+  "plan-15-02c": "/sss-rhyme-checkin/audio/plan-15-02c.m4a",
+  "plan-15-02d": "/sss-rhyme-checkin/audio/plan-15-02d.m4a",
+  "plan-15-03": "/sss-rhyme-checkin/audio/plan-15-03.m4a",
+  "plan-16-01": "/sss-rhyme-checkin/audio/plan-16-01.m4a",
+  "plan-16-02": "/sss-rhyme-checkin/audio/plan-16-02.m4a",
+  "plan-16-03": "/sss-rhyme-checkin/audio/plan-16-03.m4a",
+  "plan-19-01": "/sss-rhyme-checkin/audio/plan-19-01.m4a",
+  "plan-19-02": "/sss-rhyme-checkin/audio/plan-19-02.m4a",
+  "plan-19-03": "/sss-rhyme-checkin/audio/plan-19-03.m4a",
+  "plan-20-01": "/sss-rhyme-checkin/audio/plan-20-01.m4a",
+  "plan-20-03": "/sss-rhyme-checkin/audio/plan-20-03.m4a",
+  "plan-21-01": "/sss-rhyme-checkin/audio/plan-21-01.m4a",
+  "plan-21-02": "/sss-rhyme-checkin/audio/plan-21-02.m4a",
+  "plan-21-03": "/sss-rhyme-checkin/audio/plan-21-03.m4a",
+  "plan-22-01": "/sss-rhyme-checkin/audio/plan-22-01.m4a",
+  "plan-22-02": "/sss-rhyme-checkin/audio/plan-22-02.m4a",
+  "plan-22-03": "/sss-rhyme-checkin/audio/plan-22-03.m4a",
+  "plan-25-01": "/sss-rhyme-checkin/audio/plan-25-01.m4a",
+  "plan-25-02": "/sss-rhyme-checkin/audio/plan-25-02.m4a",
+  "plan-25-03": "/sss-rhyme-checkin/audio/plan-25-03.m4a",
+  "plan-26-01": "/sss-rhyme-checkin/audio/plan-26-01.m4a",
+  "plan-26-02": "/sss-rhyme-checkin/audio/plan-26-02.m4a",
+  "plan-26-03": "/sss-rhyme-checkin/audio/plan-26-03.m4a",
+  "plan-27-01": "/sss-rhyme-checkin/audio/plan-27-01.m4a",
+  "plan-27-02": "/sss-rhyme-checkin/audio/plan-27-02.m4a",
+  "plan-27-03": "/sss-rhyme-checkin/audio/plan-27-03.m4a",
+  "plan-28-01": "/sss-rhyme-checkin/audio/plan-28-01.m4a",
+  "plan-28-02": "/sss-rhyme-checkin/audio/plan-28-02.m4a",
+  "plan-28-03": "/sss-rhyme-checkin/audio/plan-28-03.m4a",
+  "plan-31-01": "/sss-rhyme-checkin/audio/plan-31-01.m4a",
+  "plan-31-02": "/sss-rhyme-checkin/audio/plan-31-02.m4a",
+  "plan-31-03": "/sss-rhyme-checkin/audio/plan-31-03.m4a",
+  "plan-32-01": "/sss-rhyme-checkin/audio/plan-32-01.m4a",
+  "plan-32-02": "/sss-rhyme-checkin/audio/plan-32-02.m4a",
+  "plan-32-03": "/sss-rhyme-checkin/audio/plan-32-03.m4a",
+  "plan-33-01": "/sss-rhyme-checkin/audio/plan-33-01.m4a",
+  "plan-33-02": "/sss-rhyme-checkin/audio/plan-33-02.m4a",
+  "plan-33-03": "/sss-rhyme-checkin/audio/plan-33-03.m4a",
+  "plan-34-01": "/sss-rhyme-checkin/audio/plan-34-01.m4a",
+  "plan-34-02": "/sss-rhyme-checkin/audio/plan-34-02.m4a",
+  "plan-34-03": "/sss-rhyme-checkin/audio/plan-34-03.m4a",
+  "plan-37-01": "/sss-rhyme-checkin/audio/plan-37-01.m4a",
+  "plan-37-02": "/sss-rhyme-checkin/audio/plan-37-02.m4a",
+  "plan-37-03": "/sss-rhyme-checkin/audio/plan-37-03.m4a",
+  "plan-38-01": "/sss-rhyme-checkin/audio/plan-38-01.m4a",
+  "plan-38-02": "/sss-rhyme-checkin/audio/plan-38-02.m4a",
+  "plan-38-03": "/sss-rhyme-checkin/audio/plan-38-03.m4a",
+  "plan-39-01": "/sss-rhyme-checkin/audio/plan-39-01.m4a",
+  "plan-39-02": "/sss-rhyme-checkin/audio/plan-39-02.m4a",
+  "plan-39-03": "/sss-rhyme-checkin/audio/plan-39-03.m4a",
+  "plan-40-01": "/sss-rhyme-checkin/audio/plan-40-01.m4a",
+  "plan-40-02": "/sss-rhyme-checkin/audio/plan-40-02.m4a",
+  "plan-40-03": "/sss-rhyme-checkin/audio/plan-40-03.m4a",
+  "plan-43-01": "/sss-rhyme-checkin/audio/plan-43-01.m4a",
+  "plan-43-02": "/sss-rhyme-checkin/audio/plan-43-02.m4a",
+  "plan-43-03": "/sss-rhyme-checkin/audio/plan-43-03.m4a",
+  "plan-44-01": "/sss-rhyme-checkin/audio/plan-44-01.m4a",
+  "plan-44-02": "/sss-rhyme-checkin/audio/plan-44-02.m4a",
+  "plan-44-03": "/sss-rhyme-checkin/audio/plan-44-03.m4a",
+  "plan-45-01": "/sss-rhyme-checkin/audio/plan-45-01.m4a",
+  "plan-45-02": "/sss-rhyme-checkin/audio/plan-45-02.m4a",
+  "plan-45-03": "/sss-rhyme-checkin/audio/plan-45-03.m4a",
+  "plan-46-01": "/sss-rhyme-checkin/audio/plan-46-01.m4a",
+  "plan-46-02": "/sss-rhyme-checkin/audio/plan-46-02.m4a",
+  "plan-46-03": "/sss-rhyme-checkin/audio/plan-46-03.m4a",
+  "plan-49-01": "/sss-rhyme-checkin/audio/plan-49-01.m4a",
+  "plan-49-02": "/sss-rhyme-checkin/audio/plan-49-02.m4a",
+  "plan-49-03": "/sss-rhyme-checkin/audio/plan-49-03.m4a",
+  "plan-50-01": "/sss-rhyme-checkin/audio/plan-50-01.m4a",
 };
 
 

@@ -346,3 +346,13 @@ button { -webkit-tap-highlight-color: transparent; }
 .play-all-now { color: rgba(255,255,255,.92); font-size: 10px; line-height: 1.4; }
 .tpr-hero .play-all-now { color: #d8fff0; }
 .scene-hero .play-all-now { color: #d8fff0; }
+
+/* Review week (empty) styling */
+.theme-accordion.review-week { opacity: .55; }
+.theme-accordion.review-week .theme-accordion-head { cursor: default; }
+.theme-accordion.review-week .theme-symbol { background: #f0f1f5; }
+
+/* Bottom tab bar 4 columns */
+.bottom-tab-bar { grid-template-columns: repeat(4,1fr) !important; }
+.bottom-tab-bar button { font-size: 9px; }
+.bottom-tab-bar button i { font-size: 18px; }
