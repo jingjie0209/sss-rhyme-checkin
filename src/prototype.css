@@ -339,7 +339,7 @@ button { -webkit-tap-highlight-color: transparent; }
 .local-audio::-webkit-media-controls { overflow: hidden; }
 
 /* Play-all button + now playing line */
-.play-all-wrap { margin-top: 12px; display: grid; gap: 6px; }
+.play-all-wrap { margin-top: 12px; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
 .play-all-button { display: inline-flex; align-items: center; gap: 6px; padding: 10px 16px; border: 0; border-radius: 999px; background: #fff; color: #554dca; font-size: 12px; font-weight: 900; box-shadow: 0 6px 16px rgba(31,38,81,.16); transition: background .18s, color .18s, transform .12s; }
 .play-all-button.on { background: #23264a; color: #fff; box-shadow: 0 6px 16px rgba(35,38,74,.3); }
 .play-all-button:active { transform: scale(.97); }
