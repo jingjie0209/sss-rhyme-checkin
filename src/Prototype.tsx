@@ -265,6 +265,34 @@ function PlanLibraryView({ flow }: { flow: FlowControls }) {
 
   const flatTracks: PlayAllTrack[] = weeks.flatMap(w => w.songs.map(s => ({ id: s.id, title: s.title })));
   const player = usePlayAll(flatTracks, LOCAL_AUDIO);
+  const [weekPlayerIndex, setWeekPlayerIndex] = useState<number | null>(null);
+  const weekAudioRef = useRef<HTMLAudioElement | null>(null);
+  const weekPlayerPlaying = weekPlayerIndex !== null;
+  const currentWeekSong = weekPlayerIndex !== null ? weeks[weekPlayerIndex]?.songs[0] : null;
+
+  const startWeekPlay = (weekIdx: number) => {
+    const week = weeks[weekIdx];
+    if (!week?.songs.length) return;
+    setWeekPlayerIndex(weekIdx);
+  };
+  const stopWeekPlay = () => {
+    weekAudioRef.current?.pause();
+    setWeekPlayerIndex(null);
+  };
+
+  useEffect(() => {
+    if (weekPlayerIndex === null) return;
+    const week = weeks[weekPlayerIndex];
+    if (!week?.songs.length) return;
+    let el = weekAudioRef.current;
+    if (!el) { el = new Audio(); weekAudioRef.current = el; }
+    const track = week.songs[0];
+    const src = LOCAL_AUDIO[track.id];
+    if (!src) return;
+    el.src = src;
+    el.play().catch(() => {});
+  }, [weekPlayerIndex]);
+
   const totalSongs = weeks.reduce((sum, w) => sum + w.songs.length, 0);
   const done = weeks.reduce((sum, w) => sum + w.songs.filter(s => checked.has(s.id)).length, 0);
   const totalPercent = totalSongs ? Math.min(100, done / totalSongs * 100) : 0;
@@ -305,6 +333,9 @@ function PlanLibraryView({ flow }: { flow: FlowControls }) {
               </button>
               {isOpen && !isReview ? (
                 <div className="theme-song-list">
+                  <button className="week-play-all" onClick={() => { if (weekPlayerPlaying) stopWeekPlay(); else startWeekPlay(weeks.indexOf(week)); }} type="button">
+                    {weekPlayerPlaying ? '⏹ 停止播放本周' : '▶ 播放本周全部'}
+                  </button>
                   {week.songs.map((song) => {
                     const doneSong = checked.has(song.id);
                     return (

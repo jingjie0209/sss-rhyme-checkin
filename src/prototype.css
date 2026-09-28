@@ -356,3 +356,7 @@ button { -webkit-tap-highlight-color: transparent; }
 .bottom-tab-bar { grid-template-columns: repeat(4,1fr) !important; }
 .bottom-tab-bar button { font-size: 9px; }
 .bottom-tab-bar button i { font-size: 18px; }
+
+/* Per-week play all button */
+.week-play-all { display: flex; align-items: center; justify-content: center; gap: 6px; width: calc(100% - 26px); margin: 4px 13px 8px; padding: 10px; border: 0; border-radius: 12px; background: #f0efff; color: #5f56cd; font-size: 12px; font-weight: 800; transition: background .18s, color .18s; }
+.week-play-all:active { transform: scale(.98); }
