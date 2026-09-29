@@ -265,33 +265,40 @@ function PlanLibraryView({ flow }: { flow: FlowControls }) {
 
   const flatTracks: PlayAllTrack[] = weeks.flatMap(w => w.songs.map(s => ({ id: s.id, title: s.title })));
   const player = usePlayAll(flatTracks, LOCAL_AUDIO);
-  const [weekPlayerIndex, setWeekPlayerIndex] = useState<number | null>(null);
+  const [weekPlayer, setWeekPlayer] = useState<{ weekIdx: number; songIdx: number } | null>(null);
   const weekAudioRef = useRef<HTMLAudioElement | null>(null);
-  const weekPlayerPlaying = weekPlayerIndex !== null;
-  const currentWeekSong = weekPlayerIndex !== null ? weeks[weekPlayerIndex]?.songs[0] : null;
+  const weekPlayerPlaying = weekPlayer !== null;
 
   const startWeekPlay = (weekIdx: number) => {
-    const week = weeks[weekIdx];
-    if (!week?.songs.length) return;
-    setWeekPlayerIndex(weekIdx);
+    setWeekPlayer({ weekIdx, songIdx: 0 });
   };
   const stopWeekPlay = () => {
     weekAudioRef.current?.pause();
-    setWeekPlayerIndex(null);
+    setWeekPlayer(null);
   };
 
   useEffect(() => {
-    if (weekPlayerIndex === null) return;
-    const week = weeks[weekPlayerIndex];
+    if (!weekPlayer) return;
+    const week = weeks[weekPlayer.weekIdx];
     if (!week?.songs.length) return;
+    const track = week.songs[weekPlayer.songIdx];
+    if (!track) { stopWeekPlay(); return; }
+    const src = LOCAL_AUDIO[track.id];
+    if (!src) { stopWeekPlay(); return; }
     let el = weekAudioRef.current;
     if (!el) { el = new Audio(); weekAudioRef.current = el; }
-    const track = week.songs[0];
-    const src = LOCAL_AUDIO[track.id];
-    if (!src) return;
     el.src = src;
     el.play().catch(() => {});
-  }, [weekPlayerIndex]);
+    const onEnded = () => {
+      if (weekPlayer.songIdx + 1 < week.songs.length) {
+        setWeekPlayer({ weekIdx: weekPlayer.weekIdx, songIdx: weekPlayer.songIdx + 1 });
+      } else {
+        stopWeekPlay();
+      }
+    };
+    el.addEventListener("ended", onEnded);
+    return () => el.removeEventListener("ended", onEnded);
+  }, [weekPlayer]);
 
   const totalSongs = weeks.reduce((sum, w) => sum + w.songs.length, 0);
   const done = weeks.reduce((sum, w) => sum + w.songs.filter(s => checked.has(s.id)).length, 0);
