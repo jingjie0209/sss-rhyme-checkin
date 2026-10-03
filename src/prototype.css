@@ -360,3 +360,13 @@ button { -webkit-tap-highlight-color: transparent; }
 /* Per-week play all button */
 .week-play-all { display: flex; align-items: center; justify-content: center; gap: 6px; width: calc(100% - 26px); margin: 4px 13px 8px; padding: 10px; border: 0; border-radius: 12px; background: #f0efff; color: #5f56cd; font-size: 12px; font-weight: 800; transition: background .18s, color .18s; }
 .week-play-all:active { transform: scale(.98); }
+
+/* Global player bar above bottom tab */
+.global-player-bar { position: absolute; z-index: 55; left: 0; right: 0; bottom: 56px; display: flex; align-items: center; gap: 8px; padding: 8px 16px; background: #fff; border-top: 1px solid #eceef5; box-shadow: 0 -4px 12px rgba(31,38,81,.06); }
+.global-player-icon { flex: 0 0 auto; color: #655ddd; font-size: 16px; font-weight: 900; animation: playerPulse 1.2s ease-in-out infinite; }
+.global-player-title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #23264a; font-size: 12px; font-weight: 800; }
+.global-player-source { flex: 0 0 auto; color: #8e93a8; font-size: 9px; }
+@keyframes playerPulse { 0%, 100% { opacity: 1; } 50% { opacity: .4; } }
+
+/* Adjust bottom tab bar position when player bar is visible (we can't easily detect, just increase bottom offset) */
+.bottom-tab-bar { bottom: 0; }

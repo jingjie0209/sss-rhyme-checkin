@@ -6,6 +6,7 @@ import { TPR_SONGS, type TprSong } from "./data/tprSongs";
 import { SCENE_GROUPS, type SceneSong, type SceneGroup } from "./data/sceneData";
 import { PLAN_WEEKS } from "./data/planData";
 import { usePlayAll, type PlayAllTrack } from "./playAll";
+import { audioManagerStop, audioManagerGetInfo } from "./audioManager";
 import { SONG_PREVIEWS } from "./data/previewData";
 
 type SongWithTheme = ResourceSong & { themeId: string; themeName: string; themeLabel: string };
@@ -575,6 +576,29 @@ function ThemeLibraryView({ flow }: { flow: FlowControls }) {
   );
 }
 
+
+function GlobalPlayerBar() {
+  const [info, setInfo] = useState<{ playing: boolean; title: string; source: string }>({ playing: false, title: "", source: "" });
+  useEffect(() => {
+    const update = () => {
+      const i = audioManagerGetInfo();
+      setInfo({ playing: i.playing, title: i.title, source: i.source });
+    };
+    // Poll every 500ms (simple approach).
+    const interval = setInterval(update, 500);
+    update();
+    return () => clearInterval(interval);
+  }, []);
+  if (!info.playing || !info.title) return null;
+  return (
+    <div className="global-player-bar">
+      <span className="global-player-icon">♫</span>
+      <span className="global-player-title">{info.title}</span>
+      <span className="global-player-source">{info.source}</span>
+    </div>
+  );
+}
+
 function ResourceShell({ flow, mobile = false }: { flow: FlowControls; mobile?: boolean }) {
   const [tab, setTab] = useState<"plan" | "scene" | "tpr" | "all">("plan");
   return (
@@ -584,6 +608,7 @@ function ResourceShell({ flow, mobile = false }: { flow: FlowControls; mobile?: 
           {tab === "plan" ? <PlanLibraryView flow={flow} /> : tab === "scene" ? <SceneLibraryView flow={flow} /> : tab === "tpr" ? <TprLibraryView flow={flow} /> : <ThemeLibraryView flow={flow} />}
         </main>
       </MobileScroll>
+      <GlobalPlayerBar />
       <nav className="bottom-tab-bar" role="tablist" aria-label="内容分类">
         <button className={tab === "plan" ? "active" : ""} onClick={() => setTab("plan")} type="button" role="tab" aria-selected={tab === "plan"}>
           <i>📅</i>
@@ -1054,7 +1079,8 @@ function MediaContactCard({ song }: { song: SongWithTheme }) {
       </header>
       {hosted ? (
         <>
-          <audio ref={audioRef} controls playsInline preload="metadata" className="local-audio">
+          <audio ref={audioRef} controls playsInline preload="metadata" className="local-audio"
+            onPlay={() => audioManagerStop()}>
             <source src={hosted} type="audio/mp4" />
             您的浏览器不支持音频播放。
           </audio>
