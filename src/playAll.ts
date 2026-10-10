@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { audioManagerSetPlaylist, audioManagerStop, audioManagerSubscribe } from "./audioManager";
+import type { PlayAllTrack } from "./playAllTypes";
 
-export type PlayAllTrack = { id: string; title: string };
+export type { PlayAllTrack } from "./playAllTypes";
 
 export function usePlayAll(tracks: PlayAllTrack[], audioMap: Record<string, string>) {
-  const audioRef = useRef<HTMLAudioElement | null>(null);
   const [index, setIndex] = useState<number | null>(null);
   const [playing, setPlaying] = useState(false);
 
@@ -11,54 +12,35 @@ export function usePlayAll(tracks: PlayAllTrack[], audioMap: Record<string, stri
   const current = index !== null ? available[index] : null;
 
   useEffect(() => {
-    if (index === null) return;
-    const track = available[index];
-    if (!track) {
-      stop();
-      return;
-    }
-    const src = audioMap[track.id];
-    if (!src) return;
-    let el = audioRef.current;
-    if (!el) {
-      el = new Audio();
-      audioRef.current = el;
-    }
-    if (!el.src.endsWith(src)) {
-      el.src = src;
-    }
-    el.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
-  }, [index]);
+    return audioManagerSubscribe((info) => {
+      if (!info.source) return;
+      const nextIndex = available.findIndex((t) => t.id === info.songId);
+      setIndex(nextIndex >= 0 ? nextIndex : null);
+      setPlaying(info.playing);
+    });
+  }, [available]);
 
-  useEffect(() => {
-    const el = audioRef.current;
-    if (!el) return;
-    const onEnded = () => {
-      if (index === null) return;
-      if (index + 1 < available.length) setIndex(index + 1);
-      else { setPlaying(false); setIndex(null); }
-    };
-    el.addEventListener("ended", onEnded);
-    return () => el.removeEventListener("ended", onEnded);
-  }, [index, available.length]);
-
-  const start = () => {
+  const start = useCallback(() => {
     if (!available.length) return;
+    audioManagerSetPlaylist(
+      available.map((t) => ({ songId: t.id, src: audioMap[t.id], title: t.title, source: "连续播放" })),
+      0,
+      true,
+    );
     setIndex(0);
-  };
+    setPlaying(true);
+  }, [available, audioMap]);
 
-  const stop = () => {
-    audioRef.current?.pause();
-    setPlaying(false);
+  const stop = useCallback(() => {
+    audioManagerStop();
     setIndex(null);
-  };
+    setPlaying(false);
+  }, []);
 
-  const toggle = () => {
+  const toggle = useCallback(() => {
     if (playing || index !== null) stop();
     else start();
-  };
-
-  useEffect(() => () => { audioRef.current?.pause(); }, []);
+  }, [index, playing, start, stop]);
 
   return { available, current, playing, index, start, stop, toggle };
 }

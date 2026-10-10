@@ -6,7 +6,16 @@ import { TPR_SONGS, type TprSong } from "./data/tprSongs";
 import { SCENE_GROUPS, type SceneSong, type SceneGroup } from "./data/sceneData";
 import { PLAN_WEEKS } from "./data/planData";
 import { usePlayAll, type PlayAllTrack } from "./playAll";
-import { audioManagerStop, audioManagerGetInfo } from "./audioManager";
+import {
+  audioManagerStop,
+  audioManagerGetInfo,
+  audioManagerNext,
+  audioManagerPrevious,
+  audioManagerPause,
+  audioManagerResume,
+  audioManagerSubscribe,
+  audioManagerSetPlaylist,
+} from "./audioManager";
 import { SONG_PREVIEWS } from "./data/previewData";
 
 type SongWithTheme = ResourceSong & { themeId: string; themeName: string; themeLabel: string };
@@ -266,39 +275,31 @@ function PlanLibraryView({ flow }: { flow: FlowControls }) {
 
   const flatTracks: PlayAllTrack[] = weeks.flatMap(w => w.songs.map(s => ({ id: s.id, title: s.title })));
   const player = usePlayAll(flatTracks, LOCAL_AUDIO);
-  const [weekPlayer, setWeekPlayer] = useState<{ weekIdx: number; songIdx: number } | null>(null);
-  const weekAudioRef = useRef<HTMLAudioElement | null>(null);
+  const [weekPlayer, setWeekPlayer] = useState<number | null>(null);
   const weekPlayerPlaying = weekPlayer !== null;
 
   const startWeekPlay = (weekIdx: number) => {
-    setWeekPlayer({ weekIdx, songIdx: 0 });
+    const week = weeks[weekIdx];
+    if (!week?.songs.length) return;
+    audioManagerSetPlaylist(
+      week.songs
+        .filter((song) => LOCAL_AUDIO[song.id])
+        .map((song) => ({ songId: song.id, src: LOCAL_AUDIO[song.id], title: song.title, source: `第${week.week}周` })),
+      0,
+      true,
+    );
+    setWeekPlayer(weekIdx);
   };
   const stopWeekPlay = () => {
-    weekAudioRef.current?.pause();
+    audioManagerStop();
     setWeekPlayer(null);
   };
 
   useEffect(() => {
-    if (!weekPlayer) return;
-    const week = weeks[weekPlayer.weekIdx];
-    if (!week?.songs.length) return;
-    const track = week.songs[weekPlayer.songIdx];
-    if (!track) { stopWeekPlay(); return; }
-    const src = LOCAL_AUDIO[track.id];
-    if (!src) { stopWeekPlay(); return; }
-    let el = weekAudioRef.current;
-    if (!el) { el = new Audio(); weekAudioRef.current = el; }
-    el.src = src;
-    el.play().catch(() => {});
-    const onEnded = () => {
-      if (weekPlayer.songIdx + 1 < week.songs.length) {
-        setWeekPlayer({ weekIdx: weekPlayer.weekIdx, songIdx: weekPlayer.songIdx + 1 });
-      } else {
-        stopWeekPlay();
-      }
-    };
-    el.addEventListener("ended", onEnded);
-    return () => el.removeEventListener("ended", onEnded);
+    if (weekPlayer === null) return;
+    return audioManagerSubscribe((info) => {
+      if (!info.playing && info.index < 0) setWeekPlayer(null);
+    });
   }, [weekPlayer]);
 
   const totalSongs = weeks.reduce((sum, w) => sum + w.songs.length, 0);
@@ -578,26 +579,39 @@ function ThemeLibraryView({ flow }: { flow: FlowControls }) {
 
 
 function GlobalPlayerBar() {
-  const [info, setInfo] = useState<{ playing: boolean; title: string; source: string }>({ playing: false, title: "", source: "" });
+  const [state, setState] = useState(() => {
+    const i = audioManagerGetInfo();
+    return { playing: i.playing, title: i.title, source: i.source, index: i.index, total: i.total };
+  });
+
   useEffect(() => {
-    const update = () => {
-      const i = audioManagerGetInfo();
-      setInfo({ playing: i.playing, title: i.title, source: i.source });
-    };
-    // Poll every 500ms (simple approach).
-    const interval = setInterval(update, 500);
-    update();
-    return () => clearInterval(interval);
+    const unsubscribe = audioManagerSubscribe((i) => {
+      setState({ playing: i.playing, title: i.title, source: i.source, index: i.index, total: i.total });
+    });
+    return unsubscribe;
   }, []);
-  if (!info.playing || !info.title) return null;
+
+  if (state.index < 0 || !state.title) return null;
   return (
     <div className="global-player-bar">
-      <span className="global-player-icon">♫</span>
-      <span className="global-player-title">{info.title}</span>
-      <span className="global-player-source">{info.source}</span>
+      <div className="global-player-main">
+        <span className="global-player-icon">♫</span>
+        <div className="global-player-copy">
+          <b>{state.title}</b>
+          <small>{state.source} · {state.index + 1}/{state.total}</small>
+        </div>
+      </div>
+      <div className="global-player-controls">
+        <button type="button" onClick={audioManagerPrevious} aria-label="上一首">‹</button>
+        <button type="button" onClick={() => (state.playing ? audioManagerPause() : audioManagerResume())} aria-label={state.playing ? "暂停" : "播放"}>
+          {state.playing ? "⏸" : "▶"}
+        </button>
+        <button type="button" onClick={audioManagerNext} aria-label="下一首">›</button>
+      </div>
     </div>
   );
 }
+
 
 function ResourceShell({ flow, mobile = false }: { flow: FlowControls; mobile?: boolean }) {
   const [tab, setTab] = useState<"plan" | "scene" | "tpr" | "all">("plan");
