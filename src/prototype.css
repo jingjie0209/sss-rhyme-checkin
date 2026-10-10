@@ -381,3 +381,39 @@ button { -webkit-tap-highlight-color: transparent; }
 .global-player-controls button { display: grid; width: 30px; height: 30px; place-items: center; border: 0; border-radius: 50%; background: #f2f2ff; color: #5f56cd; font-size: 14px; font-weight: 800; }
 .global-player-controls button:active { transform: scale(.94); }
 .global-player-controls button:nth-child(2) { background: #655ddd; color: #fff; }
+
+/* 顶部子分类 Tab（全部 / 打卡计划 / 场景儿歌 / TPR儿歌） */
+.sub-tab-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 0 0 12px; padding: 4px; border-radius: 14px; background: #eceef8; }
+.sub-tab-bar button { padding: 8px 4px; border: 0; border-radius: 11px; background: transparent; color: #7b809b; font-size: 11px; font-weight: 800; white-space: nowrap; transition: background .18s, color .18s, box-shadow .18s; }
+.sub-tab-bar button.active { background: #fff; color: #554dca; box-shadow: 0 4px 10px rgba(31,38,81,.12); }
+.sub-tab-bar button:active { transform: scale(.97); }
+
+/* 底部主导航：两个 Tab */
+.bottom-tab-bar { grid-template-columns: repeat(2, 1fr) !important; }
+
+/* 儿歌每日报告 */
+.report-scroll { position: absolute; inset: 0; }
+.report-main { min-height: 100%; padding: 18px 16px 110px; background: #fff; }
+.report-header { margin-bottom: 6px; }
+.report-date-nav { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.report-date-nav h1 { flex: 1; margin: 0; color: #23264a; font-size: 17px; font-weight: 800; text-align: center; }
+.report-date-nav button { display: grid; width: 32px; height: 32px; place-items: center; border: 0; border-radius: 50%; background: #f2f3f9; color: #5f56cd; font-size: 16px; font-weight: 800; }
+.report-date-nav button:disabled { color: #c9ccd9; }
+.report-summary { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 18px 0 16px; border-bottom: 8px solid #f5f6fa; }
+.report-stat { display: grid; justify-items: center; gap: 6px; }
+.report-stat span { color: #8b90a6; font-size: 11px; }
+.report-stat b { color: #f5c518; font-size: 38px; font-weight: 800; line-height: 1; }
+.report-list { margin: 0; padding: 0; list-style: none; }
+.report-row { display: flex; align-items: center; gap: 10px; padding: 12px 2px; border-bottom: 1px solid #f0f1f6; }
+.report-time { flex: 0 0 auto; width: 42px; color: #6b7089; font-size: 12px; }
+.report-thumb { position: relative; flex: 0 0 auto; display: grid; width: 44px; height: 44px; place-items: center; overflow: hidden; border-radius: 12px; background: #fdf0d5; }
+.report-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.report-thumb i { color: #e0a83a; font-size: 18px; font-style: normal; }
+.report-thumb-play { position: absolute; display: grid; width: 20px; height: 20px; place-items: center; border-radius: 50%; background: rgba(35,38,74,.55); color: #fff; font-size: 9px; }
+.report-copy { flex: 1; min-width: 0; display: grid; gap: 5px; }
+.report-copy b { overflow: hidden; color: #23264a; font-size: 13px; font-weight: 700; line-height: 1.35; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.report-copy small { display: flex; align-items: center; gap: 10px; color: #a2a6b8; font-size: 10px; }
+.report-tag { color: #b0b4c4; }
+.report-empty { display: grid; gap: 6px; padding: 60px 20px; text-align: center; }
+.report-empty b { color: #4a4f6b; font-size: 14px; }
+.report-empty small { color: #969ab0; font-size: 11px; line-height: 1.6; }
