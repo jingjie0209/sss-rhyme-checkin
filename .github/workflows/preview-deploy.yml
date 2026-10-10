@@ -1,4 +1,4 @@
-name: Deploy Preview
+name: Deploy Public Preview
 
 on:
   push:
@@ -11,33 +11,58 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages-preview
-  cancel-in-progress: true
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-      - run: npm ci
-      - run: npm run build:github
+
+      - name: Install preview dependencies
+        run: npm ci
+
+      - name: Build preview bundle
+        run: npx vite build --mode github --base /sss-rhyme-checkin/preview/ --outDir dist/preview --emptyOutDir
+
+      - name: Checkout production main
+        run: git worktree add ../production origin/main
+
+      - name: Install production dependencies
+        run: npm --prefix ../production ci
+
+      - name: Build production root
+        run: npm --prefix ../production run build:github
+
+      - name: Assemble composite Pages artifact
+        run: |
+          mkdir -p site
+          cp -a ../production/dist/client/. site/
+          mkdir -p site/preview
+          cp -a dist/preview/. site/preview/
+          rm -rf site/preview/audio site/preview/previews
+
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/client
-          name: github-pages-preview
+          path: site
+          name: github-pages
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
     environment:
-      name: github-pages-preview
+      name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
         with:
-          artifact_name: github-pages-preview
+          artifact_name: github-pages
