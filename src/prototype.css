@@ -353,7 +353,6 @@ button { -webkit-tap-highlight-color: transparent; }
 .theme-accordion.review-week .theme-symbol { background: #f0f1f5; }
 
 /* Bottom tab bar 4 columns */
-.bottom-tab-bar { grid-template-columns: repeat(4,1fr) !important; }
 .bottom-tab-bar button { font-size: 9px; }
 .bottom-tab-bar button i { font-size: 18px; }
 
