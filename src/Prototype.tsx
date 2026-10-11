@@ -6,8 +6,24 @@ import { TPR_SONGS, type TprSong } from "./data/tprSongs";
 import { SCENE_GROUPS, type SceneSong, type SceneGroup } from "./data/sceneData";
 import { PLAN_WEEKS } from "./data/planData";
 import { usePlayAll, type PlayAllTrack } from "./playAll";
-import { audioManagerStop, audioManagerGetInfo } from "./audioManager";
+import {
+  audioManagerStop,
+  audioManagerGetInfo,
+  audioManagerNext,
+  audioManagerPrevious,
+  audioManagerPause,
+  audioManagerResume,
+  audioManagerSubscribe,
+  audioManagerSetPlaylist,
+} from "./audioManager";
 import { SONG_PREVIEWS } from "./data/previewData";
+import {
+  entriesForDate,
+  localDateKey,
+  startPlaySession,
+  subscribePlayHistory,
+  type PlayEntry,
+} from "./playHistory";
 
 type SongWithTheme = ResourceSong & { themeId: string; themeName: string; themeLabel: string };
 
@@ -250,7 +266,7 @@ function PlayAllButton({ player }: { player: ReturnType<typeof usePlayAll> }) {
 }
 
 
-function PlanLibraryView({ flow }: { flow: FlowControls }) {
+function PlanLibraryView({ flow, subTabs }: { flow: FlowControls; subTabs?: ReactNode }) {
   const { checked } = useCheckins();
   const [expanded, setExpanded] = useState<number | null>(null);
   const weeks = PLAN_WEEKS;
@@ -266,39 +282,31 @@ function PlanLibraryView({ flow }: { flow: FlowControls }) {
 
   const flatTracks: PlayAllTrack[] = weeks.flatMap(w => w.songs.map(s => ({ id: s.id, title: s.title })));
   const player = usePlayAll(flatTracks, LOCAL_AUDIO);
-  const [weekPlayer, setWeekPlayer] = useState<{ weekIdx: number; songIdx: number } | null>(null);
-  const weekAudioRef = useRef<HTMLAudioElement | null>(null);
+  const [weekPlayer, setWeekPlayer] = useState<number | null>(null);
   const weekPlayerPlaying = weekPlayer !== null;
 
   const startWeekPlay = (weekIdx: number) => {
-    setWeekPlayer({ weekIdx, songIdx: 0 });
+    const week = weeks[weekIdx];
+    if (!week?.songs.length) return;
+    audioManagerSetPlaylist(
+      week.songs
+        .filter((song) => LOCAL_AUDIO[song.id])
+        .map((song) => ({ songId: song.id, src: LOCAL_AUDIO[song.id], title: song.title, source: `第${week.week}周` })),
+      0,
+      true,
+    );
+    setWeekPlayer(weekIdx);
   };
   const stopWeekPlay = () => {
-    weekAudioRef.current?.pause();
+    audioManagerStop();
     setWeekPlayer(null);
   };
 
   useEffect(() => {
-    if (!weekPlayer) return;
-    const week = weeks[weekPlayer.weekIdx];
-    if (!week?.songs.length) return;
-    const track = week.songs[weekPlayer.songIdx];
-    if (!track) { stopWeekPlay(); return; }
-    const src = LOCAL_AUDIO[track.id];
-    if (!src) { stopWeekPlay(); return; }
-    let el = weekAudioRef.current;
-    if (!el) { el = new Audio(); weekAudioRef.current = el; }
-    el.src = src;
-    el.play().catch(() => {});
-    const onEnded = () => {
-      if (weekPlayer.songIdx + 1 < week.songs.length) {
-        setWeekPlayer({ weekIdx: weekPlayer.weekIdx, songIdx: weekPlayer.songIdx + 1 });
-      } else {
-        stopWeekPlay();
-      }
-    };
-    el.addEventListener("ended", onEnded);
-    return () => el.removeEventListener("ended", onEnded);
+    if (weekPlayer === null) return;
+    return audioManagerSubscribe((info) => {
+      if (!info.playing && info.index < 0) setWeekPlayer(null);
+    });
   }, [weekPlayer]);
 
   const totalSongs = weeks.reduce((sum, w) => sum + w.songs.length, 0);
@@ -309,6 +317,7 @@ function PlanLibraryView({ flow }: { flow: FlowControls }) {
     <>
       <div className="resource-sticky-top">
         <AppHeader />
+        {subTabs}
         <section className="theme-hero">
           <div>
             <span>50 周打卡计划</span>
@@ -369,7 +378,7 @@ function PlanLibraryView({ flow }: { flow: FlowControls }) {
   );
 }
 
-function SceneLibraryView({ flow }: { flow: FlowControls }) {
+function SceneLibraryView({ flow, subTabs }: { flow: FlowControls; subTabs?: ReactNode }) {
   const { checked } = useCheckins();
   const [expanded, setExpanded] = useState<string | null>(null);
   const groups = SCENE_GROUPS;
@@ -399,6 +408,7 @@ function SceneLibraryView({ flow }: { flow: FlowControls }) {
     <>
       <div className="resource-sticky-top">
         <AppHeader />
+        {subTabs}
         <section className="theme-hero">
           <div>
             <span>场景儿歌 · 一整天</span>
@@ -456,7 +466,7 @@ function SceneLibraryView({ flow }: { flow: FlowControls }) {
   );
 }
 
-function TprLibraryView({ flow }: { flow: FlowControls }) {
+function TprLibraryView({ flow, subTabs }: { flow: FlowControls; subTabs?: ReactNode }) {
   const { checked } = useCheckins();
   const songs = TPR_SONGS;
   const flatTracks: PlayAllTrack[] = songs.map(s => ({ id: s.id, title: s.title }));
@@ -484,6 +494,7 @@ function TprLibraryView({ flow }: { flow: FlowControls }) {
     <>
       <div className="resource-sticky-top">
         <AppHeader />
+        {subTabs}
         <section className="theme-hero tpr-hero">
           <div>
             <strong>TPR {songs.length} 首儿歌</strong>
@@ -515,7 +526,7 @@ function TprLibraryView({ flow }: { flow: FlowControls }) {
   );
 }
 
-function ThemeLibraryView({ flow }: { flow: FlowControls }) {
+function ThemeLibraryView({ flow, subTabs }: { flow: FlowControls; subTabs?: ReactNode }) {
   const { checked } = useCheckins();
   const [expandedTheme, setExpandedTheme] = useState<string | null>(null);
 
@@ -533,6 +544,7 @@ function ThemeLibraryView({ flow }: { flow: FlowControls }) {
     <>
       <div className="resource-sticky-top">
         <AppHeader />
+        {subTabs}
         <section className="theme-hero">
           <div>
             <span>按主题循序打卡</span>
@@ -578,58 +590,212 @@ function ThemeLibraryView({ flow }: { flow: FlowControls }) {
 
 
 function GlobalPlayerBar() {
-  const [info, setInfo] = useState<{ playing: boolean; title: string; source: string }>({ playing: false, title: "", source: "" });
+  const [state, setState] = useState(() => {
+    const i = audioManagerGetInfo();
+    return { playing: i.playing, title: i.title, source: i.source, index: i.index, total: i.total };
+  });
+
   useEffect(() => {
-    const update = () => {
-      const i = audioManagerGetInfo();
-      setInfo({ playing: i.playing, title: i.title, source: i.source });
-    };
-    // Poll every 500ms (simple approach).
-    const interval = setInterval(update, 500);
-    update();
-    return () => clearInterval(interval);
+    const unsubscribe = audioManagerSubscribe((i) => {
+      setState({ playing: i.playing, title: i.title, source: i.source, index: i.index, total: i.total });
+    });
+    return unsubscribe;
   }, []);
-  if (!info.playing || !info.title) return null;
+
+  if (state.index < 0 || !state.title) return null;
   return (
     <div className="global-player-bar">
-      <span className="global-player-icon">♫</span>
-      <span className="global-player-title">{info.title}</span>
-      <span className="global-player-source">{info.source}</span>
+      <div className="global-player-main">
+        <span className="global-player-icon">♫</span>
+        <div className="global-player-copy">
+          <b>{state.title}</b>
+          <small>{state.source} · {state.index + 1}/{state.total}</small>
+        </div>
+      </div>
+      <div className="global-player-controls">
+        <button type="button" onClick={audioManagerPrevious} aria-label="上一首">‹</button>
+        <button type="button" onClick={() => (state.playing ? audioManagerPause() : audioManagerResume())} aria-label={state.playing ? "暂停" : "播放"}>
+          {state.playing ? "⏸" : "▶"}
+        </button>
+        <button type="button" onClick={audioManagerNext} aria-label="下一首">›</button>
+      </div>
     </div>
   );
 }
 
+
+const SUB_TABS = [
+  { key: "all", label: "全部" },
+  { key: "plan", label: "打卡计划" },
+  { key: "scene", label: "场景儿歌" },
+  { key: "tpr", label: "TPR儿歌" },
+] as const;
+
+type SubTabKey = (typeof SUB_TABS)[number]["key"];
+
+function SubTabBar({ value, onChange }: { value: SubTabKey; onChange: (key: SubTabKey) => void }) {
+  return (
+    <nav className="sub-tab-bar" role="tablist" aria-label="儿歌分类">
+      {SUB_TABS.map((item) => (
+        <button
+          key={item.key}
+          className={value === item.key ? "active" : ""}
+          onClick={() => onChange(item.key)}
+          type="button"
+          role="tab"
+          aria-selected={value === item.key}
+        >
+          {item.label}
+        </button>
+      ))}
+    </nav>
+  );
+}
+
+function formatClock(ts: number) {
+  const d = new Date(ts);
+  return `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
+}
+
+function formatDuration(seconds: number) {
+  const total = Math.max(0, Math.round(seconds));
+  const m = Math.floor(total / 60);
+  const sec = total % 60;
+  return `${String(m).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
+}
+
+function shiftDateKey(dateKey: string, deltaDays: number) {
+  const [y, m, d] = dateKey.split("-").map(Number);
+  const date = new Date(y, (m || 1) - 1, d || 1);
+  date.setDate(date.getDate() + deltaDays);
+  return localDateKey(date.getTime());
+}
+
+function reportTitle(dateKey: string) {
+  const [, m, d] = dateKey.split("-");
+  return `${Number(m)}-${Number(d)}号收听详情`;
+}
+
+function DailyReportView({ flow }: { flow: FlowControls }) {
+  void flow;
+  const today = localDateKey(Date.now());
+  const [dateKey, setDateKey] = useState(today);
+  const [entries, setEntries] = useState<PlayEntry[]>(() => entriesForDate(today));
+
+  useEffect(() => {
+    const update = () => setEntries(entriesForDate(dateKey));
+    update();
+    return subscribePlayHistory(update);
+  }, [dateKey]);
+
+  const ordered = [...entries].sort((a, b) => b.startedAt - a.startedAt);
+  const totalSeconds = entries.reduce((sum, item) => sum + item.duration, 0);
+  const totalMinutes = Math.round(totalSeconds / 60);
+  const playCount = entries.length;
+  const isToday = dateKey === today;
+
+  return (
+    <MobileScroll className="report-scroll">
+      <main className="report-main">
+        <header className="report-header">
+          <div className="report-date-nav">
+            <button type="button" onClick={() => setDateKey(shiftDateKey(dateKey, -1))} aria-label="前一天">‹</button>
+            <h1>{reportTitle(dateKey)}</h1>
+            <button
+              type="button"
+              onClick={() => setDateKey(shiftDateKey(dateKey, 1))}
+              disabled={isToday}
+              aria-label="后一天"
+            >
+              ›
+            </button>
+          </div>
+        </header>
+
+        <section className="report-summary">
+          <div className="report-stat">
+            <span>总听时长(分钟)</span>
+            <b>{totalMinutes}</b>
+          </div>
+          <div className="report-stat">
+            <span>播放声音数(遍)</span>
+            <b>{playCount}</b>
+          </div>
+        </section>
+
+        {ordered.length ? (
+          <ul className="report-list">
+            {ordered.map((entry, index) => {
+              const poster = SONG_PREVIEWS[entry.songId]?.poster;
+              return (
+                <li className="report-row" key={`${entry.songId}-${entry.startedAt}-${index}`}>
+                  <span className="report-time">{formatClock(entry.startedAt)}</span>
+                  <span className="report-thumb">
+                    {poster ? <img src={poster} alt="" /> : <i>♫</i>}
+                    <span className="report-thumb-play">▶</span>
+                  </span>
+                  <span className="report-copy">
+                    <b>{entry.title}</b>
+                    <small>
+                      <span>⏱ {formatDuration(entry.duration)}</span>
+                      <span>▶ 1遍</span>
+                      <span className="report-tag">默认</span>
+                    </small>
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <div className="report-empty">
+            <b>今天还没有收听记录</b>
+            <small>进入「儿歌」播放任意一首，这里就会生成收听详情。</small>
+          </div>
+        )}
+      </main>
+    </MobileScroll>
+  );
+}
+
 function ResourceShell({ flow, mobile = false }: { flow: FlowControls; mobile?: boolean }) {
-  const [tab, setTab] = useState<"plan" | "scene" | "tpr" | "all">("plan");
+  const [tab, setTab] = useState<"songs" | "report">("songs");
+  const [section, setSection] = useState<SubTabKey>("all");
+  const subTabs = <SubTabBar value={section} onChange={setSection} />;
+
   return (
     <div className={`resource-shell ${mobile ? "native-mobile" : ""}`}>
-      <MobileScroll className="resource-scroll">
-        <main className="resource-main">
-          {tab === "plan" ? <PlanLibraryView flow={flow} /> : tab === "scene" ? <SceneLibraryView flow={flow} /> : tab === "tpr" ? <TprLibraryView flow={flow} /> : <ThemeLibraryView flow={flow} />}
-        </main>
-      </MobileScroll>
+      {tab === "report" ? (
+        <DailyReportView flow={flow} />
+      ) : (
+        <MobileScroll className="resource-scroll">
+          <main className="resource-main">
+            {section === "all" ? (
+              <ThemeLibraryView flow={flow} subTabs={subTabs} />
+            ) : section === "plan" ? (
+              <PlanLibraryView flow={flow} subTabs={subTabs} />
+            ) : section === "scene" ? (
+              <SceneLibraryView flow={flow} subTabs={subTabs} />
+            ) : (
+              <TprLibraryView flow={flow} subTabs={subTabs} />
+            )}
+          </main>
+        </MobileScroll>
+      )}
       <GlobalPlayerBar />
-      <nav className="bottom-tab-bar" role="tablist" aria-label="内容分类">
-        <button className={tab === "plan" ? "active" : ""} onClick={() => setTab("plan")} type="button" role="tab" aria-selected={tab === "plan"}>
-          <i>📅</i>
-          <span>打卡计划</span>
-        </button>
-        <button className={tab === "scene" ? "active" : ""} onClick={() => setTab("scene")} type="button" role="tab" aria-selected={tab === "scene"}>
-          <i className="tab-icon-soft">🌤️</i>
-          <span>场景儿歌</span>
-        </button>
-        <button className={tab === "tpr" ? "active" : ""} onClick={() => setTab("tpr")} type="button" role="tab" aria-selected={tab === "tpr"}>
-          <i>🕺</i>
-          <span>TPR 儿歌</span>
-        </button>
-        <button className={tab === "all" ? "active" : ""} onClick={() => setTab("all")} type="button" role="tab" aria-selected={tab === "all"}>
+      <nav className="bottom-tab-bar" role="tablist" aria-label="主导航">
+        <button className={tab === "songs" ? "active" : ""} onClick={() => setTab("songs")} type="button" role="tab" aria-selected={tab === "songs"}>
           <i>🎵</i>
-          <span>全部</span>
+          <span>儿歌</span>
+        </button>
+        <button className={tab === "report" ? "active" : ""} onClick={() => setTab("report")} type="button" role="tab" aria-selected={tab === "report"}>
+          <i>📊</i>
+          <span>儿歌每日报告</span>
         </button>
       </nav>
     </div>
   );
 }
+
 
 const WECHAT_ID = "GL11280308";
 
@@ -1027,6 +1193,7 @@ function MediaContactCard({ song }: { song: SongWithTheme }) {
   const panAudio = PAN_DRIVE_AUDIO[song.id];
   const audio = hosted || panAudio;
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const sessionRef = useRef<ReturnType<typeof startPlaySession> | null>(null);
   const [loop, setLoop] = useState(false);
   const toggleLoop = () => {
     const next = !loop;
@@ -1079,8 +1246,27 @@ function MediaContactCard({ song }: { song: SongWithTheme }) {
       </header>
       {hosted ? (
         <>
-          <audio ref={audioRef} controls playsInline preload="metadata" className="local-audio"
-            onPlay={() => audioManagerStop()}>
+          <audio
+            ref={audioRef}
+            controls
+            playsInline
+            preload="metadata"
+            className="local-audio"
+            onPlay={() => {
+              audioManagerStop();
+              if (!sessionRef.current) {
+                sessionRef.current = startPlaySession(song.id, songDisplayName(song.title));
+              }
+            }}
+            onPause={() => {
+              sessionRef.current?.end();
+              sessionRef.current = null;
+            }}
+            onEnded={() => {
+              sessionRef.current?.end();
+              sessionRef.current = null;
+            }}
+          >
             <source src={hosted} type="audio/mp4" />
             您的浏览器不支持音频播放。
           </audio>
