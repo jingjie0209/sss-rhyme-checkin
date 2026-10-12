@@ -782,7 +782,7 @@ function DailyReportView({ flow }: { flow: FlowControls }) {
                 <div className="report-day-head">
                   <b>{friendlyDateLabel(group.dateKey, today)}</b>
                   <span>{group.dateKey}</span>
-                  <em>{group.items.length} 遍</em>
+                  <em>{group.items.length} 首</em>
                 </div>
                 <ul className="report-list">
                   {group.items.map((entry, index) => {
