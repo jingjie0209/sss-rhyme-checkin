@@ -433,3 +433,11 @@ button { -webkit-tap-highlight-color: transparent; }
 
 /* 报告页统计数字与「儿歌」顶部 banner 同色 */
 .report-stat b { background: linear-gradient(140deg, #4f46cf, #7564e4 60%, #9780ef); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+
+/* 每日报告：按日期分组 */
+.report-groups { display: grid; gap: 6px; }
+.report-day { padding-top: 4px; }
+.report-day-head { position: sticky; top: 0; z-index: 2; display: flex; align-items: baseline; gap: 8px; padding: 10px 2px 8px; background: #fff; border-bottom: 1px solid #eef0f6; }
+.report-day-head b { color: #23264a; font-size: 14px; font-weight: 800; }
+.report-day-head span { color: #a2a6b8; font-size: 11px; }
+.report-day-head em { margin-left: auto; color: #7b80a0; font-size: 11px; font-style: normal; font-weight: 700; }

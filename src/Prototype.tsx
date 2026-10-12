@@ -18,7 +18,7 @@ import {
 } from "./audioManager";
 import { SONG_PREVIEWS } from "./data/previewData";
 import {
-  entriesForDate,
+  loadPlayHistory,
   localDateKey,
   startPlaySession,
   subscribePlayHistory,
@@ -688,21 +688,43 @@ function formatDuration(seconds: number) {
 
 
 
+function friendlyDateLabel(dateKey: string, todayKey: string) {
+  if (dateKey === todayKey) return "今天";
+  const [ty, tm, td] = todayKey.split("-").map(Number);
+  const yesterday = new Date(ty, (tm || 1) - 1, td || 1);
+  yesterday.setDate(yesterday.getDate() - 1);
+  const yKey = localDateKey(yesterday.getTime());
+  if (dateKey === yKey) return "昨天";
+  const [, m, d] = dateKey.split("-");
+  return `${Number(m)}月${Number(d)}日`;
+}
+
 function DailyReportView({ flow }: { flow: FlowControls }) {
   void flow;
   const today = localDateKey(Date.now());
-  const [entries, setEntries] = useState<PlayEntry[]>(() => entriesForDate(today));
+  const [allEntries, setAllEntries] = useState<PlayEntry[]>(() => loadPlayHistory());
 
   useEffect(() => {
-    const update = () => setEntries(entriesForDate(today));
+    const update = () => setAllEntries(loadPlayHistory());
     update();
     return subscribePlayHistory(update);
-  }, [today]);
+  }, []);
 
-  const ordered = [...entries].sort((a, b) => b.startedAt - a.startedAt);
-  const totalSeconds = entries.reduce((sum, item) => sum + item.duration, 0);
+  const ordered = [...allEntries].sort((a, b) => b.startedAt - a.startedAt);
+
+  // 按日期分组，便于区分不同天的收听记录。
+  const groups: { dateKey: string; items: PlayEntry[] }[] = [];
+  for (const entry of ordered) {
+    const key = localDateKey(entry.startedAt);
+    const last = groups[groups.length - 1];
+    if (last && last.dateKey === key) last.items.push(entry);
+    else groups.push({ dateKey: key, items: [entry] });
+  }
+
+  const todayEntries = allEntries.filter((entry) => localDateKey(entry.startedAt) === today);
+  const totalSeconds = todayEntries.reduce((sum, item) => sum + item.duration, 0);
   const totalMinutes = Math.round(totalSeconds / 60);
-  const playCount = entries.length;
+  const playCount = todayEntries.length;
 
   return (
     <MobileScroll className="report-scroll">
@@ -722,32 +744,43 @@ function DailyReportView({ flow }: { flow: FlowControls }) {
           </div>
         </section>
 
-        {ordered.length ? (
-          <ul className="report-list">
-            {ordered.map((entry, index) => {
-              const poster = SONG_PREVIEWS[entry.songId]?.poster;
-              return (
-                <li className="report-row" key={`${entry.songId}-${entry.startedAt}-${index}`}>
-                  <span className="report-time">{formatClock(entry.startedAt)}</span>
-                  <span className="report-thumb">
-                    {poster ? <img src={poster} alt="" /> : <i>♫</i>}
-                    <span className="report-thumb-play">▶</span>
-                  </span>
-                  <span className="report-copy">
-                    <b>{entry.title}</b>
-                    <small>
-                      <span>⏱ {formatDuration(entry.duration)}</span>
-                      <span>▶ 1遍</span>
-                      <span className="report-tag">默认</span>
-                    </small>
-                  </span>
-                </li>
-              );
-            })}
-          </ul>
+        {groups.length ? (
+          <div className="report-groups">
+            {groups.map((group) => (
+              <section className="report-day" key={group.dateKey}>
+                <div className="report-day-head">
+                  <b>{friendlyDateLabel(group.dateKey, today)}</b>
+                  <span>{group.dateKey}</span>
+                  <em>{group.items.length} 遍</em>
+                </div>
+                <ul className="report-list">
+                  {group.items.map((entry, index) => {
+                    const poster = SONG_PREVIEWS[entry.songId]?.poster;
+                    return (
+                      <li className="report-row" key={`${entry.songId}-${entry.startedAt}-${index}`}>
+                        <span className="report-time">{formatClock(entry.startedAt)}</span>
+                        <span className="report-thumb">
+                          {poster ? <img src={poster} alt="" /> : <i>♫</i>}
+                          <span className="report-thumb-play">▶</span>
+                        </span>
+                        <span className="report-copy">
+                          <b>{entry.title}</b>
+                          <small>
+                            <span>⏱ {formatDuration(entry.duration)}</span>
+                            <span>▶ 1遍</span>
+                            <span className="report-tag">默认</span>
+                          </small>
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </section>
+            ))}
+          </div>
         ) : (
           <div className="report-empty">
-            <b>今天还没有收听记录</b>
+            <b>还没有收听记录</b>
             <small>进入「儿歌」播放任意一首，这里就会生成收听详情。</small>
           </div>
         )}
