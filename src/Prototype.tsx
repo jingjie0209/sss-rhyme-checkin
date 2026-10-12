@@ -318,6 +318,7 @@ function PlanLibraryView({ flow, subTabs }: { flow: FlowControls; subTabs?: Reac
       <div className="resource-sticky-top">
         <AppHeader />
         {subTabs}
+      </div>
         <section className="theme-hero">
           <div>
             <span>50 周打卡计划</span>
@@ -327,7 +328,6 @@ function PlanLibraryView({ flow, subTabs }: { flow: FlowControls; subTabs?: Reac
           <div className="hero-progress" style={{ "--progress": totalPercent } as CSSProperties}><b>{done}</b><span>/ {totalSongs}</span></div>
         </section>
         <PlayAllButton player={player} />
-      </div>
       <div className="section-heading"><div><b>周计划</b><span>点击周展开歌曲</span></div><small>{weeks.length} 周</small></div>
       <section className="theme-accordion-list">
         {weeks.map((week) => {
@@ -409,6 +409,7 @@ function SceneLibraryView({ flow, subTabs }: { flow: FlowControls; subTabs?: Rea
       <div className="resource-sticky-top">
         <AppHeader />
         {subTabs}
+      </div>
         <section className="theme-hero">
           <div>
             <span>场景儿歌 · 一整天</span>
@@ -418,7 +419,6 @@ function SceneLibraryView({ flow, subTabs }: { flow: FlowControls; subTabs?: Rea
           </div>
           <div className="hero-progress" style={{ "--progress": totalPercent } as CSSProperties}><b>{done}</b><span>/ {total}</span></div>
         </section>
-      </div>
       <div className="section-heading"><div><b>场景清单</b></div><small>{groups.length} 个场景</small></div>
       <section className="theme-accordion-list">
         {groups.map((group, index) => {
@@ -495,6 +495,7 @@ function TprLibraryView({ flow, subTabs }: { flow: FlowControls; subTabs?: React
       <div className="resource-sticky-top">
         <AppHeader />
         {subTabs}
+      </div>
         <section className="theme-hero tpr-hero">
           <div>
             <strong>TPR {songs.length} 首儿歌</strong>
@@ -503,7 +504,6 @@ function TprLibraryView({ flow, subTabs }: { flow: FlowControls; subTabs?: React
           </div>
           <div className="hero-progress" style={{ "--progress": totalPercent } as CSSProperties}><b>{done}</b><span>/ {songs.length}</span></div>
         </section>
-      </div>
       <div className="section-heading"><div><b>TPR 歌单</b><span>点击歌曲进入详情</span></div><small>{songs.length} 首歌曲</small></div>
       <section className="tpr-song-list">
         {songs.map((song, index) => {
@@ -528,11 +528,30 @@ function TprLibraryView({ flow, subTabs }: { flow: FlowControls; subTabs?: React
 
 function ThemeLibraryView({ flow, subTabs }: { flow: FlowControls; subTabs?: ReactNode }) {
   const { checked } = useCheckins();
-  const [expandedTheme, setExpandedTheme] = useState<string | null>(null);
-
   const themes = RESOURCE_DATA.themes;
   const flatTracks: PlayAllTrack[] = themes.flatMap(t => t.songs.map(s => ({ id: s.id, title: s.title })));
   const player = usePlayAll(flatTracks, LOCAL_AUDIO);
+  const [playingTheme, setPlayingTheme] = useState<string | null>(null);
+
+  useEffect(() => {
+    return audioManagerSubscribe((info) => {
+      if (!info.playing && info.index < 0) setPlayingTheme(null);
+    });
+  }, []);
+
+  const toggleThemePlay = (theme: ThemeGroup) => {
+    if (playingTheme === theme.id) {
+      audioManagerStop();
+      setPlayingTheme(null);
+      return;
+    }
+    const tracks = theme.songs
+      .filter((song) => LOCAL_AUDIO[song.id])
+      .map((song) => ({ songId: song.id, src: LOCAL_AUDIO[song.id], title: songDisplayName(song.title), source: `主题 ${theme.number} · ${theme.name}` }));
+    if (!tracks.length) return;
+    audioManagerSetPlaylist(tracks, 0, true);
+    setPlayingTheme(theme.id);
+  };
 
   const openSong = (song: ResourceSong, theme: ThemeGroup) => {
     const songWithTheme: SongWithTheme = { ...song, themeId: theme.id, themeName: theme.name, themeLabel: theme.label };
@@ -545,25 +564,24 @@ function ThemeLibraryView({ flow, subTabs }: { flow: FlowControls; subTabs?: Rea
       <div className="resource-sticky-top">
         <AppHeader />
         {subTabs}
-        <section className="theme-hero">
-          <div>
-            <span>按主题循序打卡</span>
-            <strong>14 个主题 · 205 首儿歌</strong>
-            <p>点开一个主题查看歌曲，完成一首就打卡一首。</p>
-            <PlayAllButton player={player} />
-          </div>
-          <div className="hero-progress" style={{ "--progress": totalPercent } as CSSProperties}><b>{checked.size}</b><span>/ {RESOURCE_DATA.stats.songs}</span></div>
-        </section>
       </div>
-      <div className="section-heading"><div><b>主题清单</b><span>点击展开歌曲明细</span></div><small>{themes.length} 个主题</small></div>
-      <section className="theme-accordion-list">
+      <section className="theme-hero">
+        <div>
+          <span>按主题循序打卡</span>
+          <strong>14 个主题 · 205 首儿歌</strong>
+          <p>点开一个主题查看歌曲，完成一首就打卡一首。</p>
+          <PlayAllButton player={player} />
+        </div>
+        <div className="hero-progress" style={{ "--progress": totalPercent } as CSSProperties}><b>{checked.size}</b><span>/ {RESOURCE_DATA.stats.songs}</span></div>
+      </section>
+      <div className="section-heading"><div><b>主题清单</b></div><small>{themes.length} 个主题</small></div>
+      <section className="theme-flat-list">
         {themes.map((theme, index) => {
-          const isOpen = expandedTheme === theme.id;
           const completed = theme.songs.filter((song) => checked.has(song.id)).length;
-          const percent = theme.songCount ? Math.round((RESOURCE_DATA.themes.find((item) => item.id === theme.id)?.songs.filter((song) => checked.has(song.id)).length || 0) / theme.songCount * 100) : 0;
+          const percent = theme.songCount ? Math.round(completed / theme.songCount * 100) : 0;
           return (
-            <article className={`theme-accordion ${isOpen ? "open" : ""}`} key={theme.id}>
-              <button className="theme-accordion-head" onClick={() => setExpandedTheme(isOpen ? null : theme.id)} type="button" aria-expanded={isOpen}>
+            <article className="theme-flat-group" key={theme.id}>
+              <div className="theme-flat-head">
                 <span className="theme-order">主题 {theme.number}</span>
                 <span className="theme-symbol">{themeEmoji[index]}</span>
                 <span className="theme-title-block">
@@ -572,14 +590,19 @@ function ThemeLibraryView({ flow, subTabs }: { flow: FlowControls; subTabs?: Rea
                   <i><em style={{ width: `${percent}%` }} /></i>
                 </span>
                 <span className="theme-complete"><b>{completed}</b><small>已完成</small></span>
-                <span className="theme-chevron">⌄</span>
-              </button>
-              {isOpen ? (
-                <div className="theme-song-list">
-                  {theme.songs.map((song) => <ThemeSongRow key={song.id} song={song} theme={theme} onOpen={() => openSong(song, theme)} />)}
-                  {theme.songs.length === 0 ? <p className="empty-result">该主题下没有匹配歌曲</p> : null}
-                </div>
-              ) : null}
+                <button
+                  className={`theme-play-all ${playingTheme === theme.id ? "on" : ""}`}
+                  onClick={() => toggleThemePlay(theme)}
+                  type="button"
+                  aria-label={`${playingTheme === theme.id ? "停止播放" : "播放"}主题${theme.number}${theme.name}全部歌曲`}
+                >
+                  {playingTheme === theme.id ? "⏹" : "▶"}
+                </button>
+              </div>
+              <div className="theme-song-list">
+                {theme.songs.map((song) => <ThemeSongRow key={song.id} song={song} theme={theme} onOpen={() => openSong(song, theme)} />)}
+                {theme.songs.length === 0 ? <p className="empty-result">该主题下没有匹配歌曲</p> : null}
+              </div>
             </article>
           );
         })}
@@ -587,7 +610,6 @@ function ThemeLibraryView({ flow, subTabs }: { flow: FlowControls; subTabs?: Rea
     </>
   );
 }
-
 
 function GlobalPlayerBar() {
   const [state, setState] = useState(() => {
@@ -664,52 +686,29 @@ function formatDuration(seconds: number) {
   return `${String(m).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
 }
 
-function shiftDateKey(dateKey: string, deltaDays: number) {
-  const [y, m, d] = dateKey.split("-").map(Number);
-  const date = new Date(y, (m || 1) - 1, d || 1);
-  date.setDate(date.getDate() + deltaDays);
-  return localDateKey(date.getTime());
-}
 
-function reportTitle(dateKey: string) {
-  const [, m, d] = dateKey.split("-");
-  return `${Number(m)}-${Number(d)}号收听详情`;
-}
 
 function DailyReportView({ flow }: { flow: FlowControls }) {
   void flow;
   const today = localDateKey(Date.now());
-  const [dateKey, setDateKey] = useState(today);
   const [entries, setEntries] = useState<PlayEntry[]>(() => entriesForDate(today));
 
   useEffect(() => {
-    const update = () => setEntries(entriesForDate(dateKey));
+    const update = () => setEntries(entriesForDate(today));
     update();
     return subscribePlayHistory(update);
-  }, [dateKey]);
+  }, [today]);
 
   const ordered = [...entries].sort((a, b) => b.startedAt - a.startedAt);
   const totalSeconds = entries.reduce((sum, item) => sum + item.duration, 0);
   const totalMinutes = Math.round(totalSeconds / 60);
   const playCount = entries.length;
-  const isToday = dateKey === today;
 
   return (
     <MobileScroll className="report-scroll">
       <main className="report-main">
         <header className="report-header">
-          <div className="report-date-nav">
-            <button type="button" onClick={() => setDateKey(shiftDateKey(dateKey, -1))} aria-label="前一天">‹</button>
-            <h1>{reportTitle(dateKey)}</h1>
-            <button
-              type="button"
-              onClick={() => setDateKey(shiftDateKey(dateKey, 1))}
-              disabled={isToday}
-              aria-label="后一天"
-            >
-              ›
-            </button>
-          </div>
+          <h1>每日报告</h1>
         </header>
 
         <section className="report-summary">

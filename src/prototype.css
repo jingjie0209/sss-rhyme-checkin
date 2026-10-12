@@ -392,16 +392,13 @@ button { -webkit-tap-highlight-color: transparent; }
 
 /* 儿歌每日报告 */
 .report-scroll { position: absolute; inset: 0; }
-.report-main { min-height: 100%; padding: 18px 16px 110px; background: #fff; }
-.report-header { margin-bottom: 6px; }
-.report-date-nav { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-.report-date-nav h1 { flex: 1; margin: 0; color: #23264a; font-size: 17px; font-weight: 800; text-align: center; }
-.report-date-nav button { display: grid; width: 32px; height: 32px; place-items: center; border: 0; border-radius: 50%; background: #f2f3f9; color: #5f56cd; font-size: 16px; font-weight: 800; }
-.report-date-nav button:disabled { color: #c9ccd9; }
+.report-main { min-height: 100%; padding: max(34px, calc(env(safe-area-inset-top) + 18px)) 16px 110px; background: #fff; }
+.report-header { margin-bottom: 4px; padding: 4px 0 10px; text-align: center; }
+.report-header h1 { margin: 0; color: #23264a; font-size: 18px; font-weight: 800; }
 .report-summary { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 18px 0 16px; border-bottom: 8px solid #f5f6fa; }
 .report-stat { display: grid; justify-items: center; gap: 6px; }
 .report-stat span { color: #8b90a6; font-size: 11px; }
-.report-stat b { color: #f5c518; font-size: 38px; font-weight: 800; line-height: 1; }
+.report-stat b { color: #655ddd; font-size: 38px; font-weight: 800; line-height: 1; }
 .report-list { margin: 0; padding: 0; list-style: none; }
 .report-row { display: flex; align-items: center; gap: 10px; padding: 12px 2px; border-bottom: 1px solid #f0f1f6; }
 .report-time { flex: 0 0 auto; width: 42px; color: #6b7089; font-size: 12px; }
@@ -416,3 +413,23 @@ button { -webkit-tap-highlight-color: transparent; }
 .report-empty { display: grid; gap: 6px; padding: 60px 20px; text-align: center; }
 .report-empty b { color: #4a4f6b; font-size: 14px; }
 .report-empty small { color: #969ab0; font-size: 11px; line-height: 1.6; }
+
+/* 主题平铺列表（不再折叠展开） */
+.theme-flat-list { display: grid; gap: 14px; }
+.theme-flat-group { overflow: hidden; border: 1px solid #e2e4ef; border-radius: 19px; background: #fff; box-shadow: 0 7px 20px rgba(31,38,81,.045); }
+.theme-flat-head { position: relative; display: grid; grid-template-columns: 42px minmax(0,1fr) auto auto; gap: 10px; align-items: center; padding: 16px 13px 14px; }
+.theme-flat-group .theme-song-list { padding: 0 10px 10px; }
+
+/* hero 不再吸顶：仅顶部标题栏与子分类 Tab 保持固定 */
+.theme-hero { margin-bottom: 2px; }
+
+
+/* 主题行末尾的「播放全部」按钮 */
+.theme-play-all { flex: 0 0 auto; display: grid; width: 34px; height: 34px; place-items: center; border: 1px solid #d8d5f7; border-radius: 50%; background: #f2f0ff; color: #5f56cd; font-size: 13px; line-height: 1; cursor: pointer; transition: background .18s, color .18s, border-color .18s, transform .12s; }
+.theme-play-all:hover { background: #e9e6ff; }
+.theme-play-all.on { background: #655ddd; border-color: #655ddd; color: #fff; box-shadow: 0 6px 14px rgba(85,74,190,.26); }
+.theme-play-all:active { transform: scale(.94); }
+
+
+/* 报告页统计数字与「儿歌」顶部 banner 同色 */
+.report-stat b { background: linear-gradient(140deg, #4f46cf, #7564e4 60%, #9780ef); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
