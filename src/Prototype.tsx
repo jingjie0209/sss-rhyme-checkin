@@ -321,8 +321,8 @@ function PlanLibraryView({ flow, subTabs }: { flow: FlowControls; subTabs?: Reac
       </div>
         <section className="theme-hero">
           <div>
-            <span>50 周打卡计划</span>
-            <strong>50 周 · {totalSongs} 首儿歌</strong>
+            <span>打卡计划</span>
+            <strong>{weeks.length} 周 · {totalSongs} 首儿歌</strong>
             <p>按周循序打卡，每周 3 首，复习周巩固学习。</p>
           </div>
           <div className="hero-progress" style={{ "--progress": totalPercent } as CSSProperties}><b>{done}</b><span>/ {totalSongs}</span></div>
