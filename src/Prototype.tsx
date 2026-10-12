@@ -268,7 +268,6 @@ function PlayAllButton({ player }: { player: ReturnType<typeof usePlayAll> }) {
 
 function PlanLibraryView({ flow, subTabs }: { flow: FlowControls; subTabs?: ReactNode }) {
   const { checked } = useCheckins();
-  const [expanded, setExpanded] = useState<number | null>(null);
   const weeks = PLAN_WEEKS;
 
   const openSong = (song: { id: string; no: number; title: string }, week: number) => {
@@ -283,7 +282,6 @@ function PlanLibraryView({ flow, subTabs }: { flow: FlowControls; subTabs?: Reac
   const flatTracks: PlayAllTrack[] = weeks.flatMap(w => w.songs.map(s => ({ id: s.id, title: s.title })));
   const player = usePlayAll(flatTracks, LOCAL_AUDIO);
   const [weekPlayer, setWeekPlayer] = useState<number | null>(null);
-  const weekPlayerPlaying = weekPlayer !== null;
 
   const startWeekPlay = (weekIdx: number) => {
     const week = weeks[weekIdx];
@@ -328,16 +326,15 @@ function PlanLibraryView({ flow, subTabs }: { flow: FlowControls; subTabs?: Reac
           <div className="hero-progress" style={{ "--progress": totalPercent } as CSSProperties}><b>{done}</b><span>/ {totalSongs}</span></div>
         </section>
         <PlayAllButton player={player} />
-      <div className="section-heading"><div><b>周计划</b><span>点击周展开歌曲</span></div><small>{weeks.length} 周</small></div>
-      <section className="theme-accordion-list">
-        {weeks.map((week) => {
-          const isOpen = expanded === week.week;
+      <div className="section-heading"><div><b>周计划</b></div><small>{weeks.length} 周</small></div>
+      <section className="theme-flat-list">
+        {weeks.map((week, weekIdx) => {
           const completed = week.songs.filter(s => checked.has(s.id)).length;
           const percent = week.songs.length ? Math.round(completed / week.songs.length * 100) : 0;
           const isReview = week.songs.length === 0;
           return (
-            <article className={`theme-accordion ${isOpen ? "open" : ""} ${isReview ? "review-week" : ""}`} key={week.week}>
-              <button className="theme-accordion-head" onClick={() => { if (!isReview) setExpanded(isOpen ? null : week.week); }} type="button" aria-expanded={isOpen} disabled={isReview}>
+            <article className="theme-flat-group" key={week.week}>
+              <div className="theme-flat-head">
                 <span className="theme-order">第 {week.week} 周</span>
                 <span className="theme-symbol">{isReview ? "📖" : "🎵"}</span>
                 <span className="theme-title-block">
@@ -346,13 +343,19 @@ function PlanLibraryView({ flow, subTabs }: { flow: FlowControls; subTabs?: Reac
                   {!isReview && <i><em style={{ width: `${percent}%` }} /></i>}
                 </span>
                 <span className="theme-complete"><b>{completed}</b><small>已完成</small></span>
-                {!isReview && <span className="theme-chevron">⌄</span>}
-              </button>
-              {isOpen && !isReview ? (
-                <div className="theme-song-list">
-                  <button className="week-play-all" onClick={() => { if (weekPlayerPlaying) stopWeekPlay(); else startWeekPlay(weeks.indexOf(week)); }} type="button">
-                    {weekPlayerPlaying ? '⏹ 停止播放本周' : '▶ 播放本周全部'}
+                {!isReview ? (
+                  <button
+                    className={`theme-play-all ${weekPlayer === weekIdx ? "on" : ""}`}
+                    onClick={() => { if (weekPlayer === weekIdx) stopWeekPlay(); else startWeekPlay(weekIdx); }}
+                    type="button"
+                    aria-label={`${weekPlayer === weekIdx ? "停止播放" : "播放"}第${week.week}周全部歌曲`}
+                  >
+                    {weekPlayer === weekIdx ? "⏹" : "▶"}
                   </button>
+                ) : null}
+              </div>
+              {!isReview ? (
+                <div className="theme-song-list">
                   {week.songs.map((song) => {
                     const doneSong = checked.has(song.id);
                     return (
@@ -380,10 +383,30 @@ function PlanLibraryView({ flow, subTabs }: { flow: FlowControls; subTabs?: Reac
 
 function SceneLibraryView({ flow, subTabs }: { flow: FlowControls; subTabs?: ReactNode }) {
   const { checked } = useCheckins();
-  const [expanded, setExpanded] = useState<string | null>(null);
   const groups = SCENE_GROUPS;
   const flatTracks: PlayAllTrack[] = groups.flatMap(g => g.songs.map(s => ({ id: s.id, title: s.title })));
   const player = usePlayAll(flatTracks, LOCAL_AUDIO);
+  const [playingScene, setPlayingScene] = useState<string | null>(null);
+
+  useEffect(() => {
+    return audioManagerSubscribe((info) => {
+      if (!info.playing && info.index < 0) setPlayingScene(null);
+    });
+  }, []);
+
+  const toggleScenePlay = (group: SceneGroup) => {
+    if (playingScene === group.id) {
+      audioManagerStop();
+      setPlayingScene(null);
+      return;
+    }
+    const tracks = group.songs
+      .filter((song) => LOCAL_AUDIO[song.id])
+      .map((song) => ({ songId: song.id, src: LOCAL_AUDIO[song.id], title: songDisplayName(song.title), source: `场景 ${group.num} · ${group.name}` }));
+    if (!tracks.length) return;
+    audioManagerSetPlaylist(tracks, 0, true);
+    setPlayingScene(group.id);
+  };
 
   const openSong = (song: SceneSong, group: SceneGroup) => {
     const songWithTheme: SongWithTheme = {
@@ -420,15 +443,14 @@ function SceneLibraryView({ flow, subTabs }: { flow: FlowControls; subTabs?: Rea
           <div className="hero-progress" style={{ "--progress": totalPercent } as CSSProperties}><b>{done}</b><span>/ {total}</span></div>
         </section>
       <div className="section-heading"><div><b>场景清单</b></div><small>{groups.length} 个场景</small></div>
-      <section className="theme-accordion-list">
+      <section className="theme-flat-list">
         {groups.map((group, index) => {
-          const isOpen = expanded === group.id;
           const completed = group.songs.filter((song) => checked.has(song.id)).length;
           const percent = group.songs.length ? Math.round(completed / group.songs.length * 100) : 0;
           const isEmpty = group.songs.length === 0;
           return (
-            <article className={`theme-accordion ${isOpen ? "open" : ""}`} key={group.id}>
-              <button className="theme-accordion-head" onClick={() => { if (!isEmpty) setExpanded(isOpen ? null : group.id); }} type="button" aria-expanded={isOpen} disabled={isEmpty}>
+            <article className="theme-flat-group" key={group.id}>
+              <div className="theme-flat-head">
                 <span className="theme-order">场景 {group.num}</span>
                 <span className="theme-symbol">{sceneEmoji[index % sceneEmoji.length]}</span>
                 <span className="theme-title-block">
@@ -437,9 +459,18 @@ function SceneLibraryView({ flow, subTabs }: { flow: FlowControls; subTabs?: Rea
                   {!isEmpty && <i><em style={{ width: `${percent}%` }} /></i>}
                 </span>
                 <span className="theme-complete"><b>{completed}</b><small>已完成</small></span>
-                {!isEmpty && <span className="theme-chevron">⌄</span>}
-              </button>
-              {isOpen && !isEmpty ? (
+                {!isEmpty ? (
+                  <button
+                    className={`theme-play-all ${playingScene === group.id ? "on" : ""}`}
+                    onClick={() => toggleScenePlay(group)}
+                    type="button"
+                    aria-label={`${playingScene === group.id ? "停止播放" : "播放"}场景${group.num}${group.name}全部歌曲`}
+                  >
+                    {playingScene === group.id ? "⏹" : "▶"}
+                  </button>
+                ) : null}
+              </div>
+              {!isEmpty ? (
                 <div className="theme-song-list">
                   {group.songs.map((song) => {
                     const doneSong = checked.has(song.id);
