@@ -8,4 +8,5 @@ export const PLAN_WEEKS: PlanWeek[] = [
   { week: 3, theme: "百科认知：认识颜色", songs: [{ id: "song-079", no: 1, title: "I See Something Blue" }, { id: "song-080", no: 2, title: "I See Something Pink" }, { id: "song-090", no: 3, title: "What's Your Favorite Color" }, { id: "song-091", no: 4, title: "Red Yellow Green Blue" }] },
   { week: 4, theme: "动作启蒙", songs: [{ id: "plan-04-01", no: 1, title: "How Many Fingers" }, { id: "plan-04-02", no: 2, title: "BINGO" }, { id: "plan-04-03", no: 3, title: "I Have A Pet" }] },
   { week: 5, theme: "游戏儿歌：助力亲子欢乐时光", songs: [{ id: "plan-14-03", no: 1, title: "Follow Me" }, { id: "plan-15-02", no: 2, title: "Open Shut Them" }, { id: "plan-15-03", no: 3, title: "Walking Walking" }] },
+  { week: 6, theme: "生活习惯：穿衣、整理", songs: [{ id: "plan-34-03", no: 1, title: "This Is The Way We Get Dressed" }, { id: "plan-37-01", no: 2, title: "This Is The Way" }, { id: "plan-37-02", no: 3, title: "Put On Your Shoes" }, { id: "plan-37-03", no: 4, title: "Clean Up Song" }] },
 ];
