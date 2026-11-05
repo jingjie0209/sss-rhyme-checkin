@@ -1649,4 +1649,9 @@ export const SONG_PREVIEWS: Record<string, SongPreview> = {
     "lyric": "/sss-rhyme-checkin/previews/lyrics/sce-046.jpg",
     "flashcards": []
   },
+  "plan-37-02": {
+    "poster": "/sss-rhyme-checkin/previews/posters/song-027.jpg",
+    "lyric": "/sss-rhyme-checkin/previews/lyrics/plan-37-02.jpg",
+    "flashcards": []
+  }
 };

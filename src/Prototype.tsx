@@ -25,7 +25,7 @@ import {
   type PlayEntry,
 } from "./playHistory";
 
-type SongWithTheme = ResourceSong & { themeId: string; themeName: string; themeLabel: string };
+type SongWithTheme = ResourceSong & { themeId: string; themeName: string; themeLabel: string; lyricId?: string; tprId?: string };
 
 type CheckinContextValue = {
   checked: Set<string>;
@@ -158,9 +158,10 @@ function songDisplayName(title: string) {
     .replace(/^Bye Bye Goodbye\b/i, "Bye Bye Goodbye");
 }
 
-function resourceState(song?: ResourceSong) {
+function resourceState(song?: ResourceSong & { lyricId?: string }) {
   const hasAudio = Boolean(song && (LOCAL_AUDIO[song.id] || PAN_DRIVE_AUDIO[song.id]));
-  const hasLyrics = Boolean(song?.hasLyrics || ((song?.id.startsWith("tpr-") || song?.id.startsWith("sce-")) && SONG_PREVIEWS[song.id]?.lyric));
+  const lyricPreview = song ? SONG_PREVIEWS[song.lyricId || song.id] : undefined;
+  const hasLyrics = Boolean(song?.hasLyrics || lyricPreview?.lyric);
   const hasFlash = Boolean(song?.hasFlashcards && (SONG_PREVIEWS[song.id]?.flashcards.length || song.flashJpgCount)) && !song?.id.startsWith("tpr-");
   return [
     { key: "audio", label: "音频", icon: "♫", available: true },
@@ -270,11 +271,12 @@ function PlanLibraryView({ flow, subTabs }: { flow: FlowControls; subTabs?: Reac
   const { checked } = useCheckins();
   const weeks = PLAN_WEEKS;
 
-  const openSong = (song: { id: string; no: number; title: string }, week: number) => {
+  const openSong = (song: { id: string; no: number; title: string; lyricId?: string; tprId?: string }, week: number) => {
     const songWithTheme: SongWithTheme = {
       id: song.id, no: song.no, title: song.title,
-      hasLyrics: false, hasFlashcards: false, flashJpgCount: 0,
+      hasLyrics: Boolean(SONG_PREVIEWS[song.lyricId || song.id]?.lyric), hasFlashcards: false, flashJpgCount: 0,
       themeId: `plan-week-${week}`, themeName: `第${week}周`, themeLabel: `第${week}周`,
+      lyricId: song.lyricId, tprId: song.tprId,
     };
     flow.push({ id: song.id, headerHeight: 0, render: () => <SongDetail song={songWithTheme} onBack={flow.pop} /> });
   };
@@ -1390,7 +1392,7 @@ function ImageLightbox({ viewer, onClose, onChange }: { viewer: ImageViewerState
 }
 
 function LyricsPreview({ song, onView }: { song: SongWithTheme; onView: (viewer: ImageViewerState) => void }) {
-  const preview = SONG_PREVIEWS[song.id];
+  const preview = SONG_PREVIEWS[song.lyricId || song.id];
   if (!preview?.lyric) return null;
   return (
     <section className="content-card lyrics-content-card">
@@ -1422,7 +1424,7 @@ function FlashcardPreview({ song, onView }: { song: SongWithTheme; onView: (view
 
 
 function TprCard({ song }: { song: SongWithTheme }) {
-  const items: { en: string; zh: string }[] = SONG_TPR[song.id] || [];
+  const items: { en: string; zh: string }[] = SONG_TPR[song.tprId || song.id] || [];
   const valid = items.filter((x) => x.zh);
   if (!valid.length) return null;
   return (
