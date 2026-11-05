@@ -1148,7 +1148,7 @@ const LOCAL_AUDIO: Record<string, string> = {
   "plan-02-01": "/sss-rhyme-checkin/audio/plan-02-01.m4a",
   "plan-02-02": "/sss-rhyme-checkin/audio/plan-02-02.m4a",
   "plan-02-03": "/sss-rhyme-checkin/audio/plan-02-03.m4a",
-  "plan-03-01a": "/sss-rhyme-checkin/audio/plan-03-01a.m4a",
+  "plan-03-01a": "/sss-rhyme-checkin/audio/plan-03-01.m4a",
   "plan-03-01b": "/sss-rhyme-checkin/audio/plan-03-01b.m4a",
   "plan-03-01c": "/sss-rhyme-checkin/audio/plan-03-01c.m4a",
   "plan-03-02": "/sss-rhyme-checkin/audio/plan-03-02.m4a",
