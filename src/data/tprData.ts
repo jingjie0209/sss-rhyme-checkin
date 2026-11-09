@@ -43,4 +43,10 @@ export const SONG_TPR: Record<string, TprEntry[]> = {
   "song-080": [{ en: "look around", zh: "看一看周围" }, { en: "point to something pink", zh: "指出粉色的东西" }, { en: "find something pink", zh: "找一个粉色的东西" }, { en: "say pink", zh: "说 pink" }],
   "song-090": [{ en: "point to red", zh: "指向红色" }, { en: "point to yellow", zh: "指向黄色" }, { en: "point to green", zh: "指向绿色" }, { en: "point to blue", zh: "指向蓝色" }, { en: "say your favorite color", zh: "说出最喜欢的颜色" }],
   "song-091": [{ en: "point to red", zh: "指向红色" }, { en: "point to yellow", zh: "指向黄色" }, { en: "point to green", zh: "指向绿色" }, { en: "point to blue", zh: "指向蓝色" }, { en: "clap your hands", zh: "拍拍手" }],
+  "plan-16-01": [{ en: "peekaboo", zh: "玩躲猫猫" }, { en: "I see you", zh: "我看见你了" }, { en: "clap your hands", zh: "拍拍手" }, { en: "nod your head", zh: "点点头" }, { en: "stomp your feet", zh: "跺跺脚" }, { en: "say boo", zh: "说 boo" }],
+  "plan-25-01": [{ en: "rub your tummy", zh: "摸摸肚子" }, { en: "thumbs up", zh: "竖起大拇指" }, { en: "thumbs down", zh: "大拇指向下" }, { en: "nod your head", zh: "点点头" }, { en: "shake your head", zh: "摇摇头" }, { en: "say yummy", zh: "说好吃" }, { en: "say yucky", zh: "说不好吃" }],
+  "plan-25-02": [{ en: "pretend to slurp spaghetti", zh: "假装吸面条" }, { en: "rub your tummy", zh: "摸摸肚子" }, { en: "nod your head", zh: "点点头" }, { en: "shake your head", zh: "摇摇头" }, { en: "say yummy", zh: "说好吃" }, { en: "say yucky", zh: "说不好吃" }],
+  "plan-26-03": [{ en: "point to yourself", zh: "指指自己" }, { en: "point to a friend", zh: "指指朋友" }, { en: "shake your head", zh: "摇摇头" }, { en: "say not me", zh: "说不是我" }, { en: "pretend to take a bite", zh: "假装咬一口饼干" }],
+  "plan-26-02": [{ en: "rub your tummy", zh: "摸摸肚子" }, { en: "nod your head", zh: "点点头" }, { en: "say yes I am", zh: "说是的，我饿了" }, { en: "pretend to eat", zh: "假装吃东西" }, { en: "say I am full", zh: "说我吃饱了" }],
+  "plan-50-01": [{ en: "say A", zh: "说字母 A" }, { en: "say B", zh: "说字母 B" }, { en: "clap the syllables", zh: "拍手数音节" }, { en: "pretend to eat an apple", zh: "假装吃苹果" }, { en: "pretend to peel a banana", zh: "假装剥香蕉" }, { en: "stomp your feet", zh: "跺跺脚" }],
 };
